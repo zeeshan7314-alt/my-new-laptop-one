@@ -1,0 +1,127 @@
+// =====================================================
+// SEO Engine — meta, canonical, OpenGraph, Twitter, JSON-LD
+// =====================================================
+import { Laptop, cpuLabel, gpuShort } from './db'
+import { faq } from './engine'
+
+export const SITE = {
+  name: 'LaptopIndex',
+  tagline: 'The Laptop Comparison Engine',
+  baseUrl: 'https://laptopindex.pages.dev', // updated at deploy time
+  disclosure: 'As Amazon Associates we may earn commission from qualifying purchases.',
+}
+
+export interface Meta {
+  title: string
+  description: string
+  path: string
+  ogType?: string
+  jsonLd?: object[]
+}
+
+export function productMeta(l: Laptop): Meta {
+  const title = `${l.name} Review (2026): Benchmarks, Specs & Verdict`
+  const description = `${l.name} in-depth review — ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}″ ${l.display.refreshHz}Hz. Overall score ${l.scores.overall}/10 at $${l.price.toLocaleString()}. Pros, cons & who should buy.`
+  return { title, description: description.slice(0, 158), path: `/${l.slug}-review`, ogType: 'article', jsonLd: productJsonLd(l) }
+}
+
+export function productJsonLd(l: Laptop): object[] {
+  const url = `${SITE.baseUrl}/${l.slug}-review`
+  const product: any = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: l.name,
+    brand: { '@type': 'Brand', name: l.brand },
+    sku: l.slug,
+    category: `${l.segment} Laptop`,
+    description: `${l.name}: ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.storage.raw} ${l.storage.type}, ${l.display.sizeInches}″ ${l.display.resolution} ${l.display.refreshHz}Hz display.`,
+    offers: {
+      '@type': 'Offer',
+      price: l.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: l.amazon.url || url,
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: l.scores.overall, bestRating: 10, worstRating: 1 },
+      author: { '@type': 'Organization', name: SITE.name },
+      datePublished: '2026-08-19',
+    },
+  }
+  if (l.amazon.rating && l.amazon.reviewCount) {
+    product.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: l.amazon.rating,
+      bestRating: 5,
+      reviewCount: l.amazon.reviewCount,
+    }
+  }
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Laptops', item: SITE.baseUrl + '/laptops' },
+      { '@type': 'ListItem', position: 3, name: l.name, item: url },
+    ],
+  }
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq(l).map(f => ({
+      '@type': 'Question', name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+  return [product, breadcrumb, faqLd]
+}
+
+export function compareMeta(a: Laptop, b: Laptop, slug: string): Meta {
+  const title = `${a.name} vs ${b.name}: Which Should You Buy? (2026)`
+  const description = `${a.name} ($${a.price.toLocaleString()}) vs ${b.name} ($${b.price.toLocaleString()}) — CPU & GPU benchmarks, display, RAM, weight and value compared. See the winner.`
+  const jsonLd = [{
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Compare', item: SITE.baseUrl + '/compare' },
+      { '@type': 'ListItem', position: 3, name: `${a.name} vs ${b.name}`, item: `${SITE.baseUrl}/compare/${slug}` },
+    ],
+  }]
+  return { title, description: description.slice(0, 158), path: `/compare/${slug}`, jsonLd }
+}
+
+export function guideJsonLd(title: string, slug: string, items: Laptop[]): object[] {
+  return [{
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: title,
+    itemListElement: items.map((l, i) => ({
+      '@type': 'ListItem', position: i + 1,
+      url: `${SITE.baseUrl}/${l.slug}-review`, name: l.name,
+    })),
+  }, {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Buying Guides', item: SITE.baseUrl + '/guides' },
+      { '@type': 'ListItem', position: 3, name: title, item: `${SITE.baseUrl}/guides/${slug}` },
+    ],
+  }]
+}
+
+export function websiteJsonLd(): object[] {
+  return [{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.baseUrl,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE.baseUrl}/laptops?q={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
+  }]
+}
