@@ -124,6 +124,7 @@ app.get('/:page{[a-z0-9-]+-review}', (c) => {
 
 app.notFound((c) => {
   (c as any).set('meta', { title: 'Page Not Found | ' + SITE.name, description: 'This page does not exist.', path: '/404' })
+  c.status(404)
   return c.render(
     <main class="max-w-xl mx-auto px-4 py-24 text-center">
       <h1 class="text-5xl font-extrabold text-slate-900 dark:text-white">404</h1>
