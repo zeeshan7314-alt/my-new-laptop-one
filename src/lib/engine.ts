@@ -214,6 +214,30 @@ export const GUIDES: Guide[] = [
     filter: l => l.brand === 'Apple', limit: 10 },
 ]
 
+// Guides this laptop appears in (for SEO internal links from product pages)
+export function guidesFor(l: Laptop, n = 5): { guide: Guide; rank: number }[] {
+  const out: { guide: Guide; rank: number }[] = []
+  for (const g of GUIDES) {
+    const idx = guideRanking(g).findIndex(x => x.id === l.id)
+    if (idx >= 0) out.push({ guide: g, rank: idx + 1 })
+  }
+  return out.sort((a, b) => a.rank - b.rank).slice(0, n)
+}
+
+// Comparisons involving this laptop, against its most relevant rivals
+export function comparisonsFor(l: Laptop, n = 6): Laptop[] {
+  return similar(l, n)
+}
+
+// Related guides (share overlapping laptops with the given guide)
+export function relatedGuides(g: Guide, n = 4): Guide[] {
+  const mine = new Set(guideRanking(g).map(l => l.id))
+  return GUIDES.filter(x => x.slug !== g.slug)
+    .map(x => ({ x, overlap: guideRanking(x).filter(l => mine.has(l.id)).length }))
+    .sort((a, b) => b.overlap - a.overlap)
+    .slice(0, n).map(v => v.x)
+}
+
 export function guideRanking(g: Guide): Laptop[] {
   return LAPTOPS.filter(g.filter)
     .sort((a, b) => b.scores[g.scoreKey] - a.scores[g.scoreKey] || b.scores.overall - a.scores.overall)

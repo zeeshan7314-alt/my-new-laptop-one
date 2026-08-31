@@ -26,6 +26,7 @@ export const renderer = jsxRenderer(({ children }, c) => {
 <meta property="og:title" content="${m.title}">
 <meta property="og:description" content="${m.description}">
 <meta property="og:url" content="${canonical}">
+${m.ogImage ? raw(`<meta property="og:image" content="${m.ogImage}"><meta name="twitter:image" content="${m.ogImage}">`) : ''}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${m.title}">
 <meta name="twitter:description" content="${m.description}">

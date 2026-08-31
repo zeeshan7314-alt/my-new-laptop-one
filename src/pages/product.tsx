@@ -6,8 +6,9 @@ import {
   prosCons, whoFor, sectionText, faq, verdictLine, similar,
   betterAlternative, cheaperAlternative, premiumAlternative,
   sameBrand, sameCpu, sameGpu, sameBudget, compareSlug, SCORE_KEYS,
+  guidesFor, comparisonsFor,
 } from '../lib/engine'
-import { Header, Footer, CompareBar, ScoreDonut, ScoreBar, BadgePill, AmazonBtn, LaptopCard, Breadcrumbs } from '../components/layout'
+import { Header, Footer, CompareBar, ScoreDonut, ScoreBar, BadgePill, AmazonBtn, LaptopCard, Breadcrumbs, Thumb } from '../components/layout'
 
 const Section = ({ id, icon, title, children }: any) => (
   <section id={id} class="scroll-mt-20">
@@ -40,7 +41,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
     ['display', 'Display'], ['gaming', 'Gaming'], ['productivity', 'Productivity'], ['programming', 'Programming'],
     ['video-editing', 'Video Editing'], ['rendering', '3D Rendering'], ['battery', 'Battery'],
     ['upgradeability', 'Upgradeability'], ['heat-noise', 'Heat & Noise'], ['ports', 'Ports'],
-    ['value', 'Value'], ['alternatives', 'Alternatives'], ['faq', 'FAQ'],
+    ['value', 'Value'], ['alternatives', 'Alternatives'], ['rankings', 'Where It Ranks'], ['faq', 'FAQ'],
   ]
   const specRows: [string, string][] = [
     ['Brand', l.brand], ['Model', l.model], ['Category', `${l.segment} · ${l.formFactor}`],
@@ -64,6 +65,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
         {/* Hero */}
         <section id="review-hero" class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 md:p-8">
           <div class="flex flex-col md:flex-row md:items-start gap-6">
+            <div class="self-center md:self-start"><Thumb l={l} size="lg" eager /></div>
             <div class="flex-1 min-w-0">
               <div class="flex flex-wrap gap-1.5 mb-2">{l.badges.map(b => <BadgePill text={b} />)}</div>
               <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight">{l.name} Review <span class="text-slate-400 font-bold">(2026)</span></h1>
@@ -189,6 +191,32 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
               </div>
               <h3 class="font-bold text-slate-900 dark:text-white mb-3">Similar Laptops</h3>
               <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">{sims.map(s => <LaptopCard l={s} />)}</div>
+            </Section>
+
+            {/* SEO internal links: guide placements + head-to-heads */}
+            <Section id="rankings" icon="fa-ranking-star" title="Where It Ranks">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
+                  <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Featured in Buying Guides</h3>
+                  <ul class="space-y-2 text-sm">
+                    {guidesFor(l).map(({ guide, rank }) => (
+                      <li class="flex items-center gap-2">
+                        <span class={`w-7 h-7 shrink-0 rounded-lg text-xs font-extrabold flex items-center justify-center ${rank === 1 ? 'bg-amber-400 text-amber-950' : 'bg-brand-500/10 text-brand-600 dark:text-brand-400'}`}>#{rank}</span>
+                        <a href={`/guides/${guide.slug}`} class="text-slate-700 dark:text-slate-300 hover:text-brand-500 font-medium">{guide.h1}</a>
+                      </li>
+                    ))}
+                    {guidesFor(l).length === 0 && <li class="text-slate-500">Not currently ranked in a guide — see <a href="/guides" class="text-brand-500 hover:underline">all buying guides</a>.</li>}
+                  </ul>
+                </div>
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
+                  <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Head-to-Head Comparisons</h3>
+                  <ul class="space-y-2 text-sm">
+                    {comparisonsFor(l).map(r => (
+                      <li><a href={`/compare/${compareSlug(l, r)}`} class="text-slate-700 dark:text-slate-300 hover:text-brand-500"><i class="fas fa-scale-balanced text-brand-400 mr-1.5 text-xs" aria-hidden="true"></i>{l.model} <span class="text-brand-500 font-semibold">vs</span> {r.name}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </Section>
 
             {/* FAQ */}

@@ -1,7 +1,7 @@
 // =====================================================
 // Shared layout components: header, footer, cards, score bars
 // =====================================================
-import { Laptop, cpuLabel, gpuShort, money, storageLabel, META } from '../lib/db'
+import { Laptop, cpuLabel, gpuShort, money, storageLabel, META, imgOf, imgAlt } from '../lib/db'
 import { SITE } from '../lib/seo'
 
 export const Header = () => (
@@ -144,10 +144,24 @@ export const AmazonBtn = ({ l, size = 'md' }: { l: Laptop; size?: 'md' | 'lg' | 
   )
 }
 
+export const Thumb = ({ l, size = 'md', eager }: { l: Laptop; size?: 'sm' | 'md' | 'lg'; eager?: boolean }) => {
+  const src = imgOf(l)
+  const dim = size === 'lg' ? 'w-40 h-40 md:w-52 md:h-52' : size === 'sm' ? 'w-14 h-14' : 'w-20 h-20'
+  return src ? (
+    <img src={src} alt={imgAlt(l)} width="400" height="400" loading={eager ? 'eager' : 'lazy'} decoding="async"
+      class={`${dim} shrink-0 rounded-xl object-contain bg-white ring-1 ring-slate-200 dark:ring-slate-700`} />
+  ) : (
+    <div class={`${dim} shrink-0 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-300 dark:text-slate-600`} role="img" aria-label={imgAlt(l)}>
+      <i class="fas fa-laptop text-2xl" aria-hidden="true"></i>
+    </div>
+  )
+}
+
 export const LaptopCard = ({ l, rank }: { l: Laptop; rank?: number }) => (
   <article class="laptop-card group relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-lg transition p-4 flex flex-col gap-3" data-id={l.id} data-slug={l.slug} data-name={l.name}>
     <div class="flex items-start gap-3">
       {rank !== undefined && <div class="w-8 h-8 shrink-0 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 font-extrabold flex items-center justify-center">{rank}</div>}
+      <a href={`/${l.slug}-review`} tabindex={-1} aria-hidden="true"><Thumb l={l} size="md" /></a>
       <div class="min-w-0 flex-1">
         <div class="flex flex-wrap gap-1 mb-1">{l.badges.map(b => <BadgePill text={b} />)}</div>
         <h3 class="font-bold text-slate-900 dark:text-white leading-snug">

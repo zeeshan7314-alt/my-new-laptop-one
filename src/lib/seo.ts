@@ -1,7 +1,7 @@
 // =====================================================
 // SEO Engine — meta, canonical, OpenGraph, Twitter, JSON-LD
 // =====================================================
-import { Laptop, cpuLabel, gpuShort } from './db'
+import { Laptop, cpuLabel, gpuShort, imgOf } from './db'
 import { faq } from './engine'
 
 export const SITE = {
@@ -16,13 +16,14 @@ export interface Meta {
   description: string
   path: string
   ogType?: string
+  ogImage?: string
   jsonLd?: object[]
 }
 
 export function productMeta(l: Laptop): Meta {
   const title = `${l.name} Review (2026): Benchmarks, Specs & Verdict`
   const description = `${l.name} in-depth review — ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}″ ${l.display.refreshHz}Hz. Overall score ${l.scores.overall}/10 at $${l.price.toLocaleString()}. Pros, cons & who should buy.`
-  return { title, description: description.slice(0, 158), path: `/${l.slug}-review`, ogType: 'article', jsonLd: productJsonLd(l) }
+  return { title, description: description.slice(0, 158), path: `/${l.slug}-review`, ogType: 'article', ogImage: imgOf(l) ? SITE.baseUrl + imgOf(l) : undefined, jsonLd: productJsonLd(l) }
 }
 
 export function productJsonLd(l: Laptop): object[] {
@@ -31,6 +32,7 @@ export function productJsonLd(l: Laptop): object[] {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: l.name,
+    image: imgOf(l) ? [SITE.baseUrl + imgOf(l)] : undefined,
     brand: { '@type': 'Brand', name: l.brand },
     sku: l.slug,
     category: `${l.segment} Laptop`,
@@ -89,7 +91,7 @@ export function compareMeta(a: Laptop, b: Laptop, slug: string): Meta {
       { '@type': 'ListItem', position: 3, name: `${a.name} vs ${b.name}`, item: `${SITE.baseUrl}/compare/${slug}` },
     ],
   }]
-  return { title, description: description.slice(0, 158), path: `/compare/${slug}`, jsonLd }
+  return { title, description: description.slice(0, 158), path: `/compare/${slug}`, ogImage: imgOf(a) ? SITE.baseUrl + imgOf(a)! : undefined, jsonLd }
 }
 
 export function guideJsonLd(title: string, slug: string, items: Laptop[]): object[] {

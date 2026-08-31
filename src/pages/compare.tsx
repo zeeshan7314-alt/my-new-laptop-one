@@ -1,7 +1,8 @@
 // Comparison pages: /compare hub + /compare/:a-vs-:b
 import { Laptop, LAPTOPS, cpuLabel, gpuLabel, money, storageLabel, META } from '../lib/db'
 import { compareLaptops, compareSlug, popularPairs, similar, SCORE_KEYS } from '../lib/engine'
-import { Header, Footer, CompareBar, ScoreDonut, BadgePill, AmazonBtn, LaptopCard, Breadcrumbs } from '../components/layout'
+import { Header, Footer, CompareBar, ScoreDonut, BadgePill, AmazonBtn, LaptopCard, Breadcrumbs, Thumb } from '../components/layout'
+import { guidesFor } from '../lib/engine'
 
 const winCls = (mine: boolean) => mine ? 'bg-emerald-50 dark:bg-emerald-500/10 font-bold text-emerald-700 dark:text-emerald-400' : ''
 
@@ -15,6 +16,7 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
   const HeadCard = ({ l, isWinner }: { l: Laptop; isWinner: boolean }) => (
     <div class={`flex-1 bg-white dark:bg-slate-900 rounded-2xl border-2 p-5 ${isWinner ? 'border-emerald-400 dark:border-emerald-600' : 'border-slate-200 dark:border-slate-800'}`}>
       {isWinner && <div class="text-[10px] font-extrabold uppercase tracking-wide text-emerald-600 dark:text-emerald-400 mb-1"><i class="fas fa-trophy mr-1" aria-hidden="true"></i>Winner</div>}
+      <div class="flex justify-center mb-3"><a href={`/${l.slug}-review`} tabindex={-1} aria-hidden="true"><Thumb l={l} size="lg" eager /></a></div>
       <div class="flex flex-wrap gap-1 mb-1">{l.badges.map(bd => <BadgePill text={bd} />)}</div>
       <h2 class="font-bold text-lg text-slate-900 dark:text-white leading-snug"><a href={`/${l.slug}-review`} class="hover:text-brand-500">{l.name}</a></h2>
       <p class="text-xs text-slate-500 mt-0.5">{cpuLabel(l)} · {gpuLabel(l)}</p>
@@ -150,6 +152,22 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
             <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">{alts.map(l => <LaptopCard l={l} />)}</div>
           </section>
         )}
+
+        {/* SEO internal links */}
+        <section id="related-links" class="mt-10 grid md:grid-cols-2 gap-4 text-sm">
+          {[a, b].map(l => (
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
+              <h2 class="font-bold text-slate-900 dark:text-white mb-2">More on the {l.name}</h2>
+              <ul class="space-y-1.5 text-slate-600 dark:text-slate-400">
+                <li><a href={`/${l.slug}-review`} class="hover:text-brand-500"><i class="fas fa-file-lines text-brand-400 mr-1.5 text-xs" aria-hidden="true"></i>Full {l.name} review</a></li>
+                {guidesFor(l, 3).map(({ guide, rank }) => (
+                  <li><a href={`/guides/${guide.slug}`} class="hover:text-brand-500"><i class="fas fa-ranking-star text-brand-400 mr-1.5 text-xs" aria-hidden="true"></i>#{rank} in {guide.h1}</a></li>
+                ))}
+                <li><a href={`/laptops?brand=${encodeURIComponent(l.brand)}`} class="hover:text-brand-500"><i class="fas fa-list text-brand-400 mr-1.5 text-xs" aria-hidden="true"></i>All {l.brand} laptops</a></li>
+              </ul>
+            </div>
+          ))}
+        </section>
       </main>
       <CompareBar />
       <Footer />

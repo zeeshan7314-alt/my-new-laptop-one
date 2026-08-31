@@ -1,7 +1,7 @@
 // Buying guides — /guides and /guides/:slug
 import { Laptop, LAPTOPS, cpuLabel, gpuLabel, money, storageLabel, META } from '../lib/db'
-import { GUIDES, Guide, guideRanking, prosCons, compareSlug } from '../lib/engine'
-import { Header, Footer, CompareBar, ScoreDonut, BadgePill, AmazonBtn, Breadcrumbs } from '../components/layout'
+import { GUIDES, Guide, guideRanking, prosCons, compareSlug, relatedGuides } from '../lib/engine'
+import { Header, Footer, CompareBar, ScoreDonut, BadgePill, AmazonBtn, Breadcrumbs, Thumb } from '../components/layout'
 
 export const GuidesHub = () => (
   <>
@@ -55,6 +55,7 @@ export const GuidePage = ({ g }: { g: Guide }) => {
               <article id={`pick-${l.slug}`} class="scroll-mt-20 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 md:p-6">
                 <div class="flex items-start gap-4">
                   <div class={`w-10 h-10 shrink-0 rounded-xl font-extrabold flex items-center justify-center text-lg ${i === 0 ? 'bg-amber-400 text-amber-950' : 'bg-brand-500/10 text-brand-600 dark:text-brand-400'}`}>{i + 1}</div>
+                  <a href={`/${l.slug}-review`} class="hidden sm:block" tabindex={-1} aria-hidden="true"><Thumb l={l} size="md" eager={i < 2} /></a>
                   <div class="min-w-0 flex-1">
                     {i < 3 && <div class="text-[10px] font-extrabold uppercase tracking-wide text-amber-600 dark:text-amber-400 mb-0.5"><i class="fas fa-award mr-1" aria-hidden="true"></i>{awards[i]}</div>}
                     <div class="flex flex-wrap gap-1 mb-1">{l.badges.map(b => <BadgePill text={b} />)}</div>
@@ -79,6 +80,19 @@ export const GuidePage = ({ g }: { g: Guide }) => {
             )
           })}
         </div>
+
+        {/* SEO internal links: related guides */}
+        <section id="related-guides" class="mt-10">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Related Buying Guides</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {relatedGuides(g).map(rg => (
+              <a href={`/guides/${rg.slug}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 hover:shadow-lg transition p-4">
+                <h3 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{rg.h1}</h3>
+                <p class="text-xs text-slate-500 mt-1.5 line-clamp-2">{rg.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
 
         <section class="mt-10 bg-slate-100 dark:bg-slate-800/60 rounded-2xl p-5 text-sm text-slate-600 dark:text-slate-400">
           <h2 class="font-bold text-slate-900 dark:text-white mb-2">How we rank</h2>

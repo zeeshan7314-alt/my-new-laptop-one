@@ -111,6 +111,38 @@ export const BrowsePage = ({ f }: { f: Filters }) => {
               : <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">{results.map(l => <LaptopCard l={l} />)}</div>}
           </section>
         </div>
+
+        {/* SEO internal-link hub: popular filter combinations */}
+        <section id="popular-searches" class="mt-12 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
+          <h2 class="font-bold text-slate-900 dark:text-white mb-3">Popular Laptop Searches</h2>
+          <div class="flex flex-wrap gap-2 text-xs">
+            {[
+              ['Gaming under $1500', '/laptops?segment=Gaming&maxPrice=1500'],
+              ['RTX 5060 laptops', '/laptops?gpu=RTX+5060'],
+              ['RTX 5070 laptops', '/laptops?gpu=RTX+5070'],
+              ['OLED laptops', '/laptops?panel=OLED'],
+              ['32GB+ RAM', '/laptops?ram=32'],
+              ['1TB+ storage', '/laptops?storage=1024'],
+              ['144Hz+ displays', '/laptops?refresh=144'],
+              ['Under 3 lbs', '/laptops?maxWeight=3'],
+              ['Touchscreen', '/laptops?touch=yes'],
+              ['AMD laptops', '/laptops?cpu=AMD'],
+              ['Apple MacBooks', '/laptops?cpu=Apple'],
+              ['Best value first', '/laptops?sort=value'],
+              ['Under $500', '/laptops?maxPrice=500'],
+              ['$1000–$1500', '/laptops?minPrice=1000&maxPrice=1500'],
+              ['Professional laptops', '/laptops?segment=Professional'],
+            ].map(([t, h]) => (
+              <a href={h} class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition">{t}</a>
+            ))}
+          </div>
+          <h2 class="font-bold text-slate-900 dark:text-white mt-5 mb-3">Buying Guides</h2>
+          <div class="flex flex-wrap gap-2 text-xs">
+            {['best-gaming-laptops', 'best-laptops-under-1000', 'best-student-laptops', 'best-oled-laptops', 'best-lightweight-laptops', 'best-programming-laptops', 'best-ai-laptops', 'best-budget-laptops'].map(s => (
+              <a href={`/guides/${s}`} class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition capitalize">{s.replace(/-/g, ' ')}</a>
+            ))}
+          </div>
+        </section>
       </main>
       <CompareBar />
       <Footer />
