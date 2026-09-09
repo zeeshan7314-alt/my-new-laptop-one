@@ -34,11 +34,34 @@ ${m.ogImage ? raw(`<meta property="og:image" content="${m.ogImage}"><meta name="
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
 ${jsonLd ? raw(`<script type="application/ld+json">${jsonLd}</script>`) : ''}
 <script>
-// theme bootstrap (before paint, no FOUC)
-(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')})();
-tailwind = { config: { darkMode: 'class', theme: { extend: { colors: { brand: {50:'#eef6ff',100:'#d9ecff',200:'#bcdeff',300:'#8ec9ff',400:'#59abff',500:'#3388ff',600:'#1c68f5',700:'#1552e1',800:'#1844b6',900:'#193d8f',950:'#14275c'} } } } } }
+// theme bootstrap (before paint, no FOUC - defaults to light theme unless dark explicitly chosen)
+(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})();
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eef6ff',
+          100: '#d9ecff',
+          200: '#bcdeff',
+          300: '#8ec9ff',
+          400: '#59abff',
+          500: '#3388ff',
+          600: '#1c68f5',
+          700: '#1552e1',
+          800: '#1844b6',
+          900: '#193d8f',
+          950: '#14275c'
+        }
+      }
+    }
+  }
+}
+</script>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 <link href="/static/style.css" rel="stylesheet">
 </head>

@@ -20,27 +20,34 @@ export const Header = () => (
       <div class="flex-1"></div>
       <form action="/laptops" method="get" class="hidden sm:block relative" role="search">
         <input type="search" name="q" id="header-search" placeholder="Search laptops…" autocomplete="off"
-          class="w-44 lg:w-64 pl-9 pr-3 py-1.5 rounded-lg text-sm bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-brand-400 focus:outline-none" />
+          class="w-44 lg:w-64 pl-9 pr-3 py-1.5 rounded-lg text-sm bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none" />
         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs" aria-hidden="true"></i>
         <div id="search-suggest" class="absolute top-full mt-1 left-0 right-0 rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 hidden max-h-80 overflow-auto"></div>
       </form>
-      <a href="/wishlist" id="wishlist-link" class="relative p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Wishlist">
+      <a href="/wishlist" id="wishlist-link" class="relative p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300" aria-label="Wishlist">
         <i class="far fa-heart" aria-hidden="true"></i>
         <span id="wishlist-count" class="hidden absolute -top-0.5 -right-0.5 bg-rose-500 text-white text-[10px] font-bold rounded-full w-4 h-4 items-center justify-center">0</span>
       </a>
-      <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle dark mode">
+      <button id="theme-toggle" class="theme-toggle-btn p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300" aria-label="Toggle dark mode" title="Toggle theme">
         <i class="fas fa-moon dark:hidden" aria-hidden="true"></i><i class="fas fa-sun hidden dark:inline" aria-hidden="true"></i>
       </button>
-      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Menu">
+      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300" aria-label="Menu">
         <i class="fas fa-bars" aria-hidden="true"></i>
       </button>
     </nav>
-    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 px-4 py-2 bg-white dark:bg-slate-900">
-      <a href="/laptops" class="block py-2 text-sm font-medium">Browse Laptops</a>
-      <a href="/guides" class="block py-2 text-sm font-medium">Buying Guides</a>
-      <a href="/compare" class="block py-2 text-sm font-medium">Compare</a>
-      <a href="/wishlist" class="block py-2 text-sm font-medium">Wishlist</a>
-      <form action="/laptops" method="get" class="py-2"><input type="search" name="q" placeholder="Search laptops…" class="w-full px-3 py-2 rounded-lg text-sm bg-slate-100 dark:bg-slate-800" /></form>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 px-4 py-3 bg-white dark:bg-slate-900 space-y-1">
+      <a href="/laptops" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Browse Laptops</a>
+      <a href="/guides" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Buying Guides</a>
+      <a href="/compare" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Compare</a>
+      <a href="/wishlist" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Wishlist</a>
+      <div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Theme</span>
+        <button class="theme-toggle-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center gap-1.5" aria-label="Toggle theme">
+          <i class="fas fa-moon dark:hidden" aria-hidden="true"></i><i class="fas fa-sun hidden dark:inline" aria-hidden="true"></i>
+          <span>Toggle Light/Dark</span>
+        </button>
+      </div>
+      <form action="/laptops" method="get" class="pt-2"><input type="search" name="q" placeholder="Search laptops…" class="w-full px-3 py-2 rounded-lg text-sm bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-transparent" /></form>
     </div>
   </header>
 )

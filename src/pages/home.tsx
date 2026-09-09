@@ -22,31 +22,31 @@ export const HomePage = () => {
       <Header />
       <main>
         {/* Hero */}
-        <section id="hero-section" class="bg-gradient-to-b from-brand-600 to-brand-800 dark:from-slate-900 dark:to-slate-950 text-white">
+        <section id="hero-section" class="bg-gradient-to-b from-slate-50 via-white to-slate-100/70 dark:from-slate-900 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800">
           <div class="max-w-7xl mx-auto px-4 py-14 md:py-20 text-center">
-            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Find Your Perfect Laptop.<br /><span class="text-amber-300">Backed by Benchmarks, Not Hype.</span></h1>
-            <p class="mt-4 text-white/80 max-w-2xl mx-auto">{META.count} laptops scored across 10 real-world use cases using PassMark & G3DMark data, verified Amazon ratings and live pricing. Updated {META.updated}.</p>
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900 dark:text-white">Find Your Perfect Laptop.<br /><span class="text-brand-600 dark:text-amber-400">Backed by Benchmarks, Not Hype.</span></h1>
+            <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">{META.count} laptops scored across 10 real-world use cases using PassMark & G3DMark data, verified Amazon ratings and live pricing. Updated {META.updated}.</p>
             <form action="/laptops" method="get" class="mt-7 max-w-xl mx-auto relative" role="search">
-              <input type="search" name="q" placeholder="Search by model, CPU, GPU… e.g. RTX 5060" class="w-full pl-12 pr-32 py-4 rounded-2xl text-slate-900 text-sm font-medium shadow-xl focus:outline-none bg-white" />
+              <input type="search" name="q" placeholder="Search by model, CPU, GPU… e.g. RTX 5060" class="w-full pl-12 pr-32 py-4 rounded-2xl text-slate-900 dark:text-white placeholder:text-slate-400 text-sm font-medium shadow-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-brand-500 focus:outline-none" />
               <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true"></i>
               <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">Search</button>
             </form>
             <div class="mt-5 flex flex-wrap justify-center gap-2 text-xs">
               {[['Best under $1000', '/guides/best-laptops-under-1000'], ['Gaming laptops', '/guides/best-gaming-laptops'], ['OLED picks', '/guides/best-oled-laptops'], ['Ultraportables', '/guides/best-lightweight-laptops'], ['Compare tool', '/compare']].map(([t, h]) => (
-                <a href={h} class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 font-medium">{t}</a>
+                <a href={h} class="px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 font-medium text-slate-700 dark:text-slate-300 shadow-sm transition">{t}</a>
               ))}
             </div>
           </div>
         </section>
 
         {/* Category tiles */}
-        <section id="categories" class="max-w-7xl mx-auto px-4 -mt-8 relative z-10">
+        <section id="categories" class="max-w-7xl mx-auto px-4 -mt-6 relative z-10">
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {segs.map(([t, ic, href, d]) => (
               <a href={href} class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 hover:shadow-lg transition p-4 text-center">
                 <i class={`fas ${ic} text-brand-500 text-xl`} aria-hidden="true"></i>
                 <div class="font-bold text-sm text-slate-900 dark:text-white mt-2">{t}</div>
-                <div class="text-[11px] text-slate-500 mt-1 leading-snug">{d}</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">{d}</div>
               </a>
             ))}
           </div>

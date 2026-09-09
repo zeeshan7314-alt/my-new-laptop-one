@@ -9,9 +9,20 @@
   };
 
   // ---------- Theme ----------
-  $('#theme-toggle')?.addEventListener('click', () => {
-    const dark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  function syncThemeUI(isDark) {
+    $$('.theme-toggle-btn').forEach(btn => {
+      btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    });
+  }
+  syncThemeUI(document.documentElement.classList.contains('dark'));
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest?.('#theme-toggle, .theme-toggle-btn');
+    if (!btn) return;
+    const isDark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch {}
+    syncThemeUI(isDark);
   });
 
   // ---------- Mobile menu ----------

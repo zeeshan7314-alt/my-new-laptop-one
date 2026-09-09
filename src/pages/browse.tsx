@@ -56,8 +56,8 @@ export function applyFilters(f: Filters): Laptop[] {
 
 const Sel = ({ name, label, opts, cur }: { name: string; label: string; opts: [string, string][]; cur?: string }) => (
   <label class="block">
-    <span class="text-[11px] font-bold uppercase tracking-wide text-slate-400">{label}</span>
-    <select name={name} class="filter-sel mt-1 w-full px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm border border-transparent focus:border-brand-400 focus:outline-none">
+    <span class="text-[11px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</span>
+    <select name={name} class="filter-sel mt-1 w-full px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm border border-slate-200 dark:border-transparent focus:border-brand-500 focus:outline-none">
       <option value="">Any</option>
       {opts.map(([v, t]) => <option value={v} selected={cur === v}>{t}</option>)}
     </select>
@@ -86,10 +86,10 @@ export const BrowsePage = ({ f }: { f: Filters }) => {
               <Sel name="segment" label="Category" cur={f.segment} opts={[['General', 'General'], ['Gaming', 'Gaming'], ['Professional', 'Professional']]} />
               <Sel name="brand" label="Brand" cur={f.brand} opts={brands.map(b => [b, b] as [string, string])} />
               <div class="grid grid-cols-2 gap-2">
-                <label class="block"><span class="text-[11px] font-bold uppercase tracking-wide text-slate-400">Min $</span>
-                  <input type="number" name="minPrice" value={f.minPrice || ''} placeholder="0" class="filter-sel mt-1 w-full px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm" /></label>
-                <label class="block"><span class="text-[11px] font-bold uppercase tracking-wide text-slate-400">Max $</span>
-                  <input type="number" name="maxPrice" value={f.maxPrice || ''} placeholder="10000" class="filter-sel mt-1 w-full px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm" /></label>
+                <label class="block"><span class="text-[11px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Min $</span>
+                  <input type="number" name="minPrice" value={f.minPrice || ''} placeholder="0" class="filter-sel mt-1 w-full px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm border border-slate-200 dark:border-transparent focus:border-brand-500 focus:outline-none" /></label>
+                <label class="block"><span class="text-[11px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Max $</span>
+                  <input type="number" name="maxPrice" value={f.maxPrice || ''} placeholder="10000" class="filter-sel mt-1 w-full px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm border border-slate-200 dark:border-transparent focus:border-brand-500 focus:outline-none" /></label>
               </div>
               <Sel name="gpu" label="Graphics" cur={f.gpu} opts={[['dedicated', 'Dedicated GPU'], ['integrated', 'Integrated GPU'], ['RTX 5050', 'RTX 5050'], ['RTX 5060', 'RTX 5060'], ['RTX 5070', 'RTX 5070 / Ti'], ['RTX 5080', 'RTX 5080'], ['RTX 5090', 'RTX 5090'], ['RTX 4050', 'RTX 4050']]} />
               <Sel name="cpu" label="CPU Brand" cur={f.cpu} opts={[['Intel', 'Intel'], ['AMD', 'AMD'], ['Apple', 'Apple'], ['Snapdragon', 'Snapdragon']]} />
@@ -133,13 +133,13 @@ export const BrowsePage = ({ f }: { f: Filters }) => {
               ['$1000–$1500', '/laptops?minPrice=1000&maxPrice=1500'],
               ['Professional laptops', '/laptops?segment=Professional'],
             ].map(([t, h]) => (
-              <a href={h} class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition">{t}</a>
+              <a href={h} class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition">{t}</a>
             ))}
           </div>
           <h2 class="font-bold text-slate-900 dark:text-white mt-5 mb-3">Buying Guides</h2>
           <div class="flex flex-wrap gap-2 text-xs">
             {['best-gaming-laptops', 'best-laptops-under-1000', 'best-student-laptops', 'best-oled-laptops', 'best-lightweight-laptops', 'best-programming-laptops', 'best-ai-laptops', 'best-budget-laptops'].map(s => (
-              <a href={`/guides/${s}`} class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition capitalize">{s.replace(/-/g, ' ')}</a>
+              <a href={`/guides/${s}`} class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent hover:bg-brand-500/10 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition capitalize">{s.replace(/-/g, ' ')}</a>
             ))}
           </div>
         </section>

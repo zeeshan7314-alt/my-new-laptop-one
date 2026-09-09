@@ -1,0 +1,6 @@
+{
+  "name": "LaptopIndex",
+  "description": "Data-driven laptop reviews, benchmarks, and comparison engine with PassMark & G3DMark scores and Amazon pricing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
