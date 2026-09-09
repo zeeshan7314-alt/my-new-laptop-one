@@ -3,7 +3,7 @@
 ## Project Overview
 - **Name**: LaptopIndex (webapp)
 - **Goal**: Premium data-driven laptop comparison engine (NanoReview / RTINGS style) generated entirely from a spreadsheet database — the spreadsheet IS the CMS.
-- **Data**: 101 laptops from "Laptops Recs August 2026.xlsx" — brand, model, segment, display (size/res/refresh/panel/touch), CPU (PassMark), GPU (G3DMark), RAM, storage, dimensions, weight, Amazon rating/reviews/price + affiliate links (tag preserved: `sayeentech-20`).
+- **Data**: 101 laptops from "Laptops Recs August 2026.xlsx" — brand, model, segment, display (size/res/refresh/panel/touch), CPU (PassMark), GPU (G3DMark), RAM, storage, dimensions, weight, Amazon rating/reviews/price + affiliate links (tag preserved: `wat344r5-20`).
 
 ## URLs
 - **Sandbox Preview**: https://3000-itfuhuub7q0m79qcz0aym-2e77fc33.sandbox.novita.ai

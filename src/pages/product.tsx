@@ -22,7 +22,7 @@ const AltRow = ({ label, l, current }: { label: string; l?: Laptop; current: Lap
     <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 w-20 shrink-0">{label}</span>
     <div class="min-w-0 flex-1">
       <a href={`/${l.slug}-review`} class="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-500 truncate block">{l.name}</a>
-      <span class="text-xs text-slate-500">{money(l.price)} · {l.scores.overall}/10</span>
+      <span class="text-xs text-slate-500">{l.priceBracket} · {l.scores.overall}/10</span>
     </div>
     <a href={`/compare/${compareSlug(current, l)}`} class="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline shrink-0">Compare</a>
   </div>
@@ -55,7 +55,6 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
     ['Dimensions', `${l.physical.lengthIn}″ × ${l.physical.widthIn}″ × ${l.physical.thicknessIn}″`],
     ['Weight', `${l.physical.weightLbs} lbs (${l.physical.weightKg} kg)`],
     ['Amazon Rating', l.amazon.rating ? `${l.amazon.rating} ★ (${(l.amazon.reviewCount || 0).toLocaleString()} reviews)` : '—'],
-    ['Price', money(l.price)],
   ]
   return (
     <>
@@ -163,9 +162,9 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
               <p class="prose-p mb-4">{st.value}</p>
               <div id="price-widget" class="bg-gradient-to-r from-brand-500 to-brand-700 rounded-2xl p-6 text-white flex flex-col sm:flex-row items-center gap-4">
                 <div class="flex-1 text-center sm:text-left">
-                  <div class="text-xs uppercase tracking-wider opacity-80 font-bold">Current Price · {l.priceBracket}</div>
-                  <div class="text-4xl font-extrabold">{money(l.price)}</div>
-                  <div class="text-xs opacity-80 mt-1">Captured {META.updated} — click through for live pricing & deals</div>
+                  <div class="text-xs uppercase tracking-wider opacity-80 font-bold">{l.priceBracket} Category</div>
+                  <div class="text-2xl sm:text-3xl font-extrabold">Check Current Price on Amazon</div>
+                  <div class="text-xs opacity-80 mt-1">Live pricing, configurations & deals update frequently on Amazon</div>
                 </div>
                 <AmazonBtn l={l} size="lg" />
               </div>

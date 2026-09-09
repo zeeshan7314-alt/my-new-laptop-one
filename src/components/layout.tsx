@@ -146,7 +146,7 @@ export const AmazonBtn = ({ l, size = 'md' }: { l: Laptop; size?: 'md' | 'lg' | 
     <a href={l.amazon.url || '#'} target="_blank" rel="nofollow sponsored noopener"
       class={`amazon-btn inline-flex items-center justify-center gap-2 rounded-xl font-bold text-slate-900 bg-gradient-to-b from-amber-300 to-amber-400 hover:from-amber-400 hover:to-amber-500 shadow-sm transition ${cls}`}>
       <i class="fab fa-amazon" aria-hidden="true"></i>
-      <span>{money(l.price)} on Amazon</span>
+      <span>Check Prices</span>
     </a>
   )
 }

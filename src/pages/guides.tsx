@@ -44,7 +44,7 @@ export const GuidePage = ({ g }: { g: Guide }) => {
         <nav aria-label="Ranked picks" class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-8 text-sm">
           <h2 class="font-bold text-xs uppercase tracking-wide text-slate-400 mb-2">Our Picks at a Glance</h2>
           <ol class="grid sm:grid-cols-2 gap-x-6 gap-y-1 list-decimal list-inside marker:font-bold marker:text-brand-500">
-            {ranked.map(l => <li><a href={`#pick-${l.slug}`} class="hover:text-brand-500">{l.name} — {money(l.price)}</a></li>)}
+            {ranked.map(l => <li><a href={`#pick-${l.slug}`} class="hover:text-brand-500">{l.name}</a></li>)}
           </ol>
         </nav>
 

@@ -56,10 +56,26 @@ export interface Laptop {
   badges: string[]
 }
 
+export const AMAZON_AFFILIATE_TAG = 'wat344r5-20'
+
+export const formatAmazonUrl = (url: string | null): string | null => {
+  if (!url) return null
+  if (url.includes('tag=')) {
+    return url.replace(/tag=[^&]+/, `tag=${AMAZON_AFFILIATE_TAG}`)
+  }
+  return url.includes('?') ? `${url}&tag=${AMAZON_AFFILIATE_TAG}` : `${url}?tag=${AMAZON_AFFILIATE_TAG}`
+}
+
 const db = raw as unknown as { meta: { updated: string; count: number; affiliateDisclosure: string }, laptops: Laptop[] }
 
 export const META = db.meta
-export const LAPTOPS: Laptop[] = db.laptops
+export const LAPTOPS: Laptop[] = db.laptops.map(l => ({
+  ...l,
+  amazon: {
+    ...l.amazon,
+    url: formatAmazonUrl(l.amazon.url),
+  },
+}))
 const bySlugMap = new Map(LAPTOPS.map(l => [l.slug, l]))
 
 export const all = () => LAPTOPS

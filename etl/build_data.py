@@ -75,6 +75,8 @@ for r in range(3, ws.max_row + 1):
         continue
     link_cell = ws.cell(row=r, column=35)
     amazon = link_cell.hyperlink.target if link_cell.hyperlink else None
+    if amazon and "tag=" in amazon:
+        amazon = re.sub(r"tag=[^&]+", "tag=wat344r5-20", amazon)
     rows.append({
         "row": r, "bracket": current_bracket,
         "brand": norm_brand(brand), "model": str(cell(r, 2) or "").strip(),

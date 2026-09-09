@@ -82,7 +82,7 @@ export const HomePage = () => {
               {pairs.map(([x, y]) => (
                 <a href={`/compare/${compareSlug(x, y)}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 hover:shadow-lg transition p-4">
                   <div class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{x.name} <span class="text-brand-500">vs</span> {y.name}</div>
-                  <div class="text-xs text-slate-500 mt-1.5">{money(x.price)} vs {money(y.price)}</div>
+                  <div class="text-xs text-slate-500 mt-1.5">{x.scores.overall} vs {y.scores.overall} overall · {x.segment}</div>
                 </a>
               ))}
             </div>

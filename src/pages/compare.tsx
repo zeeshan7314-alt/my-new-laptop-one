@@ -23,8 +23,8 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
       <div class="flex items-center gap-4 mt-3">
         <ScoreDonut score={l.scores.overall} size="sm" />
         <div>
-          <div class="text-2xl font-extrabold text-slate-900 dark:text-white">{money(l.price)}</div>
-          {l.amazon.rating ? <div class="text-xs text-slate-500"><i class="fas fa-star text-amber-400" aria-hidden="true"></i> {l.amazon.rating} ({(l.amazon.reviewCount || 0).toLocaleString()})</div> : null}
+          <div class="text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">{l.priceBracket}</div>
+          {l.amazon.rating ? <div class="text-xs text-slate-500 mt-1"><i class="fas fa-star text-amber-400" aria-hidden="true"></i> {l.amazon.rating} ({(l.amazon.reviewCount || 0).toLocaleString()})</div> : null}
         </div>
       </div>
       <div class="mt-4"><AmazonBtn l={l} /></div>
@@ -62,7 +62,7 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
             {winner
               ? `${winner.name} takes ${cmp.winner === 1 ? cmp.pointsA : cmp.pointsB} weighted points vs ${cmp.winner === 1 ? cmp.pointsB : cmp.pointsA}, winning on ${cmp.rows.filter(r => r.winner === cmp.winner).slice(0, 3).map(r => r.label.replace(/ \(.*\)/, '')).join(', ')}. `
               : `Both land ${cmp.pointsA} weighted points — pick by priority. `}
-            {winner && loser ? (winner.price < loser.price ? `The winner is also ${money(loser.price - winner.price)} cheaper — a clear-cut call.` : `The ${loser.name} counters at ${money(loser.price)} — worth it if its strengths match your needs.`) : ''}
+            {winner && loser ? (winner.price < loser.price ? `The winner also sits in a more competitive value tier — a clear-cut call.` : `The ${loser.name} counters in a higher tier — worth it if its strengths match your needs.`) : ''}
           </p>
         </section>
 
@@ -111,7 +111,6 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
                 {spec('Weight', l => `${l.physical.weightLbs} lbs`, numBetter(l => l.physical.weightLbs, true))}
                 {spec('Thickness', l => `${l.physical.thicknessIn}″`, numBetter(l => l.physical.thicknessIn, true))}
                 {spec('Amazon Rating', l => l.amazon.rating ? `${l.amazon.rating} ★ (${(l.amazon.reviewCount || 0).toLocaleString()})` : '—', numBetter(l => l.amazon.rating))}
-                {spec('Price', l => money(l.price), numBetter(l => l.price, true))}
                 {spec('Value Score', l => `${l.scores.value}/10`, numBetter(l => l.scores.value))}
               </tbody>
             </table>
@@ -137,7 +136,7 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
           <N icon="fa-weight-hanging" title="Build & Portability" text={
             `${a.physical.weightLbs} lbs / ${a.physical.thicknessIn}″ vs ${b.physical.weightLbs} lbs / ${b.physical.thicknessIn}″. ${Math.abs((a.physical.weightLbs || 0) - (b.physical.weightLbs || 0)) < 0.3 ? 'Effectively identical to carry.' : `The ${(a.physical.weightLbs || 9) < (b.physical.weightLbs || 9) ? a.name : b.name} is ${Math.abs((a.physical.weightLbs || 0) - (b.physical.weightLbs || 0)).toFixed(1)} lbs lighter — significant for daily carry.`} Travel scores: ${a.scores.travel} vs ${b.scores.travel}.`} />
           <N icon="fa-hand-holding-dollar" title="Value" text={
-            `At ${money(a.price)} vs ${money(b.price)}, value scores land ${a.scores.value}/10 vs ${b.scores.value}/10. ${a.scores.value === b.scores.value ? 'Both price fairly for what they deliver.' : `The ${a.scores.value > b.scores.value ? a.name : b.name} extracts more performance per dollar.`}`} />
+            `Value scores land ${a.scores.value}/10 vs ${b.scores.value}/10. ${a.scores.value === b.scores.value ? 'Both offer comparable performance for their respective classes.' : `The ${a.scores.value > b.scores.value ? a.name : b.name} extracts more performance per dollar.`}`} />
         </section>
 
         <section id="final-verdict" class="bg-gradient-to-r from-brand-500 to-brand-700 rounded-2xl p-6 text-white mb-10">
@@ -188,12 +187,12 @@ export const CompareHub = () => {
           <div class="grid sm:grid-cols-[1fr_auto_1fr_auto] gap-3 items-center">
             <select id="cmp-a" class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-medium border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none">
               <option value="">Select first laptop…</option>
-              {LAPTOPS.map(l => <option value={l.slug}>{l.name} — {money(l.price)}</option>)}
+              {LAPTOPS.map(l => <option value={l.slug}>{l.name}</option>)}
             </select>
             <span class="text-center font-extrabold text-slate-400 dark:text-slate-500">VS</span>
             <select id="cmp-b" class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-medium border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none">
               <option value="">Select second laptop…</option>
-              {LAPTOPS.map(l => <option value={l.slug}>{l.name} — {money(l.price)}</option>)}
+              {LAPTOPS.map(l => <option value={l.slug}>{l.name}</option>)}
             </select>
             <button id="cmp-go" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">Compare</button>
           </div>
@@ -203,7 +202,7 @@ export const CompareHub = () => {
           {pairs.map(([x, y]) => (
             <a href={`/compare/${compareSlug(x, y)}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-lg transition p-4">
               <div class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{x.name} <span class="text-brand-500">vs</span> {y.name}</div>
-              <div class="text-xs text-slate-500 mt-1.5">{money(x.price)} vs {money(y.price)} · {x.scores.overall} vs {y.scores.overall} overall</div>
+              <div class="text-xs text-slate-500 mt-1.5">{x.scores.overall} vs {y.scores.overall} overall · {x.segment} vs {y.segment}</div>
             </a>
           ))}
         </div>
