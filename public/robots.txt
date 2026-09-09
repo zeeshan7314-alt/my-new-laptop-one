@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /wishlist
+
+Sitemap: https://laptopindex.info/sitemap.xml

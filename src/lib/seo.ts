@@ -7,7 +7,7 @@ import { faq } from './engine'
 export const SITE = {
   name: 'LaptopIndex',
   tagline: 'The Laptop Comparison Engine',
-  baseUrl: 'https://laptopindex.pages.dev', // updated at deploy time
+  baseUrl: 'https://laptopindex.info',
   disclosure: 'As Amazon Associates we may earn commission from qualifying purchases.',
 }
 
@@ -22,7 +22,7 @@ export interface Meta {
 
 export function productMeta(l: Laptop): Meta {
   const title = `${l.name} Review (2026): Benchmarks, Specs & Verdict`
-  const description = `${l.name} in-depth review — ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}″ ${l.display.refreshHz}Hz. Overall score ${l.scores.overall}/10 at $${l.price.toLocaleString()}. Pros, cons & who should buy.`
+  const description = `${l.name} in-depth review — ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}″ ${l.display.refreshHz}Hz. Overall score ${l.scores.overall}/10. Benchmarks, pros, cons & who should buy.`
   return { title, description: description.slice(0, 158), path: `/${l.slug}-review`, ogType: 'article', ogImage: imgOf(l) ? SITE.baseUrl + imgOf(l) : undefined, jsonLd: productJsonLd(l) }
 }
 
@@ -35,6 +35,7 @@ export function productJsonLd(l: Laptop): object[] {
     image: imgOf(l) ? [SITE.baseUrl + imgOf(l)] : undefined,
     brand: { '@type': 'Brand', name: l.brand },
     sku: l.slug,
+    mpn: l.model,
     category: `${l.segment} Laptop`,
     description: `${l.name}: ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.storage.raw} ${l.storage.type}, ${l.display.sizeInches}″ ${l.display.resolution} ${l.display.refreshHz}Hz display.`,
     offers: {
@@ -43,11 +44,15 @@ export function productJsonLd(l: Laptop): object[] {
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
       url: l.amazon.url || url,
+      seller: {
+        '@type': 'Organization',
+        name: 'Amazon',
+      },
     },
     review: {
       '@type': 'Review',
       reviewRating: { '@type': 'Rating', ratingValue: l.scores.overall, bestRating: 10, worstRating: 1 },
-      author: { '@type': 'Organization', name: SITE.name },
+      author: { '@type': 'Organization', name: SITE.name, url: SITE.baseUrl },
       datePublished: '2026-08-19',
     },
   }
@@ -81,16 +86,25 @@ export function productJsonLd(l: Laptop): object[] {
 
 export function compareMeta(a: Laptop, b: Laptop, slug: string): Meta {
   const title = `${a.name} vs ${b.name}: Which Should You Buy? (2026)`
-  const description = `${a.name} ($${a.price.toLocaleString()}) vs ${b.name} ($${b.price.toLocaleString()}) — CPU & GPU benchmarks, display, RAM, weight and value compared. See the winner.`
-  const jsonLd = [{
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Compare', item: SITE.baseUrl + '/compare' },
-      { '@type': 'ListItem', position: 3, name: `${a.name} vs ${b.name}`, item: `${SITE.baseUrl}/compare/${slug}` },
-    ],
-  }]
+  const description = `${a.name} vs ${b.name} — CPU & GPU benchmarks, display, RAM, weight and value compared. See the winner.`
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `${SITE.baseUrl}/compare/${slug}`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Compare', item: SITE.baseUrl + '/compare' },
+        { '@type': 'ListItem', position: 3, name: `${a.name} vs ${b.name}`, item: `${SITE.baseUrl}/compare/${slug}` },
+      ],
+    },
+  ]
   return { title, description: description.slice(0, 158), path: `/compare/${slug}`, ogImage: imgOf(a) ? SITE.baseUrl + imgOf(a)! : undefined, jsonLd }
 }
 
@@ -115,15 +129,25 @@ export function guideJsonLd(title: string, slug: string, items: Laptop[]): objec
 }
 
 export function websiteJsonLd(): object[] {
-  return [{
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE.name,
-    url: SITE.baseUrl,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${SITE.baseUrl}/laptops?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE.name,
+      alternateName: 'Laptop Index',
+      url: SITE.baseUrl,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${SITE.baseUrl}/laptops?q={search_term_string}` },
+        'query-input': 'required name=search_term_string',
+      },
     },
-  }]
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: SITE.name,
+      url: SITE.baseUrl,
+      logo: `${SITE.baseUrl}/static/icon.png`,
+    },
+  ]
 }

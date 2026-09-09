@@ -6,8 +6,10 @@
 - **Data**: 101 laptops from "Laptops Recs August 2026.xlsx" — brand, model, segment, display (size/res/refresh/panel/touch), CPU (PassMark), GPU (G3DMark), RAM, storage, dimensions, weight, Amazon rating/reviews/price + affiliate links (tag preserved: `wat344r5-20`).
 
 ## URLs
+- **Production Domain**: https://laptopindex.info
 - **Sandbox Preview**: https://3000-itfuhuub7q0m79qcz0aym-2e77fc33.sandbox.novita.ai
-- **Production**: not yet deployed (Cloudflare Pages ready — see Deployment)
+- **Sitemap**: https://laptopindex.info/sitemap.xml
+- **Robots.txt**: https://laptopindex.info/robots.txt
 
 ## Functional Entry Points
 | Route | Description |
@@ -54,5 +56,16 @@ pm2 start ecosystem.config.cjs   # sandbox dev server on :3000
 ```
 
 ## Deployment
-- **Platform**: Cloudflare Pages · **Status**: ✅ sandbox active, production pending
+
+### Spaceship Hyperlift (Docker & GitHub)
+1. In Spaceship, navigate to **Hyperlift Manager** and connect your GitHub repository.
+2. Select your deployment branch (e.g. `main`).
+3. Set the Dockerfile path to `Dockerfile`.
+4. (Optional) Set `PORT` in Environment Variables (defaults to `8080` if not specified).
+5. Deploy! Hyperlift will automatically build the container and route traffic with SSL.
+
+### Cloudflare Pages
+- Can also be deployed to Cloudflare Pages or Cloud Run as needed.
+
+- **Production Domain**: https://laptopindex.info
 - **Last Updated**: 2026-08-26

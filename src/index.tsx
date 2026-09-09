@@ -103,16 +103,49 @@ app.get('/wishlist', (c) => render(c, {
 
 // ---------- Sitemap + robots ----------
 app.get('/sitemap.xml', (c) => {
-  const urls: string[] = ['/', '/laptops', '/compare', '/guides',
-    ...LAPTOPS.map(l => `/${l.slug}-review`),
-    ...GUIDES.map(g => `/guides/${g.slug}`),
-    ...popularPairs(30).map(([a, b]) => `/compare/${compareSlug(a, b)}`),
+  const corePages: { loc: string; priority: string; changefreq: string }[] = [
+    { loc: '/', priority: '1.0', changefreq: 'daily' },
+    { loc: '/laptops', priority: '0.9', changefreq: 'daily' },
+    { loc: '/compare', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/guides', priority: '0.9', changefreq: 'weekly' },
   ]
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `<url><loc>${SITE.baseUrl}${u}</loc><lastmod>${META.updated}</lastmod></url>`).join('\n')}\n</urlset>`
-  c.header('Content-Type', 'application/xml')
+  const guidePages = GUIDES.map(g => ({
+    loc: `/guides/${g.slug}`, priority: '0.8', changefreq: 'weekly',
+  }))
+  const productPages = LAPTOPS.map(l => ({
+    loc: `/${l.slug}-review`, priority: '0.8', changefreq: 'weekly',
+  }))
+  const comparePages = popularPairs(30).map(([a, b]) => ({
+    loc: `/compare/${compareSlug(a, b)}`, priority: '0.7', changefreq: 'monthly',
+  }))
+
+  const allEntries = [...corePages, ...guidePages, ...productPages, ...comparePages]
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allEntries.map(e => `  <url>
+    <loc>${SITE.baseUrl}${e.loc}</loc>
+    <lastmod>${META.updated}</lastmod>
+    <changefreq>${e.changefreq}</changefreq>
+    <priority>${e.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`
+  c.header('Content-Type', 'application/xml; charset=utf-8')
+  c.header('Cache-Control', 'public, max-age=3600, s-maxage=86400')
   return c.body(xml)
 })
-app.get('/robots.txt', (c) => c.text(`User-agent: *\nAllow: /\nSitemap: ${SITE.baseUrl}/sitemap.xml\n`))
+
+app.get('/robots.txt', (c) => {
+  c.header('Content-Type', 'text/plain; charset=utf-8')
+  c.header('Cache-Control', 'public, max-age=3600, s-maxage=86400')
+  return c.text(`User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /wishlist
+
+Sitemap: ${SITE.baseUrl}/sitemap.xml
+`)
+})
 
 // ---------- Product review pages (catch-all, keep LAST) ----------
 app.get('/:page{[a-z0-9-]+-review}', (c) => {

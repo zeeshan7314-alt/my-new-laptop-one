@@ -26,11 +26,12 @@ export const renderer = jsxRenderer(({ children }, c) => {
 <meta property="og:title" content="${m.title}">
 <meta property="og:description" content="${m.description}">
 <meta property="og:url" content="${canonical}">
+<meta property="og:locale" content="en_US">
 ${m.ogImage ? raw(`<meta property="og:image" content="${m.ogImage}"><meta name="twitter:image" content="${m.ogImage}">`) : ''}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${m.title}">
 <meta name="twitter:description" content="${m.description}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
 ${jsonLd ? raw(`<script type="application/ld+json">${jsonLd}</script>`) : ''}
 <script>
