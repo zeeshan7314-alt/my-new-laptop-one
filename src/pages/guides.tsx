@@ -28,6 +28,20 @@ export const GuidesHub = () => (
   </>
 )
 
+const guideScoreLabel = (k: string) => {
+  const map: Record<string, string> = {
+    gaming: 'Gaming',
+    student: 'Student',
+    engineering: 'Engineering',
+    travel: 'Travel',
+    value: 'Value',
+    programming: 'Dev',
+    ai: 'AI',
+    office: 'Productivity',
+  }
+  return `${map[k] || k} Score`
+}
+
 export const GuidePage = ({ g }: { g: Guide }) => {
   const ranked = guideRanking(g)
   const awards = ['Editor\u2019s Pick', 'Runner-Up', 'Best Value Alternative']
@@ -64,7 +78,7 @@ export const GuidePage = ({ g }: { g: Guide }) => {
                   </div>
                   <div class="hidden sm:flex flex-col items-center gap-1 shrink-0">
                     <ScoreDonut score={l.scores[g.scoreKey]} size="sm" />
-                    <span class="text-[10px] uppercase font-bold text-slate-400">{g.scoreKey} score</span>
+                    <span class="text-[10px] uppercase font-bold text-slate-400">{guideScoreLabel(g.scoreKey)}</span>
                   </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-4 mt-4 text-sm">

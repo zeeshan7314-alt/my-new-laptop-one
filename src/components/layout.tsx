@@ -176,7 +176,6 @@ export const LaptopCard = ({ l, rank }: { l: Laptop; rank?: number }) => (
         </h3>
         <p class="text-xs text-slate-500 mt-0.5">{l.segment} · {l.formFactor}{l.amazon.rating ? <span> · <i class="fas fa-star text-amber-400 text-[10px]" aria-hidden="true"></i> {l.amazon.rating} ({(l.amazon.reviewCount || 0).toLocaleString()})</span> : null}</p>
       </div>
-      <ScoreDonut score={l.scores.overall} size="sm" />
     </div>
     <ul class="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-slate-600 dark:text-slate-400">
       <li class="truncate"><i class="fas fa-microchip w-4 text-slate-400" aria-hidden="true"></i> {cpuLabel(l)}</li>

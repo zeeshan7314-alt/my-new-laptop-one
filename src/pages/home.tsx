@@ -25,7 +25,7 @@ export const HomePage = () => {
         <section id="hero-section" class="bg-gradient-to-b from-slate-50 via-white to-slate-100/70 dark:from-slate-900 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800">
           <div class="max-w-7xl mx-auto px-4 py-14 md:py-20 text-center">
             <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900 dark:text-white">Find Your Perfect Laptop.<br /><span class="text-brand-600 dark:text-amber-400">Backed by Benchmarks, Not Hype.</span></h1>
-            <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">{META.count} laptops scored across 10 real-world use cases using PassMark & G3DMark data, verified Amazon ratings and live pricing. Updated {META.updated}.</p>
+            <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">{META.count} laptops scored across real-world use cases using PassMark & G3DMark data, verified Amazon ratings and live pricing. Updated {META.updated}.</p>
             <form action="/laptops" method="get" class="mt-7 max-w-xl mx-auto relative" role="search">
               <input type="search" name="q" placeholder="Search by model, CPU, GPU… e.g. RTX 5060" class="w-full pl-12 pr-32 py-4 rounded-2xl text-slate-900 dark:text-white placeholder:text-slate-400 text-sm font-medium shadow-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-brand-500 focus:outline-none" />
               <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true"></i>
@@ -82,7 +82,7 @@ export const HomePage = () => {
               {pairs.map(([x, y]) => (
                 <a href={`/compare/${compareSlug(x, y)}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 hover:shadow-lg transition p-4">
                   <div class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{x.name} <span class="text-brand-500">vs</span> {y.name}</div>
-                  <div class="text-xs text-slate-500 mt-1.5">{x.scores.overall} vs {y.scores.overall} overall · {x.segment}</div>
+                  <div class="text-xs text-slate-500 mt-1.5">${x.price.toLocaleString()} vs ${y.price.toLocaleString()} · {x.segment}</div>
                 </a>
               ))}
             </div>
@@ -113,7 +113,7 @@ export const HomePage = () => {
             <div class="grid md:grid-cols-3 gap-6 text-sm text-slate-600 dark:text-slate-400">
               <div><i class="fas fa-microchip text-brand-500 text-lg" aria-hidden="true"></i><h3 class="font-bold text-slate-900 dark:text-white mt-1.5 mb-1">Real Benchmarks</h3><p>PassMark multi-thread CPU scores and G3DMark laptop GPU scores — no marketing numbers, log-normalized across the whole database.</p></div>
               <div><i class="fas fa-users text-brand-500 text-lg" aria-hidden="true"></i><h3 class="font-bold text-slate-900 dark:text-white mt-1.5 mb-1">Verified Buyers</h3><p>Amazon star ratings weighted by review volume, so a 4.6★ with 3,000 reviews counts more than a 5★ with 4.</p></div>
-              <div><i class="fas fa-calculator text-brand-500 text-lg" aria-hidden="true"></i><h3 class="font-bold text-slate-900 dark:text-white mt-1.5 mb-1">10 Use-Case Scores</h3><p>Every laptop is scored for gaming, programming, creation, travel, AI and more — each with transparent, documented weightings.</p></div>
+              <div><i class="fas fa-calculator text-brand-500 text-lg" aria-hidden="true"></i><h3 class="font-bold text-slate-900 dark:text-white mt-1.5 mb-1">Use-Case Scores</h3><p>Every laptop is scored for gaming, programming, productivity, travel, AI and more — each with transparent, documented weightings.</p></div>
             </div>
           </section>
         </div>

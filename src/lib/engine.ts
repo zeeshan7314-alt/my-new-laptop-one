@@ -79,11 +79,14 @@ export function compareLaptops(a: Laptop, b: Laptop) {
 
 // Category winner helper for score bars
 export const SCORE_KEYS: { key: keyof Scores; label: string }[] = [
-  { key: 'overall', label: 'Overall' }, { key: 'gaming', label: 'Gaming' },
-  { key: 'office', label: 'Productivity' }, { key: 'programming', label: 'Programming' },
-  { key: 'engineering', label: 'Engineering / 3D' }, { key: 'creator', label: 'Content Creation' },
-  { key: 'student', label: 'Student' }, { key: 'travel', label: 'Travel / Portability' },
-  { key: 'ai', label: 'AI Workloads' }, { key: 'value', label: 'Value for Money' },
+  { key: 'gaming', label: 'Gaming' },
+  { key: 'office', label: 'Productivity' },
+  { key: 'programming', label: 'Programming' },
+  { key: 'engineering', label: 'Engineering / 3D' },
+  { key: 'student', label: 'Student' },
+  { key: 'travel', label: 'Travel / Portability' },
+  { key: 'ai', label: 'AI Workloads' },
+  { key: 'value', label: 'Value for Money' },
 ]
 
 // ---------- Popular comparison pairs (for hub + internal links) ----------
@@ -164,9 +167,9 @@ export const GUIDES: Guide[] = [
     description: 'Every RTX 5060 gaming laptop ranked by benchmark scores, thermals headroom and price-per-frame.',
     intro: 'The RTX 5060 is 2026\u2019s sweet-spot GPU. These are the best implementations, ranked by overall gaming performance and value.',
     filter: l => (l.gpu.model || '').includes('5060'), limit: 10 },
-  { slug: 'best-oled-laptops', title: 'Best OLED & Mini-LED Laptops in 2026', h1: 'Best OLED Laptops', scoreKey: 'creator',
+  { slug: 'best-oled-laptops', title: 'Best OLED & Mini-LED Laptops in 2026', h1: 'Best OLED Laptops', scoreKey: 'engineering',
     description: 'The best OLED, AMOLED and Mini-LED laptops of 2026 for perfect blacks and cinema-grade color.',
-    intro: 'Self-emissive and Mini-LED panels deliver the best contrast money can buy. Ranked by our creator score.',
+    intro: 'Self-emissive and Mini-LED panels deliver the best contrast money can buy. Ranked by display quality and workstation benchmarks.',
     filter: l => ['OLED', 'AMOLED', 'Mini LED'].includes(l.display.panel || ''), limit: 10 },
   { slug: 'best-lightweight-laptops', title: 'Best Lightweight Laptops in 2026', h1: 'Best Lightweight Laptops', scoreKey: 'travel',
     description: 'Best ultraportable laptops under 3.5 lbs in 2026 — ranked by weight, thinness and battery-friendly efficiency.',
@@ -180,9 +183,9 @@ export const GUIDES: Guide[] = [
     description: 'The best developer laptops of 2026 — ranked by multicore CPU, RAM, tall screens and SSD speed.',
     intro: 'Compilers love cores and RAM. Our programming score weights CPU 34%, RAM 24%, storage & display quality the rest — with a bonus for 16:10 screens.',
     filter: () => true, limit: 12 },
-  { slug: 'best-video-editing-laptops', title: 'Best Video Editing Laptops in 2026', h1: 'Best Video Editing Laptops', scoreKey: 'creator',
+  { slug: 'best-video-editing-laptops', title: 'Best Video Editing Laptops in 2026', h1: 'Best Video Editing Laptops', scoreKey: 'engineering',
     description: 'Best laptops for Premiere Pro, DaVinci Resolve and Final Cut in 2026 — ranked by encode power and color-accurate panels.',
-    intro: 'Timeline scrubbing needs GPU + CPU; grading needs a great panel. Our creator score weights display quality at 24%.',
+    intro: 'Timeline scrubbing needs GPU + CPU; grading needs a great panel. Ranked by dedicated GPU power and multicore performance.',
     filter: l => (l.ram.gb || 0) >= 16, limit: 10 },
   { slug: 'best-ai-laptops', title: 'Best AI Laptops in 2026', h1: 'Best AI Laptops', scoreKey: 'ai',
     description: 'Best laptops for local LLMs, Stable Diffusion and ML dev in 2026 — ranked by GPU compute and RAM capacity.',
@@ -192,9 +195,9 @@ export const GUIDES: Guide[] = [
     description: 'The most dependable business laptops of 2026 — ranked by productivity performance, portability and buyer satisfaction.',
     intro: 'Boardroom to airport: our office score rewards CPU responsiveness, light weight, good screens and proven reliability ratings.',
     filter: l => l.segment !== 'Gaming', limit: 12 },
-  { slug: 'best-2-in-1-laptops', title: 'Best 2-in-1 Convertible Laptops in 2026', h1: 'Best 2-in-1 Laptops', scoreKey: 'overall',
+  { slug: 'best-2-in-1-laptops', title: 'Best 2-in-1 Convertible Laptops in 2026', h1: 'Best 2-in-1 Laptops', scoreKey: 'office',
     description: 'The best convertible touchscreen laptops of 2026 — tablets when you want, laptops when you need.',
-    intro: 'Every pick here folds flat or flips around, with touch input standard. Ranked by overall score.',
+    intro: 'Every pick here folds flat or flips around, with touch input standard. Ranked by productivity and versatility.',
     filter: l => l.formFactor === '2-in-1', limit: 10 },
   { slug: 'best-laptops-under-500', title: 'Best Laptops Under $500 in 2026', h1: 'Best Laptops Under $500', scoreKey: 'value',
     description: 'Top laptops under $500 in 2026 that don\u2019t suck — real SSDs, IPS panels, and CPUs that can actually multitask.',
@@ -202,15 +205,15 @@ export const GUIDES: Guide[] = [
     filter: l => l.price < 500, limit: 10 },
   { slug: 'best-laptops-under-1000', title: 'Best Laptops Under $1000 in 2026', h1: 'Best Laptops Under $1000', scoreKey: 'value',
     description: 'The best laptops under $1000 in 2026 — where mid-range pricing meets near-flagship performance.',
-    intro: 'The $600–$1000 band is where value peaks in 2026. Ranked by value score with an overall-quality tiebreaker.',
+    intro: 'The $600–$1000 band is where value peaks in 2026. Ranked by value score with benchmark tiebreaker.',
     filter: l => l.price < 1000, limit: 12 },
-  { slug: 'best-laptops-under-1500', title: 'Best Laptops Under $1500 in 2026', h1: 'Best Laptops Under $1500', scoreKey: 'overall',
+  { slug: 'best-laptops-under-1500', title: 'Best Laptops Under $1500 in 2026', h1: 'Best Laptops Under $1500', scoreKey: 'value',
     description: 'Best premium laptops under $1500 in 2026 — high-refresh gaming rigs, OLED ultrabooks and creator machines.',
-    intro: 'At $1500 you should compromise on nothing. Ranked by overall score across every discipline.',
+    intro: 'At $1500 you should compromise on nothing. Ranked by value and performance across every discipline.',
     filter: l => l.price < 1500, limit: 12 },
-  { slug: 'best-macbooks', title: 'Best MacBooks in 2026', h1: 'Best MacBooks', scoreKey: 'overall',
+  { slug: 'best-macbooks', title: 'Best MacBooks in 2026', h1: 'Best MacBooks', scoreKey: 'office',
     description: 'Every Apple MacBook ranked for 2026 — M-series Air and Pro compared by real benchmark data.',
-    intro: 'Apple silicon dominates efficiency. Every MacBook in our database, ranked by overall score.',
+    intro: 'Apple silicon dominates efficiency. Every MacBook in our database, ranked by productivity performance.',
     filter: l => l.brand === 'Apple', limit: 10 },
 ]
 
@@ -293,7 +296,7 @@ export function whoFor(l: Laptop): { buy: string[]; avoid: string[] } {
   if (s.gaming >= 7) buy.push('Gamers who want high-FPS AAA performance without a desktop')
   else if (s.gaming >= 5) buy.push('Casual gamers happy at 1080p medium settings')
   if (s.programming >= 7) buy.push('Developers running IDEs, containers and local builds')
-  if (s.creator >= 7) buy.push('Video editors and designers who need color and compute')
+  if (s.engineering >= 7) buy.push('Engineers, 3D artists, and video editors who need compute')
   if (s.student >= 7) buy.push('Students who need reliable all-day productivity on a budget')
   if (s.travel >= 7) buy.push('Frequent travelers who count every ounce in their bag')
   if (s.ai >= 7) buy.push('AI tinkerers running local models and CUDA workloads')
@@ -302,7 +305,7 @@ export function whoFor(l: Laptop): { buy: string[]; avoid: string[] } {
 
   if (s.gaming < 5) avoid.push('Serious gamers — the graphics hardware isn\u2019t there')
   if (s.travel < 5) avoid.push('Anyone commuting daily with a laptop — too heavy/bulky')
-  if (s.creator < 5) avoid.push('Creators doing color-critical or GPU-heavy work')
+  if (s.engineering < 5) avoid.push('Heavy 3D modeling, CAD, or GPU rendering workloads')
   if ((l.ram.gb || 0) <= 8) avoid.push('Power users who keep 40 browser tabs and 5 apps open')
   if (avoid.length === 0) avoid.push('Bargain hunters — similar performance exists for less if you shop the tier below')
   return { buy: buy.slice(0, 4), avoid: avoid.slice(0, 3) }
@@ -325,7 +328,7 @@ export function sectionText(l: Laptop) {
       : `There is no dedicated GPU here — graphics run on the ${l.cpu.brand} integrated solution, scoring ${s.gaming}/10 for gaming. Esports staples (Valorant, LoL, CS2) are playable at modest settings; modern AAA gaming is off the table.`,
     productivity: `For office and productivity work the ${l.model} scores ${s.office}/10. ${l.ram.gb} GB of ${l.ram.type} memory ${(l.ram.gb || 0) >= 16 ? 'keeps large spreadsheets, dozens of tabs and video calls running simultaneously without paging.' : 'covers everyday workloads, though heavy multitaskers will hit the ceiling.'} The ${l.storage.raw} ${l.storage.type} keeps boots and file operations ${l.storage.type === 'SSD' ? 'fast' : 'adequate'}.`,
     programming: `Developers should expect a ${s.programming}/10 experience. ${(l.cpu.cores || 0) >= 10 ? `${l.cpu.cores} cores chew through parallel builds and containerized stacks.` : (l.cpu.cores || 0) >= 6 ? `${l.cpu.cores} cores handle typical web/dev stacks smoothly.` : 'Core count is limited — fine for scripting and web work, slow for big compiles.'} ${(d.resH || 0) >= 1200 ? 'The taller 16:10-class screen shows meaningfully more code per screenful.' : ''} ${l.ram.soldered ? 'Note the soldered RAM: buy the capacity you\u2019ll need in 3 years, today.' : 'Upgradeable RAM means you can start smaller and expand later.'}`,
-    videoEditing: `Content creation lands at ${s.creator}/10. ${l.gpu.dedicated ? `The ${l.gpu.model} accelerates timeline playback, effects and export encoding.` : 'Without a dGPU, editing leans entirely on the CPU — fine for 1080p cuts, slow for 4K multi-layer work.'} ${['OLED', 'AMOLED', 'Mini LED', 'Liquid Retina'].includes(d.panel || '') ? 'The premium panel is a genuine asset for color grading.' : 'For color-critical delivery, plan on an external calibrated monitor.'}`,
+    videoEditing: `${l.gpu.dedicated ? `The ${l.gpu.model} accelerates timeline playback, effects and export encoding.` : 'Without a dGPU, editing leans entirely on the CPU — fine for 1080p cuts, slow for 4K multi-layer work.'} ${['OLED', 'AMOLED', 'Mini LED', 'Liquid Retina'].includes(d.panel || '') ? 'The premium panel is a genuine asset for color grading.' : 'For color-critical delivery, plan on an external calibrated monitor.'}`,
     rendering: `3D and engineering workloads score ${s.engineering}/10. ${l.gpu.dedicated && (l.gpu.g3dmark || 0) > 15000 ? 'Viewport manipulation in CAD/DCC apps stays fluid, and GPU renders (Blender Cycles, V-Ray GPU) are well within reach.' : l.gpu.dedicated ? 'Light CAD and moderate scenes are workable; production rendering will test your patience.' : 'Integrated graphics restrict this machine to light 2D CAD and coursework-scale models.'}`,
     battery: `Battery specifics aren\u2019t listed in our source data, so treat this as guidance: ${!l.gpu.dedicated && (l.physical.weightLbs || 9) < 4 ? 'efficiency-focused hardware like this typically delivers strong all-day endurance under office loads.' : l.gpu.dedicated ? 'gaming-class hardware prioritizes performance; expect moderate unplugged endurance and pack the charger for long days.' : 'expect average endurance typical of this class.'} ${l.brand === 'Apple' ? 'Apple silicon MacBooks are the industry benchmark for battery life in practice.' : ''}`,
     upgradeability: `${l.ram.soldered ? `RAM is soldered at ${l.ram.gb} GB — what you buy is what you keep.` : `RAM is socketed and user-upgradeable beyond the included ${l.ram.gb} GB — a big longevity win.`} Storage is ${l.storage.type === 'SSD' ? 'M.2 SSD-based, typically replaceable for capacity upgrades' : `${l.storage.type}, which generally cannot be upgraded`}.`,
@@ -346,7 +349,7 @@ export function faq(l: Laptop): { q: string; a: string }[] {
   })
   out.push({
     q: `Is the ${l.name} worth it in 2026?`,
-    a: `${s.value >= 7 ? 'Yes — it ranks among the best value laptops in our database' : s.value >= 5 ? 'It offers fair value' : 'Only if its specific strengths match your needs'} at ${'$' + l.price.toLocaleString()}, with a ${s.value}/10 value score and ${s.overall}/10 overall.`,
+    a: `${s.value >= 7 ? 'Yes — it ranks among the best value laptops in our database' : s.value >= 5 ? 'It offers fair value' : 'Only if its specific strengths match your needs'} at ${'$' + l.price.toLocaleString()}, with a ${s.value}/10 value score.`,
   })
   out.push({
     q: `Can the RAM be upgraded on the ${l.name}?`,

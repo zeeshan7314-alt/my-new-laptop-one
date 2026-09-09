@@ -20,12 +20,9 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
       <div class="flex flex-wrap gap-1 mb-1">{l.badges.map(bd => <BadgePill text={bd} />)}</div>
       <h2 class="font-bold text-lg text-slate-900 dark:text-white leading-snug"><a href={`/${l.slug}-review`} class="hover:text-brand-500">{l.name}</a></h2>
       <p class="text-xs text-slate-500 mt-0.5">{cpuLabel(l)} · {gpuLabel(l)}</p>
-      <div class="flex items-center gap-4 mt-3">
-        <ScoreDonut score={l.scores.overall} size="sm" />
-        <div>
-          <div class="text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">{l.priceBracket}</div>
-          {l.amazon.rating ? <div class="text-xs text-slate-500 mt-1"><i class="fas fa-star text-amber-400" aria-hidden="true"></i> {l.amazon.rating} ({(l.amazon.reviewCount || 0).toLocaleString()})</div> : null}
-        </div>
+      <div class="mt-3">
+        <div class="text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">{l.priceBracket}</div>
+        {l.amazon.rating ? <div class="text-xs text-slate-500 mt-1"><i class="fas fa-star text-amber-400" aria-hidden="true"></i> {l.amazon.rating} ({(l.amazon.reviewCount || 0).toLocaleString()})</div> : null}
       </div>
       <div class="mt-4"><AmazonBtn l={l} /></div>
     </div>
@@ -202,7 +199,7 @@ export const CompareHub = () => {
           {pairs.map(([x, y]) => (
             <a href={`/compare/${compareSlug(x, y)}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-lg transition p-4">
               <div class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{x.name} <span class="text-brand-500">vs</span> {y.name}</div>
-              <div class="text-xs text-slate-500 mt-1.5">{x.scores.overall} vs {y.scores.overall} overall · {x.segment} vs {y.segment}</div>
+              <div class="text-xs text-slate-500 mt-1.5">${x.price.toLocaleString()} vs ${y.price.toLocaleString()} · {x.segment} vs {y.segment}</div>
             </a>
           ))}
         </div>

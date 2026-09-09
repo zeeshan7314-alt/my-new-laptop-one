@@ -22,7 +22,7 @@ export interface Meta {
 
 export function productMeta(l: Laptop): Meta {
   const title = `${l.name} Review (2026): Benchmarks, Specs & Verdict`
-  const description = `${l.name} in-depth review — ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}″ ${l.display.refreshHz}Hz. Overall score ${l.scores.overall}/10. Benchmarks, pros, cons & who should buy.`
+  const description = `${l.name} in-depth review — ${cpuLabel(l)}, ${gpuShort(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}″ ${l.display.refreshHz}Hz. Benchmarks, specs, pros, cons & who should buy.`
   return { title, description: description.slice(0, 158), path: `/${l.slug}-review`, ogType: 'article', ogImage: imgOf(l) ? SITE.baseUrl + imgOf(l) : undefined, jsonLd: productJsonLd(l) }
 }
 

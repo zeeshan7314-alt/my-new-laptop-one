@@ -22,7 +22,7 @@ const AltRow = ({ label, l, current }: { label: string; l?: Laptop; current: Lap
     <span class="text-[10px] font-bold uppercase tracking-wide text-slate-400 w-20 shrink-0">{label}</span>
     <div class="min-w-0 flex-1">
       <a href={`/${l.slug}-review`} class="text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-brand-500 truncate block">{l.name}</a>
-      <span class="text-xs text-slate-500">{l.priceBracket} · {l.scores.overall}/10</span>
+      <span class="text-xs text-slate-500">{l.priceBracket}</span>
     </div>
     <a href={`/compare/${compareSlug(current, l)}`} class="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline shrink-0">Compare</a>
   </div>
@@ -79,13 +79,6 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
               </div>
               <p class="mt-3 text-[11px] text-slate-400">{META.affiliateDisclosure} Price captured {META.updated}.</p>
             </div>
-            <div class="flex md:flex-col items-center gap-4 shrink-0">
-              <ScoreDonut score={l.scores.overall} />
-              <div class="text-center">
-                <div class="text-xs uppercase tracking-wide text-slate-400 font-bold">LaptopIndex Score</div>
-                <div class="text-sm text-slate-500">{rankText(l)}</div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -101,7 +94,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
           <div class="space-y-10 min-w-0">
             {/* Verdict + pros/cons */}
             <Section id="verdict" icon="fa-gavel" title="Verdict">
-              <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">{verdictLine(l)}, scoring <strong>{l.scores.overall}/10</strong> overall in our {META.count}-laptop database. {st.value}</p>
+              <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">{verdictLine(l)} in our {META.count}-laptop database. {st.value}</p>
               <div class="grid md:grid-cols-2 gap-4">
                 <div class="bg-emerald-50 dark:bg-emerald-500/10 rounded-xl p-4 border border-emerald-200 dark:border-emerald-500/20">
                   <h3 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2"><i class="fas fa-circle-check mr-1.5" aria-hidden="true"></i>Pros</h3>
@@ -238,10 +231,4 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
       <Footer />
     </>
   )
-}
-
-import { LAPTOPS } from '../lib/db'
-function rankText(l: Laptop) {
-  const rank = [...LAPTOPS].sort((a, b) => b.scores.overall - a.scores.overall).findIndex(x => x.id === l.id) + 1
-  return `#${rank} of ${LAPTOPS.length}`
 }

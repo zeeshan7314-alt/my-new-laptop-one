@@ -24,7 +24,7 @@ const render = (c: any, meta: Meta, node: any) => {
 
 // ---------- Home ----------
 app.get('/', (c) => render(c,
-  { title: `${SITE.name} — Laptop Reviews, Benchmarks & Comparisons (2026)`, description: `Compare ${META.count} laptops with real PassMark & G3DMark benchmarks, 10 use-case scores and live Amazon pricing. Find your perfect laptop in minutes.`, path: '/', jsonLd: websiteJsonLd() },
+  { title: `${SITE.name} — Laptop Reviews, Benchmarks & Comparisons (2026)`, description: `Compare ${META.count} laptops with real PassMark & G3DMark benchmarks, use-case scores and live Amazon pricing. Find your perfect laptop in minutes.`, path: '/', jsonLd: websiteJsonLd() },
   <HomePage />))
 
 // ---------- Browse + filters ----------
@@ -43,7 +43,7 @@ app.get('/laptops', (c) => {
   const title = f.q ? `"${f.q}" — Laptop Search Results` : f.segment ? `Best ${f.segment} Laptops — Browse & Filter (2026)` : 'Browse All Laptops — Filter by Price, GPU, RAM & More'
   return render(c, {
     title: `${title} | ${SITE.name}`,
-    description: `Filter ${META.count} benchmark-scored laptops by brand, price, GPU, CPU, RAM, screen and weight. Sorted by our data-driven overall score.`,
+    description: `Filter ${META.count} benchmark-scored laptops by brand, price, GPU, CPU, RAM, screen and weight. Data-driven specs, benchmarks, and deals.`,
     path: hasFilter ? '/laptops' : '/laptops', // canonical always points to clean browse
   }, <BrowsePage f={f} />)
 })

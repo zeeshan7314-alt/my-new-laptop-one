@@ -74,7 +74,7 @@ export const BrowsePage = ({ f }: { f: Filters }) => {
       <main class="max-w-7xl mx-auto px-4 py-6">
         <Breadcrumbs items={[{ name: 'Laptops' }]} />
         <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-1">{title}</h1>
-        <p class="text-slate-500 text-sm mb-5"><span id="result-count">{results.length}</span> of {LAPTOPS.length} laptops match · sorted by {f.sort || 'overall score'}</p>
+        <p class="text-slate-500 text-sm mb-5"><span id="result-count">{results.length}</span> of {LAPTOPS.length} laptops match · sorted by {f.sort || 'benchmark rank'}</p>
         <div class="grid lg:grid-cols-[260px_1fr] gap-6">
           <aside>
             <form id="filter-form" method="get" action="/laptops" class="lg:sticky lg:top-20 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 space-y-3">
@@ -101,7 +101,7 @@ export const BrowsePage = ({ f }: { f: Filters }) => {
               <Sel name="panel" label="Panel" cur={f.panel} opts={[['OLED', 'OLED / AMOLED'], ['Mini LED', 'Mini LED'], ['IPS', 'IPS'], ['Liquid Retina', 'Liquid Retina']]} />
               <Sel name="touch" label="Touchscreen" cur={f.touch} opts={[['yes', 'Touch only']]} />
               <Sel name="maxWeight" label="Max Weight" cur={f.maxWeight ? String(f.maxWeight) : undefined} opts={[['3', 'Under 3 lbs'], ['4', 'Under 4 lbs'], ['5', 'Under 5 lbs'], ['6', 'Under 6 lbs']]} />
-              <Sel name="sort" label="Sort By" cur={f.sort} opts={[['score', 'Overall Score'], ['value', 'Best Value'], ['gaming', 'Gaming Score'], ['price-asc', 'Price: Low → High'], ['price-desc', 'Price: High → Low'], ['rating', 'Amazon Rating'], ['popular', 'Most Reviewed'], ['weight', 'Lightest']]} />
+              <Sel name="sort" label="Sort By" cur={f.sort} opts={[['score', 'Benchmark Rank'], ['value', 'Best Value'], ['gaming', 'Gaming Score'], ['price-asc', 'Price: Low → High'], ['price-desc', 'Price: High → Low'], ['rating', 'Amazon Rating'], ['popular', 'Most Reviewed'], ['weight', 'Lightest']]} />
               <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 rounded-xl text-sm">Apply Filters</button>
             </form>
           </aside>
