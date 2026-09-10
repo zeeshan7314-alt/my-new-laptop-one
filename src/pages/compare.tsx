@@ -181,18 +181,18 @@ export const CompareHub = () => {
         <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">Laptop Comparison Tool</h1>
         <p class="text-slate-500 mb-6">Pick any two of our {LAPTOPS.length} laptops for a benchmark-weighted head-to-head verdict.</p>
         <section id="compare-picker" class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 mb-10">
-          <div class="grid sm:grid-cols-[1fr_auto_1fr_auto] gap-3 items-center">
-            <select id="cmp-a" class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-medium border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none">
+          <form action="/compare" method="get" class="grid sm:grid-cols-[1fr_auto_1fr_auto] gap-3 items-center">
+            <select id="cmp-a" name="a" required class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-medium border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none">
               <option value="">Select first laptop…</option>
               {LAPTOPS.map(l => <option value={l.slug}>{l.name}</option>)}
             </select>
             <span class="text-center font-extrabold text-slate-400 dark:text-slate-500">VS</span>
-            <select id="cmp-b" class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-medium border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none">
+            <select id="cmp-b" name="b" required class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-medium border border-slate-200 dark:border-transparent focus:border-brand-400 focus:outline-none">
               <option value="">Select second laptop…</option>
               {LAPTOPS.map(l => <option value={l.slug}>{l.name}</option>)}
             </select>
-            <button id="cmp-go" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">Compare</button>
-          </div>
+            <button id="cmp-go" type="submit" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">Compare</button>
+          </form>
         </section>
         <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Popular Comparisons</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

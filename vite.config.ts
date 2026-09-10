@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [
     build({
       entry: 'src/index.tsx',
+      staticRoot: './dist',
       entryContentAfterHooks: [
         async (appName) => {
           return `import { serve } from '@hono/node-server'

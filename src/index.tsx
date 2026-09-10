@@ -86,11 +86,19 @@ app.get('/api/laptops/:slug', (c) => {
 })
 
 // ---------- Compare ----------
-app.get('/compare', (c) => render(c, {
-  title: `Laptop Comparison Tool — Compare Any 2 of ${META.count} Laptops | ${SITE.name}`,
-  description: 'Head-to-head laptop comparisons with weighted benchmark scoring: CPU, GPU, display, RAM, weight and value. Instant winner verdicts.',
-  path: '/compare',
-}, <CompareHub />))
+app.get('/compare', (c) => {
+  const a = c.req.query('a')
+  const b = c.req.query('b')
+  if (a && b && a !== b) {
+    const pair = [a, b].sort().join('-vs-')
+    return c.redirect(`/compare/${pair}`, 302)
+  }
+  return render(c, {
+    title: `Laptop Comparison Tool — Compare Any 2 of ${META.count} Laptops | ${SITE.name}`,
+    description: 'Head-to-head laptop comparisons with weighted benchmark scoring: CPU, GPU, display, RAM, weight and value. Instant winner verdicts.',
+    path: '/compare',
+  }, <CompareHub />)
+})
 
 app.get('/compare/:pair', (c) => {
   const pair = parseCompareSlug(c.req.param('pair'))

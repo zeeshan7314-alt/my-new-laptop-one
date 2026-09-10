@@ -37,6 +37,7 @@ RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
 # Copy built server bundle and static files from builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/public/static ./static
 
 # Use standard non-root node user for security
 USER node

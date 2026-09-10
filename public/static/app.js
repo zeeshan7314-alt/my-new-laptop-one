@@ -143,9 +143,15 @@
   if (location.pathname === '/wishlist') renderWishlistPage();
 
   // ---------- Compare hub picker ----------
-  $('#cmp-go')?.addEventListener('click', () => {
+  $('#cmp-go')?.addEventListener('click', (e) => {
     const a = $('#cmp-a')?.value, b = $('#cmp-b')?.value;
-    if (a && b && a !== b) location.href = '/compare/' + [a, b].sort().join('-vs-');
+    if (!a || !b) return; // let native form validation prompt for required fields
+    e.preventDefault();
+    if (a === b) {
+      alert('Please choose two different laptops to compare.');
+      return;
+    }
+    location.href = '/compare/' + [a, b].sort().join('-vs-');
   });
 
   // ---------- Auto-submit filters on change ----------
