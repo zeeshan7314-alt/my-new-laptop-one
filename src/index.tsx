@@ -16,6 +16,15 @@ import { GuidesHub, GuidePage } from './pages/guides'
 const app = new Hono()
 app.use(renderer)
 
+// Normalize common sitemap request patterns (e.g. accidentally pasted full URL in GSC or missing extension)
+app.use('*', async (c, next) => {
+  const path = c.req.path
+  if (path !== '/sitemap.xml' && (path.endsWith('sitemap.xml') || path === '/sitemap' || path.endsWith('sitemap_index.xml'))) {
+    return c.redirect('/sitemap.xml', 301)
+  }
+  await next()
+})
+
 const render = (c: any, meta: Meta, node: any) => {
   c.set('meta', meta)
   c.header('Cache-Control', 'public, max-age=300, s-maxage=3600')
@@ -55,7 +64,20 @@ app.get('/api/laptops', (c) => {
     id: l.id, slug: l.slug, name: l.name, brand: l.brand, price: l.price,
     segment: l.segment, cpu: `${l.cpu.brand || ''} ${l.cpu.model || ''}`.trim(),
     gpu: l.gpu.dedicated ? l.gpu.model : 'Integrated', ram: l.ram.gb,
-    score: l.scores.overall, rating: l.amazon.rating, badges: l.badges,
+    rating: l.amazon.rating, badges: l.badges,
+  })))
+})
+app.get('/api/search', (c) => {
+  const q = (c.req.query('q') || '').toLowerCase().trim()
+  c.header('Cache-Control', 'public, max-age=3600')
+  const results = LAPTOPS.filter(l =>
+    !q || `${l.name} ${l.brand} ${l.cpu.brand || ''} ${l.cpu.model || ''} ${l.gpu.model || ''}`.toLowerCase().includes(q)
+  ).slice(0, 20)
+  return c.json(results.map(l => ({
+    id: l.id, slug: l.slug, name: l.name, brand: l.brand, price: l.price,
+    segment: l.segment, cpu: `${l.cpu.brand || ''} ${l.cpu.model || ''}`.trim(),
+    gpu: l.gpu.dedicated ? l.gpu.model : 'Integrated', ram: l.ram.gb,
+    rating: l.amazon.rating, badges: l.badges,
   })))
 })
 app.get('/api/laptops/:slug', (c) => {
@@ -103,6 +125,9 @@ app.get('/wishlist', (c) => render(c, {
 
 // ---------- Sitemap + robots ----------
 app.get('/sitemap.xml', (c) => {
+  const reqHost = c.req.header('host')?.toLowerCase() || ''
+  const base = reqHost.includes('laptopindex.info') ? `https://${reqHost}` : SITE.baseUrl
+
   const corePages: { loc: string; priority: string; changefreq: string }[] = [
     { loc: '/', priority: '1.0', changefreq: 'daily' },
     { loc: '/laptops', priority: '0.9', changefreq: 'daily' },
@@ -124,7 +149,7 @@ app.get('/sitemap.xml', (c) => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allEntries.map(e => `  <url>
-    <loc>${SITE.baseUrl}${e.loc}</loc>
+    <loc>${base}${e.loc}</loc>
     <lastmod>${META.updated}</lastmod>
     <changefreq>${e.changefreq}</changefreq>
     <priority>${e.priority}</priority>
