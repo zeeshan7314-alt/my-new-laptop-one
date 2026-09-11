@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="50%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Squircle rounded background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Laptop Display Frame -->
+  <rect x="96" y="90" width="320" height="224" rx="18" fill="#090d16" stroke="#334155" stroke-width="4" />
+  <!-- Display Screen -->
+  <rect x="110" y="104" width="292" height="196" rx="10" fill="url(#screenGrad)" />
+
+  <!-- Web Camera Dot -->
+  <circle cx="256" cy="97" r="3.5" fill="#64748b" />
+
+  <!-- Benchmark bars inside screen -->
+  <rect x="150" y="200" width="28" height="72" rx="6" fill="url(#bar1)" />
+  <rect x="194" y="164" width="28" height="108" rx="6" fill="url(#bar2)" />
+  <rect x="238" y="132" width="28" height="140" rx="6" fill="url(#bar3)" filter="url(#glow)" />
+
+  <!-- Benchmark Trend Line -->
+  <path d="M164 190 L208 152 L252 120 L336 142" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="336" cy="142" r="7" fill="#38bdf8" filter="url(#glow)" />
+  <circle cx="252" cy="120" r="7" fill="#34d399" filter="url(#glow)" />
+
+  <!-- Performance Delta Badge in upper right of screen -->
+  <rect x="286" y="182" width="86" height="30" rx="8" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="2" />
+  <path d="M298 200 L304 192 L310 200" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="316" y="203" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="800" fill="#34d399">+9.4</text>
+
+  <!-- Laptop Base / Keyboard Deck -->
+  <path d="M56 322 L456 322 L432 368 C430 372 426 374 420 374 L92 374 C86 374 82 372 80 368 Z" fill="#cbd5e1" />
+  <path d="M56 322 L456 322 L450 334 L62 334 Z" fill="#94a3b8" />
+
+  <!-- Trackpad Notch -->
+  <rect x="216" y="326" width="80" height="8" rx="4" fill="#64748b" />
+  <rect x="206" y="338" width="100" height="28" rx="4" fill="none" stroke="#94a3b8" stroke-width="2" />
+</svg>

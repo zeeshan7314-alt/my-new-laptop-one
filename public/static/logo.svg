@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="640" height="140">
+  <defs>
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="50%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="screenG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="b1" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient>
+    <linearGradient id="b2" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+    <linearGradient id="b3" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#34d399"/></linearGradient>
+  </defs>
+
+  <!-- Left Icon Mark (Squircle 100x100) -->
+  <g transform="translate(20, 20)">
+    <rect width="100" height="100" rx="22" fill="url(#iconBg)" />
+    
+    <!-- Laptop screen -->
+    <rect x="18" y="18" width="64" height="44" rx="4" fill="#090d16" stroke="#334155" stroke-width="1" />
+    <rect x="21" y="21" width="58" height="38" rx="2" fill="url(#screenG)" />
+    
+    <!-- Bars -->
+    <rect x="28" y="38" width="6" height="16" rx="1.5" fill="url(#b1)" />
+    <rect x="38" y="31" width="6" height="23" rx="1.5" fill="url(#b2)" />
+    <rect x="48" y="25" width="6" height="29" rx="1.5" fill="url(#b3)" />
+    
+    <!-- Trend line -->
+    <path d="M31 36 L41 28 L51 23 L68 28" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="51" cy="23" r="1.8" fill="#34d399" />
+
+    <!-- Laptop base -->
+    <path d="M10 63 L90 63 L85 73 C84 74 83 75 81 75 L19 75 C17 75 16 74 15 73 Z" fill="#cbd5e1" />
+    <rect x="42" y="64" width="16" height="2" rx="1" fill="#64748b" />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="136" y="75" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="46" font-weight="800" fill="#0f172a" letter-spacing="-1.2">
+    Laptop<tspan fill="#2563eb">Index</tspan>
+  </text>
+  <text x="138" y="102" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#64748b" letter-spacing="0.5">
+    BENCHMARKS &amp; REVIEWS
+  </text>
+</svg>

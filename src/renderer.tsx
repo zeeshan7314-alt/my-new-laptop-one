@@ -43,7 +43,12 @@ ${m.ogImage ? raw(`<meta property="og:image" content="${m.ogImage}"><meta name="
 <meta name="twitter:title" content="${m.title}">
 <meta name="twitter:description" content="${m.description}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/static/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico">
 ${jsonLd ? raw(`<script type="application/ld+json">${jsonLd}</script>`) : ''}
 <script>
 // theme bootstrap (before paint, no FOUC - defaults to light theme unless dark explicitly chosen)

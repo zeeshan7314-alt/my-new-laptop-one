@@ -4,11 +4,43 @@
 import { Laptop, cpuLabel, gpuShort, money, storageLabel, META, imgOf, imgAlt } from '../lib/db'
 import { SITE } from '../lib/seo'
 
+export const LogoMark = ({ class: className = "w-7 h-7" }: { class?: string }) => (
+  <svg class={className} viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="logoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1e3a8a" />
+        <stop offset="50%" stop-color="#2563eb" />
+        <stop offset="100%" stop-color="#0284c7" />
+      </linearGradient>
+      <linearGradient id="logoScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#0f172a" />
+        <stop offset="100%" stop-color="#1e293b" />
+      </linearGradient>
+      <linearGradient id="lgb1" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient>
+      <linearGradient id="lgb2" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+      <linearGradient id="lgb3" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#34d399"/></linearGradient>
+    </defs>
+    <rect width="512" height="512" rx="112" fill="url(#logoBg)" />
+    <rect x="96" y="90" width="320" height="224" rx="18" fill="#090d16" stroke="#334155" stroke-width="6" />
+    <rect x="110" y="104" width="292" height="196" rx="10" fill="url(#logoScreen)" />
+    <circle cx="256" cy="97" r="4" fill="#64748b" />
+    <rect x="150" y="200" width="28" height="72" rx="6" fill="url(#lgb1)" />
+    <rect x="194" y="164" width="28" height="108" rx="6" fill="url(#lgb2)" />
+    <rect x="238" y="132" width="28" height="140" rx="6" fill="url(#lgb3)" />
+    <path d="M164 190 L208 152 L252 120 L336 142" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="336" cy="142" r="9" fill="#38bdf8" />
+    <circle cx="252" cy="120" r="9" fill="#34d399" />
+    <path d="M56 322 L456 322 L432 368 C430 372 426 374 420 374 L92 374 C86 374 82 372 80 368 Z" fill="#cbd5e1" />
+    <path d="M56 322 L456 322 L450 334 L62 334 Z" fill="#94a3b8" />
+    <rect x="216" y="326" width="80" height="8" rx="4" fill="#64748b" />
+  </svg>
+)
+
 export const Header = () => (
   <header id="site-header" class="sticky top-0 z-40 bg-white/85 dark:bg-slate-900/85 backdrop-blur border-b border-slate-200 dark:border-slate-800">
     <nav class="max-w-7xl mx-auto px-4 h-14 flex items-center gap-4" aria-label="Main navigation">
-      <a href="/" class="flex items-center gap-2 font-extrabold text-lg tracking-tight text-slate-900 dark:text-white shrink-0">
-        <i class="fas fa-laptop-code text-brand-500" aria-hidden="true"></i>
+      <a href="/" class="flex items-center gap-2.5 font-extrabold text-lg tracking-tight text-slate-900 dark:text-white shrink-0 group" aria-label="LaptopIndex Home">
+        <LogoMark class="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform" />
         <span>Laptop<span class="text-brand-500">Index</span></span>
       </a>
       <div class="hidden md:flex items-center gap-1 text-sm font-medium">
@@ -70,7 +102,10 @@ export const Footer = () => (
   <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-4 text-sm">
       <div>
-        <div class="font-extrabold text-lg text-slate-900 dark:text-white mb-2"><i class="fas fa-laptop-code text-brand-500 mr-1.5" aria-hidden="true"></i>Laptop<span class="text-brand-500">Index</span></div>
+        <div class="font-extrabold text-lg text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+          <LogoMark class="w-6 h-6 rounded shadow-sm" />
+          <span>Laptop<span class="text-brand-500">Index</span></span>
+        </div>
         <p class="text-slate-500 dark:text-slate-400">Data-driven laptop reviews, benchmarks and comparisons. {META.count} laptops indexed, updated {META.updated}.</p>
       </div>
       <div>
