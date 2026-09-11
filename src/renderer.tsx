@@ -18,6 +18,15 @@ export const renderer = jsxRenderer(({ children }, c) => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4NF4NXV0Q7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4NF4NXV0Q7');
+</script>
 <meta name="google-site-verification" content="SAHPMQsM3JaAetWDL7VJ6Z8__swyDnrbu82vbPpLlU4">
 <meta name="msvalidate.01" content="4D99D1FC1EDDD7ADF3A2230E3C0ABE2D">
 <title>${m.title}</title>
