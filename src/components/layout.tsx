@@ -189,13 +189,10 @@ export const AmazonBtn = ({ l, size = 'md' }: { l: Laptop; size?: 'md' | 'lg' | 
 export const Thumb = ({ l, size = 'md', eager }: { l: Laptop; size?: 'sm' | 'md' | 'lg'; eager?: boolean }) => {
   const src = imgOf(l)
   const dim = size === 'lg' ? 'w-40 h-40 md:w-52 md:h-52' : size === 'sm' ? 'w-14 h-14' : 'w-20 h-20'
-  return src ? (
+  return (
     <img src={src} alt={imgAlt(l)} width="400" height="400" loading={eager ? 'eager' : 'lazy'} decoding="async"
-      class={`${dim} shrink-0 rounded-xl object-contain bg-white ring-1 ring-slate-200 dark:ring-slate-700`} />
-  ) : (
-    <div class={`${dim} shrink-0 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-300 dark:text-slate-600`} role="img" aria-label={imgAlt(l)}>
-      <i class="fas fa-laptop text-2xl" aria-hidden="true"></i>
-    </div>
+      class={`${dim} shrink-0 rounded-xl object-contain bg-white ring-1 ring-slate-200 dark:ring-slate-700`}
+      onerror="this.onerror=null;this.src='/static/icon.svg';this.classList.add('p-3');" />
   )
 }
 

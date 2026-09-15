@@ -91,6 +91,6 @@ export const storageLabel = (l: Laptop) => l.storage.gb ? (l.storage.gb >= 1024 
 
 // Product thumbnails (WebP, fetched from Amazon listings by etl/fetch_images.py)
 const IMG = images as Record<string, string>
-export const imgOf = (l: Laptop): string | null => IMG[l.slug] || null
+export const imgOf = (l: Laptop): string => IMG[l.slug] || `/static/img/laptops/${l.slug}.webp`
 export const imgAlt = (l: Laptop): string =>
   `${l.name} — ${l.segment} laptop with ${cpuLabel(l)}, ${l.ram.gb}GB RAM, ${l.display.sizeInches}-inch ${l.display.refreshHz}Hz display`

@@ -18,7 +18,9 @@ const app = new Hono()
 
 // Serve static assets (images, css, js, icons) in production runtime (Node / Docker / Hyperlift)
 app.use('/static/*', serveStatic({ root: './public' }))
+app.use('/static/*', serveStatic({ root: './dist' }))
 app.use('/favicon.ico', serveStatic({ path: './public/favicon.ico' }))
+app.use('/favicon.ico', serveStatic({ path: './dist/favicon.ico' }))
 
 app.use(renderer)
 

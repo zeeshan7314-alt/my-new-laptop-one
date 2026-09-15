@@ -533,8 +533,10 @@ function getAnchor(url: string, l: Laptop, rival?: Laptop, seed = 0): string {
   return 'detailed laptop buying guide'
 }
 
+export const REVIEW_LINK_CLS = 'review-inline-link text-brand-600 dark:text-brand-400 font-semibold underline decoration-brand-300 dark:decoration-brand-600 hover:text-brand-700 dark:hover:text-brand-300 hover:decoration-brand-500 underline-offset-2 transition-colors'
+
 function getSectionSnippet(sec: string, url: string, anchor: string, seed = 0): string {
-  const linkHtml = `<a href="${url}">${anchor}</a>`
+  const linkHtml = `<a href="${url}" class="${REVIEW_LINK_CLS}">${anchor}</a>`
   if (sec === 'gaming') {
     if (url.includes('/guides/best-rtx-5060-laptops')) {
       const v = [
@@ -808,10 +810,10 @@ export function sectionText(l: Laptop) {
   let summaryRanking = ''
   if (selected['verdict']) {
     const vr = [
-      `Currently featured in our <a href="${selected['verdict'].url}">${selected['verdict'].anchor}</a>.`,
-      `Ranked among top contenders in our <a href="${selected['verdict'].url}">${selected['verdict'].anchor}</a>.`,
-      `Evaluated and benchmarked in our <a href="${selected['verdict'].url}">${selected['verdict'].anchor}</a>.`,
-      `Featured recommendation in our <a href="${selected['verdict'].url}">${selected['verdict'].anchor}</a>.`
+      `Currently featured in our <a href="${selected['verdict'].url}" class="${REVIEW_LINK_CLS}">${selected['verdict'].anchor}</a>.`,
+      `Ranked among top contenders in our <a href="${selected['verdict'].url}" class="${REVIEW_LINK_CLS}">${selected['verdict'].anchor}</a>.`,
+      `Evaluated and benchmarked in our <a href="${selected['verdict'].url}" class="${REVIEW_LINK_CLS}">${selected['verdict'].anchor}</a>.`,
+      `Featured recommendation in our <a href="${selected['verdict'].url}" class="${REVIEW_LINK_CLS}">${selected['verdict'].anchor}</a>.`
     ]
     summaryRanking = vr[h % vr.length]
   } else {
@@ -827,7 +829,7 @@ export function sectionText(l: Laptop) {
   // Alternatives Intro
   let alternativesIntro = ''
   if (selected['alternatives']) {
-    const linkHtml = `<a href="${selected['alternatives'].url}" class="text-brand-600 dark:text-brand-400 font-medium underline decoration-brand-300 hover:decoration-brand-500">${selected['alternatives'].anchor}</a>`
+    const linkHtml = `<a href="${selected['alternatives'].url}" class="${REVIEW_LINK_CLS}">${selected['alternatives'].anchor}</a>`
     if (rival && selected['alternatives'].url.includes('/compare/')) {
       const v = [
         `Evaluating different configurations or price brackets? Compare the ${l.name} with direct alternatives below, or check our ${linkHtml} to see real benchmark differences.`,

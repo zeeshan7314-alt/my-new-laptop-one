@@ -84,6 +84,29 @@ tailwind.config = {
 </script>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 <link href="/static/style.css" rel="stylesheet">
+<style>
+  /* Critical anchor visibility rules: ensure internal links stand out with high contrast */
+  a.review-inline-link, .prose-p a, .review-prose a {
+    color: #1c68f5 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #93c5fd !important;
+    text-underline-offset: 3px !important;
+    font-weight: 600 !important;
+    transition: color 0.15s, text-decoration-color 0.15s !important;
+  }
+  a.review-inline-link:hover, .prose-p a:hover, .review-prose a:hover {
+    color: #1552e1 !important;
+    text-decoration-color: #3b82f6 !important;
+  }
+  .dark a.review-inline-link, .dark .prose-p a, .dark .review-prose a {
+    color: #60a5fa !important;
+    text-decoration-color: #1d4ed8 !important;
+  }
+  .dark a.review-inline-link:hover, .dark .prose-p a:hover, .dark .review-prose a:hover {
+    color: #93c5fd !important;
+    text-decoration-color: #60a5fa !important;
+  }
+</style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 antialiased">
 ${children}

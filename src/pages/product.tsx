@@ -100,7 +100,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
             <Section id="verdict" icon="fa-gavel" title="Verdict">
               <div class="space-y-3 mb-5">
                 <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-base">{verdictLine(l)} in our {META.count}-laptop database.</p>
-                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: st.summaryRanking }} />
+                <p class="prose-p review-prose text-slate-600 dark:text-slate-400 leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: st.summaryRanking }} />
               </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div class="bg-emerald-50 dark:bg-emerald-500/10 rounded-xl p-4 border border-emerald-200 dark:border-emerald-500/20">
