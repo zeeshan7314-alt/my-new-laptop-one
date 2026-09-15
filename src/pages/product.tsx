@@ -43,14 +43,18 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
     ['upgradeability', 'Upgradeability'], ['heat-noise', 'Heat & Noise'], ['ports', 'Ports'],
     ['value', 'Value'], ['alternatives', 'Alternatives'], ['rankings', 'Where It Ranks'], ['faq', 'FAQ'],
   ]
-  const specRows: [string, string][] = [
-    ['Brand', l.brand], ['Model', l.model], ['Category', `${l.segment} · ${l.formFactor}`],
-    ['CPU', cpuLabel(l)], ['CPU Cores', `${l.cpu.cores ?? '—'}${l.cpu.multiThread ? ' (multi-threaded)' : ''}`],
+  const specRows: [string, any][] = [
+    ['Brand', <a href={`/laptops?brand=${encodeURIComponent(l.brand)}`} class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">{l.brand}</a>],
+    ['Model', l.model],
+    ['Category', <><a href={`/laptops?segment=${encodeURIComponent(l.segment)}`} class="text-brand-600 dark:text-brand-400 hover:underline">{l.segment}</a> · {l.formFactor}</>],
+    ['CPU', <a href={`/laptops?cpu=${encodeURIComponent(l.cpu.brand || '')}`} class="text-brand-600 dark:text-brand-400 hover:underline">{cpuLabel(l)}</a>],
+    ['CPU Cores', `${l.cpu.cores ?? '—'}${l.cpu.multiThread ? ' (multi-threaded)' : ''}`],
     ['PassMark (Multi)', l.cpu.passmark?.toLocaleString() ?? '—'],
-    ['GPU', gpuLabel(l)], ['G3DMark', l.gpu.g3dmark?.toLocaleString() ?? '— (integrated)'],
+    ['GPU', l.gpu.dedicated ? <a href="/laptops?gpu=dedicated" class="text-brand-600 dark:text-brand-400 hover:underline">{gpuLabel(l)}</a> : gpuLabel(l)],
+    ['G3DMark', l.gpu.g3dmark?.toLocaleString() ?? '— (integrated)'],
     ['RAM', `${l.ram.gb} GB ${l.ram.type}${l.ram.soldered ? ' (soldered)' : ' (upgradeable)'}`],
     ['Storage', storageLabel(l)],
-    ['Display', `${l.display.sizeInches}″ ${l.display.panel || ''} ${l.display.resolution} @ ${l.display.refreshHz} Hz`],
+    ['Display', <>{l.display.sizeInches}″ {l.display.panel ? (['OLED', 'AMOLED', 'Mini LED'].includes(l.display.panel) ? <a href="/guides/best-oled-laptops" class="text-brand-600 dark:text-brand-400 hover:underline">{l.display.panel}</a> : l.display.panel) : ''} {l.display.resolution} @ {(l.display.refreshHz || 60) >= 144 ? <a href="/laptops?refresh=144" class="text-brand-600 dark:text-brand-400 hover:underline">{l.display.refreshHz} Hz</a> : `${l.display.refreshHz} Hz`}</>],
     ['Pixel Density', `${l.display.ppi ?? '—'} PPI`], ['Touchscreen', l.display.touch ? 'Yes' : 'No'],
     ['Dimensions', `${l.physical.lengthIn}″ × ${l.physical.widthIn}″ × ${l.physical.thicknessIn}″`],
     ['Weight', `${l.physical.weightLbs} lbs (${l.physical.weightKg} kg)`],
@@ -94,7 +98,10 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
           <div class="space-y-10 min-w-0">
             {/* Verdict + pros/cons */}
             <Section id="verdict" icon="fa-gavel" title="Verdict">
-              <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">{verdictLine(l)} in our {META.count}-laptop database. {st.value}</p>
+              <div class="space-y-3 mb-5">
+                <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-base">{verdictLine(l)} in our {META.count}-laptop database.</p>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: st.summaryRanking }} />
+              </div>
               <div class="grid md:grid-cols-2 gap-4">
                 <div class="bg-emerald-50 dark:bg-emerald-500/10 rounded-xl p-4 border border-emerald-200 dark:border-emerald-500/20">
                   <h3 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2"><i class="fas fa-circle-check mr-1.5" aria-hidden="true"></i>Pros</h3>
@@ -138,21 +145,21 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
               </div>
             </Section>
 
-            <Section id="performance" icon="fa-microchip" title="Performance Summary"><p class="prose-p">{st.performance}</p></Section>
-            <Section id="display" icon="fa-display" title="Display"><p class="prose-p">{st.display}</p></Section>
-            <Section id="gaming" icon="fa-gamepad" title="Gaming Performance"><p class="prose-p">{st.gaming}</p></Section>
-            <Section id="productivity" icon="fa-briefcase" title="Productivity"><p class="prose-p">{st.productivity}</p></Section>
-            <Section id="programming" icon="fa-code" title="Programming"><p class="prose-p">{st.programming}</p></Section>
-            <Section id="video-editing" icon="fa-film" title="Video Editing"><p class="prose-p">{st.videoEditing}</p></Section>
-            <Section id="rendering" icon="fa-cube" title="3D Rendering & Engineering"><p class="prose-p">{st.rendering}</p></Section>
-            <Section id="battery" icon="fa-battery-three-quarters" title="Battery"><p class="prose-p">{st.battery}</p></Section>
-            <Section id="upgradeability" icon="fa-screwdriver-wrench" title="Upgradeability"><p class="prose-p">{st.upgradeability}</p></Section>
-            <Section id="heat-noise" icon="fa-temperature-half" title="Heat & Noise"><p class="prose-p">{st.heatNoise}</p></Section>
-            <Section id="ports" icon="fa-plug" title="Port Selection"><p class="prose-p">{st.ports}</p></Section>
+            <Section id="performance" icon="fa-microchip" title="Performance Summary"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.performance }} /></Section>
+            <Section id="display" icon="fa-display" title="Display"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.display }} /></Section>
+            <Section id="gaming" icon="fa-gamepad" title="Gaming Performance"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.gaming }} /></Section>
+            <Section id="productivity" icon="fa-briefcase" title="Productivity"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.productivity }} /></Section>
+            <Section id="programming" icon="fa-code" title="Programming"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.programming }} /></Section>
+            <Section id="video-editing" icon="fa-film" title="Video Editing"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.videoEditing }} /></Section>
+            <Section id="rendering" icon="fa-cube" title="3D Rendering & Engineering"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.rendering }} /></Section>
+            <Section id="battery" icon="fa-battery-three-quarters" title="Battery"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.battery }} /></Section>
+            <Section id="upgradeability" icon="fa-screwdriver-wrench" title="Upgradeability"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.upgradeability }} /></Section>
+            <Section id="heat-noise" icon="fa-temperature-half" title="Heat & Noise"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.heatNoise }} /></Section>
+            <Section id="ports" icon="fa-plug" title="Port Selection"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.ports }} /></Section>
 
             {/* Value + price widget */}
             <Section id="value" icon="fa-hand-holding-dollar" title="Value for Money">
-              <p class="prose-p mb-4">{st.value}</p>
+              <p class="prose-p mb-4" dangerouslySetInnerHTML={{ __html: st.value }} />
               <div id="price-widget" class="bg-gradient-to-r from-brand-500 to-brand-700 rounded-2xl p-6 text-white flex flex-col sm:flex-row items-center gap-4">
                 <div class="flex-1 text-center sm:text-left">
                   <div class="text-xs uppercase tracking-wider opacity-80 font-bold">{l.priceBracket} Category</div>
@@ -165,6 +172,9 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
 
             {/* Alternatives */}
             <Section id="alternatives" icon="fa-shuffle" title="Alternatives & Similar Laptops">
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                Evaluating different configurations or price brackets? Compare the {l.name} with direct alternatives below, or use our interactive <a href="/compare" class="text-brand-600 dark:text-brand-400 font-medium underline decoration-brand-300 hover:decoration-brand-500">laptop comparison tool</a> to benchmark any two models head-to-head.
+              </p>
               <div class="grid md:grid-cols-2 gap-4 mb-6">
                 <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
                   <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-1">Smart Alternatives</h3>
@@ -219,7 +229,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
                     <summary class="font-semibold text-slate-900 dark:text-white cursor-pointer list-none flex justify-between items-center">
                       {f.q}<i class="fas fa-chevron-down text-slate-400 text-xs group-open:rotate-180 transition" aria-hidden="true"></i>
                     </summary>
-                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{f.a}</p>
+                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed prose-p" dangerouslySetInnerHTML={{ __html: f.a }} />
                   </details>
                 ))}
               </div>

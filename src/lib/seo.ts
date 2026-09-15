@@ -87,7 +87,7 @@ export function productJsonLd(l: Laptop): object[] {
     '@type': 'FAQPage',
     mainEntity: faq(l).map(f => ({
       '@type': 'Question', name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
+      acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]*>/g, '').trim() },
     })),
   }
   return [product, breadcrumb, faqLd, organizationJsonLd()]

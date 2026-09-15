@@ -57,7 +57,7 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
           <h2 class="font-extrabold text-lg text-slate-900 dark:text-white mb-1"><i class="fas fa-trophy text-amber-500 mr-2" aria-hidden="true"></i>{winner ? `Winner: ${winner.name}` : 'Result: Dead Heat'}</h2>
           <p class="text-sm text-slate-600 dark:text-slate-300">
             {winner
-              ? `${winner.name} takes ${cmp.winner === 1 ? cmp.pointsA : cmp.pointsB} weighted points vs ${cmp.winner === 1 ? cmp.pointsB : cmp.pointsA}, winning on ${cmp.rows.filter(r => r.winner === cmp.winner).slice(0, 3).map(r => r.label.replace(/ \(.*\)/, '')).join(', ')}. `
+              ? <>{winner.name} takes {cmp.winner === 1 ? cmp.pointsA : cmp.pointsB} weighted points vs {cmp.winner === 1 ? cmp.pointsB : cmp.pointsA}, winning on {cmp.rows.filter(r => r.winner === cmp.winner).slice(0, 3).map(r => r.label.replace(/ \(.*\)/, '')).join(', ')}. Read our comprehensive <a href={`/${winner.slug}-review`} class="text-brand-600 dark:text-brand-400 font-semibold underline decoration-brand-300 hover:decoration-brand-500">{winner.name} review</a> or see the full <a href={`/${loser?.slug}-review`} class="text-brand-600 dark:text-brand-400 font-semibold underline decoration-brand-300 hover:decoration-brand-500">{loser?.name} review</a>. </>
               : `Both land ${cmp.pointsA} weighted points — pick by priority. `}
             {winner && loser ? (winner.price < loser.price ? `The winner also sits in a more competitive value tier — a clear-cut call.` : `The ${loser.name} counters in a higher tier — worth it if its strengths match your needs.`) : ''}
           </p>
@@ -116,18 +116,30 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
 
         <section id="analysis" class="space-y-6 mb-10">
           <N icon="fa-microchip" title="CPU Comparison" text={
-            pmA === pmB ? `Both run near-identical CPU performance (${pmA.toLocaleString()} PassMark).`
-              : `The ${pmA > pmB ? a.name : b.name}'s ${pmA > pmB ? cpuLabel(a) : cpuLabel(b)} is ~${pctDiff(pmA, pmB)}% faster in multi-threaded PassMark (${Math.max(pmA, pmB).toLocaleString()} vs ${Math.min(pmA, pmB).toLocaleString()}). ${pctDiff(pmA, pmB) > 40 ? 'A generational gap you will feel in exports, compiles and heavy multitasking.' : pctDiff(pmA, pmB) > 15 ? 'Noticeable in sustained workloads, less so in everyday browsing.' : 'In practice the difference is marginal.'}`} />
+            <>
+              {pmA === pmB ? `Both run near-identical CPU performance (${pmA.toLocaleString()} PassMark). `
+                : `The ${pmA > pmB ? a.name : b.name}'s ${pmA > pmB ? cpuLabel(a) : cpuLabel(b)} is ~${pctDiff(pmA, pmB)}% faster in multi-threaded PassMark (${Math.max(pmA, pmB).toLocaleString()} vs ${Math.min(pmA, pmB).toLocaleString()}). ${pctDiff(pmA, pmB) > 40 ? 'A generational gap you will feel in exports, compiles and heavy multitasking. ' : pctDiff(pmA, pmB) > 15 ? 'Noticeable in sustained workloads, less so in everyday browsing. ' : 'In practice the difference is marginal. '}`}
+              Read more in our in-depth <a href={`/${a.slug}-review#performance`} class="text-brand-600 dark:text-brand-400 font-medium hover:underline">{a.model} benchmark breakdown</a> and <a href={`/${b.slug}-review#performance`} class="text-brand-600 dark:text-brand-400 font-medium hover:underline">{b.model} performance review</a>.
+            </>
+          } />
           <N icon="fa-gamepad" title="GPU & Gaming" text={
-            !a.gpu.dedicated && !b.gpu.dedicated ? 'Neither carries a dedicated GPU — both fine for esports at low settings, neither for modern AAA gaming.'
-              : a.gpu.dedicated && !b.gpu.dedicated ? `Only the ${a.name} has a dedicated GPU (${a.gpu.model}, ${gA.toLocaleString()} G3DMark) — it wins gaming outright.`
-              : !a.gpu.dedicated && b.gpu.dedicated ? `Only the ${b.name} has a dedicated GPU (${b.gpu.model}, ${gB.toLocaleString()} G3DMark) — it wins gaming outright.`
-              : gA === gB ? 'Both GPUs land identical G3DMark scores — gaming is a wash.'
-              : `The ${gA > gB ? a.gpu.model : b.gpu.model} in the ${gA > gB ? a.name : b.name} is ~${pctDiff(gA, gB)}% faster (${Math.max(gA, gB).toLocaleString()} vs ${Math.min(gA, gB).toLocaleString()} G3DMark) — ${pctDiff(gA, gB) > 30 ? 'a full settings-tier advantage.' : 'a modest but real FPS edge.'}`} />
+            <>
+              {!a.gpu.dedicated && !b.gpu.dedicated ? 'Neither carries a dedicated GPU — both fine for esports at low settings, neither for modern AAA gaming. For dedicated gaming silicon, check our '
+                : a.gpu.dedicated && !b.gpu.dedicated ? `Only the ${a.name} has a dedicated GPU (${a.gpu.model}, ${gA.toLocaleString()} G3DMark) — it wins gaming outright. See where it ranks in our `
+                : !a.gpu.dedicated && b.gpu.dedicated ? `Only the ${b.name} has a dedicated GPU (${b.gpu.model}, ${gB.toLocaleString()} G3DMark) — it wins gaming outright. See where it ranks in our `
+                : gA === gB ? 'Both GPUs land identical G3DMark scores — gaming is a wash. Compare with top performers in our '
+                : `The ${gA > gB ? a.gpu.model : b.gpu.model} in the ${gA > gB ? a.name : b.name} is ~${pctDiff(gA, gB)}% faster (${Math.max(gA, gB).toLocaleString()} vs ${Math.min(gA, gB).toLocaleString()} G3DMark) — ${pctDiff(gA, gB) > 30 ? 'a full settings-tier advantage. ' : 'a modest but real FPS edge. '}`}
+              <a href="/guides/best-gaming-laptops" class="text-brand-600 dark:text-brand-400 font-medium hover:underline">best gaming laptops guide</a>.
+            </>
+          } />
           <N icon="fa-briefcase" title="Productivity & Battery" text={
             `Office scores: ${a.scores.office}/10 vs ${b.scores.office}/10. Battery isn't in our dataset, but ${!a.gpu.dedicated && b.gpu.dedicated ? `the iGPU-only ${a.name} will typically outlast the ${b.name} unplugged.` : a.gpu.dedicated && !b.gpu.dedicated ? `the iGPU-only ${b.name} will typically outlast the ${a.name} unplugged.` : 'both share a similar power class, so expect comparable endurance.'}`} />
           <N icon="fa-display" title="Display" text={
-            `${a.model}: ${a.display.sizeInches}″ ${a.display.panel} ${a.display.resolution} @ ${a.display.refreshHz} Hz. ${b.model}: ${b.display.sizeInches}″ ${b.display.panel} ${b.display.resolution} @ ${b.display.refreshHz} Hz. ${['OLED', 'AMOLED', 'Mini LED'].includes(a.display.panel || '') && !['OLED', 'AMOLED', 'Mini LED'].includes(b.display.panel || '') ? `The ${a.name}'s ${a.display.panel} panel is the clear quality win.` : ['OLED', 'AMOLED', 'Mini LED'].includes(b.display.panel || '') && !['OLED', 'AMOLED', 'Mini LED'].includes(a.display.panel || '') ? `The ${b.name}'s ${b.display.panel} panel is the clear quality win.` : (a.display.refreshHz || 0) !== (b.display.refreshHz || 0) ? `The ${(a.display.refreshHz || 0) > (b.display.refreshHz || 0) ? a.name : b.name}'s higher refresh rate wins for motion clarity.` : 'Panel quality is effectively even.'}`} />
+            <>
+              {`${a.model}: ${a.display.sizeInches}″ ${a.display.panel} ${a.display.resolution} @ ${a.display.refreshHz} Hz. ${b.model}: ${b.display.sizeInches}″ ${b.display.panel} ${b.display.resolution} @ ${b.display.refreshHz} Hz. ${['OLED', 'AMOLED', 'Mini LED'].includes(a.display.panel || '') && !['OLED', 'AMOLED', 'Mini LED'].includes(b.display.panel || '') ? `The ${a.name}'s ${a.display.panel} panel is the clear quality win.` : ['OLED', 'AMOLED', 'Mini LED'].includes(b.display.panel || '') && !['OLED', 'AMOLED', 'Mini LED'].includes(a.display.panel || '') ? `The ${b.name}'s ${b.display.panel} panel is the clear quality win.` : (a.display.refreshHz || 0) !== (b.display.refreshHz || 0) ? `The ${(a.display.refreshHz || 0) > (b.display.refreshHz || 0) ? a.name : b.name}'s higher refresh rate wins for motion clarity.` : 'Panel quality is effectively even.'} `}
+              {['OLED', 'AMOLED', 'Mini LED'].some(p => [a.display.panel, b.display.panel].includes(p)) && <>Explore more high-contrast options in our <a href="/guides/best-oled-laptops" class="text-brand-600 dark:text-brand-400 font-medium hover:underline">best OLED laptops guide</a>.</>}
+            </>
+          } />
           <N icon="fa-memory" title="RAM, Storage & Upgradeability" text={
             `${a.model}: ${a.ram.gb} GB ${a.ram.type} (${a.ram.soldered ? 'soldered' : 'upgradeable'}) + ${storageLabel(a)}. ${b.model}: ${b.ram.gb} GB ${b.ram.type} (${b.ram.soldered ? 'soldered' : 'upgradeable'}) + ${storageLabel(b)}. ${!a.ram.soldered && b.ram.soldered ? `The ${a.name}'s socketed RAM is a longevity advantage.` : !b.ram.soldered && a.ram.soldered ? `The ${b.name}'s socketed RAM is a longevity advantage.` : ''}`} />
           <N icon="fa-weight-hanging" title="Build & Portability" text={
@@ -138,7 +150,7 @@ export const ComparePage = ({ a, b }: { a: Laptop; b: Laptop }) => {
 
         <section id="final-verdict" class="bg-gradient-to-r from-brand-500 to-brand-700 rounded-2xl p-6 text-white mb-10">
           <h2 class="text-xl font-extrabold mb-1"><i class="fas fa-flag-checkered mr-2" aria-hidden="true"></i>Final Verdict</h2>
-          <p class="text-sm opacity-90 mb-4">{winner ? `Buy the ${winner.name} — it wins the weighted spec battle${winner.price <= (loser?.price || 0) ? ' and costs less' : ''}. ${loser ? `Choose the ${loser.name} only if ${loser.scores.travel > winner.scores.travel ? 'portability' : loser.scores.value > winner.scores.value ? 'budget' : 'its specific strengths'} matter more to you.` : ''}` : 'Both are equally strong — buy whichever fits your budget and brand preference.'}</p>
+          <p class="text-sm opacity-90 mb-4">{winner ? <>Buy the <strong>{winner.name}</strong> — it wins the weighted spec battle{winner.price <= (loser?.price || 0) ? ' and costs less' : ''}. You can read the detailed <a href={`/${winner.slug}-review`} class="underline font-bold text-white hover:text-amber-200">{winner.name} review</a> or compare alternative models in our <a href="/compare" class="underline font-bold text-white hover:text-amber-200">laptop comparison tool</a>.</> : <>Both are equally strong — buy whichever fits your budget and brand preference. Compare other configurations in our <a href="/compare" class="underline font-bold text-white hover:text-amber-200">comparison tool</a>.</>}</p>
           <div class="flex flex-wrap gap-3"><AmazonBtn l={a} /><AmazonBtn l={b} /></div>
         </section>
 
