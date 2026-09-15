@@ -3,6 +3,7 @@
 // Router: Hono on Cloudflare Pages (edge SSR)
 // =====================================================
 import { Hono } from 'hono'
+import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
 import { LAPTOPS, bySlug, META } from './lib/db'
 import { GUIDES, guideRanking, parseCompareSlug, popularPairs, compareSlug } from './lib/engine'
@@ -14,6 +15,11 @@ import { ComparePage, CompareHub } from './pages/compare'
 import { GuidesHub, GuidePage } from './pages/guides'
 
 const app = new Hono()
+
+// Serve static assets (images, css, js, icons) in production runtime (Node / Docker / Hyperlift)
+app.use('/static/*', serveStatic({ root: './public' }))
+app.use('/favicon.ico', serveStatic({ path: './public/favicon.ico' }))
+
 app.use(renderer)
 
 // Normalize common sitemap request patterns (e.g. accidentally pasted full URL in GSC or missing extension)

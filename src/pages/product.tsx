@@ -44,17 +44,17 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
     ['value', 'Value'], ['alternatives', 'Alternatives'], ['rankings', 'Where It Ranks'], ['faq', 'FAQ'],
   ]
   const specRows: [string, any][] = [
-    ['Brand', <a href={`/laptops?brand=${encodeURIComponent(l.brand)}`} class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">{l.brand}</a>],
+    ['Brand', l.brand],
     ['Model', l.model],
-    ['Category', <><a href={`/laptops?segment=${encodeURIComponent(l.segment)}`} class="text-brand-600 dark:text-brand-400 hover:underline">{l.segment}</a> · {l.formFactor}</>],
-    ['CPU', <a href={`/laptops?cpu=${encodeURIComponent(l.cpu.brand || '')}`} class="text-brand-600 dark:text-brand-400 hover:underline">{cpuLabel(l)}</a>],
+    ['Category', `${l.segment} · ${l.formFactor}`],
+    ['CPU', cpuLabel(l)],
     ['CPU Cores', `${l.cpu.cores ?? '—'}${l.cpu.multiThread ? ' (multi-threaded)' : ''}`],
     ['PassMark (Multi)', l.cpu.passmark?.toLocaleString() ?? '—'],
-    ['GPU', l.gpu.dedicated ? <a href="/laptops?gpu=dedicated" class="text-brand-600 dark:text-brand-400 hover:underline">{gpuLabel(l)}</a> : gpuLabel(l)],
+    ['GPU', gpuLabel(l)],
     ['G3DMark', l.gpu.g3dmark?.toLocaleString() ?? '— (integrated)'],
     ['RAM', `${l.ram.gb} GB ${l.ram.type}${l.ram.soldered ? ' (soldered)' : ' (upgradeable)'}`],
     ['Storage', storageLabel(l)],
-    ['Display', <>{l.display.sizeInches}″ {l.display.panel ? (['OLED', 'AMOLED', 'Mini LED'].includes(l.display.panel) ? <a href="/guides/best-oled-laptops" class="text-brand-600 dark:text-brand-400 hover:underline">{l.display.panel}</a> : l.display.panel) : ''} {l.display.resolution} @ {(l.display.refreshHz || 60) >= 144 ? <a href="/laptops?refresh=144" class="text-brand-600 dark:text-brand-400 hover:underline">{l.display.refreshHz} Hz</a> : `${l.display.refreshHz} Hz`}</>],
+    ['Display', `${l.display.sizeInches}″ ${l.display.panel ? `${l.display.panel} ` : ''}${l.display.resolution} @ ${l.display.refreshHz} Hz`],
     ['Pixel Density', `${l.display.ppi ?? '—'} PPI`], ['Touchscreen', l.display.touch ? 'Yes' : 'No'],
     ['Dimensions', `${l.physical.lengthIn}″ × ${l.physical.widthIn}″ × ${l.physical.thicknessIn}″`],
     ['Weight', `${l.physical.weightLbs} lbs (${l.physical.weightKg} kg)`],
@@ -172,9 +172,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
 
             {/* Alternatives */}
             <Section id="alternatives" icon="fa-shuffle" title="Alternatives & Similar Laptops">
-              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                Evaluating different configurations or price brackets? Compare the {l.name} with direct alternatives below, or use our interactive <a href="/compare" class="text-brand-600 dark:text-brand-400 font-medium underline decoration-brand-300 hover:decoration-brand-500">laptop comparison tool</a> to benchmark any two models head-to-head.
-              </p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 prose-p" dangerouslySetInnerHTML={{ __html: st.alternativesIntro }} />
               <div class="grid md:grid-cols-2 gap-4 mb-6">
                 <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
                   <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-1">Smart Alternatives</h3>
