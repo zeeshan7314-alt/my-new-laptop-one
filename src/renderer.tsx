@@ -38,17 +38,20 @@ export const renderer = jsxRenderer(({ children }, c) => {
 <meta property="og:description" content="${m.description}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:locale" content="en_US">
-${m.ogImage ? raw(`<meta property="og:image" content="${m.ogImage}"><meta name="twitter:image" content="${m.ogImage}">`) : ''}
+<meta property="og:image" content="${m.ogImage || `${SITE.baseUrl}/static/logo.png`}">
+<meta property="og:image:alt" content="${SITE.name}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${m.title}">
 <meta name="twitter:description" content="${m.description}">
+<meta name="twitter:image" content="${m.ogImage || `${SITE.baseUrl}/static/logo.png`}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<!-- Favicons optimized for Googlebot-Image & modern browsers (48x48 PNG primary per Google Search Central requirements) -->
 <link rel="icon" type="image/png" sizes="48x48" href="/static/favicon-48x48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/static/icon.png">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
 ${jsonLd ? raw(`<script type="application/ld+json">${jsonLd}</script>`) : ''}
 <script>
 // theme bootstrap (before paint, no FOUC - defaults to light theme unless dark explicitly chosen)

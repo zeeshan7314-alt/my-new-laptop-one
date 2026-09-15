@@ -6,7 +6,7 @@ import { Hono } from 'hono'
 import { renderer } from './renderer'
 import { LAPTOPS, bySlug, META } from './lib/db'
 import { GUIDES, guideRanking, parseCompareSlug, popularPairs, compareSlug } from './lib/engine'
-import { SITE, Meta, productMeta, compareMeta, guideJsonLd, websiteJsonLd } from './lib/seo'
+import { SITE, Meta, productMeta, compareMeta, guideJsonLd, websiteJsonLd, browseJsonLd, compareHubJsonLd, guidesHubJsonLd } from './lib/seo'
 import { HomePage, WishlistPage } from './pages/home'
 import { BrowsePage, Filters, applyFilters } from './pages/browse'
 import { ProductPage } from './pages/product'
@@ -54,6 +54,7 @@ app.get('/laptops', (c) => {
     title: `${title} | ${SITE.name}`,
     description: `Filter ${META.count} benchmark-scored laptops by brand, price, GPU, CPU, RAM, screen and weight. Data-driven specs, benchmarks, and deals.`,
     path: hasFilter ? '/laptops' : '/laptops', // canonical always points to clean browse
+    jsonLd: browseJsonLd(),
   }, <BrowsePage f={f} />)
 })
 
@@ -97,6 +98,7 @@ app.get('/compare', (c) => {
     title: `Laptop Comparison Tool — Compare Any 2 of ${META.count} Laptops | ${SITE.name}`,
     description: 'Head-to-head laptop comparisons with weighted benchmark scoring: CPU, GPU, display, RAM, weight and value. Instant winner verdicts.',
     path: '/compare',
+    jsonLd: compareHubJsonLd(),
   }, <CompareHub />)
 })
 
@@ -114,6 +116,7 @@ app.get('/guides', (c) => render(c, {
   title: `Laptop Buying Guides 2026 — Data-Ranked Best-Of Lists | ${SITE.name}`,
   description: `${GUIDES.length} algorithmically-ranked laptop buying guides: gaming, students, budget, OLED, AI and more. Zero sponsored placements.`,
   path: '/guides',
+  jsonLd: guidesHubJsonLd(),
 }, <GuidesHub />))
 
 app.get('/guides/:slug', (c) => {

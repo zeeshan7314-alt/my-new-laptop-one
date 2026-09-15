@@ -52,7 +52,16 @@ export function productJsonLd(l: Laptop): object[] {
     review: {
       '@type': 'Review',
       reviewRating: { '@type': 'Rating', ratingValue: l.scores.overall, bestRating: 10, worstRating: 1 },
-      author: { '@type': 'Organization', name: SITE.name, url: SITE.baseUrl },
+      author: {
+        '@type': 'Organization',
+        '@id': `${SITE.baseUrl}/#organization`,
+        name: SITE.name,
+        url: SITE.baseUrl,
+        logo: `${SITE.baseUrl}/static/icon-512.png`,
+      },
+      publisher: {
+        '@id': `${SITE.baseUrl}/#organization`,
+      },
       datePublished: '2026-08-19',
     },
   }
@@ -81,7 +90,7 @@ export function productJsonLd(l: Laptop): object[] {
       acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
   }
-  return [product, breadcrumb, faqLd]
+  return [product, breadcrumb, faqLd, organizationJsonLd()]
 }
 
 export function compareMeta(a: Laptop, b: Laptop, slug: string): Meta {
@@ -104,6 +113,7 @@ export function compareMeta(a: Laptop, b: Laptop, slug: string): Meta {
         { '@type': 'ListItem', position: 3, name: `${a.name} vs ${b.name}`, item: `${SITE.baseUrl}/compare/${slug}` },
       ],
     },
+    organizationJsonLd(),
   ]
   return { title, description: description.slice(0, 158), path: `/compare/${slug}`, ogImage: imgOf(a) ? SITE.baseUrl + imgOf(a)! : undefined, jsonLd }
 }
@@ -125,7 +135,78 @@ export function guideJsonLd(title: string, slug: string, items: Laptop[]): objec
       { '@type': 'ListItem', position: 2, name: 'Buying Guides', item: SITE.baseUrl + '/guides' },
       { '@type': 'ListItem', position: 3, name: title, item: `${SITE.baseUrl}/guides/${slug}` },
     ],
-  }]
+  }, organizationJsonLd()]
+}
+
+export function browseJsonLd(): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Laptops', item: SITE.baseUrl + '/laptops' },
+      ],
+    },
+    organizationJsonLd(),
+  ]
+}
+
+export function compareHubJsonLd(): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Compare', item: SITE.baseUrl + '/compare' },
+      ],
+    },
+    organizationJsonLd(),
+  ]
+}
+
+export function guidesHubJsonLd(): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.baseUrl + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Buying Guides', item: SITE.baseUrl + '/guides' },
+      ],
+    },
+    organizationJsonLd(),
+  ]
+}
+
+export function organizationJsonLd(): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.baseUrl}/#organization`,
+    name: SITE.name,
+    alternateName: ['Laptop Index', 'laptopindex.info'],
+    url: SITE.baseUrl,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${SITE.baseUrl}/#logo`,
+      url: `${SITE.baseUrl}/static/icon-512.png`,
+      contentUrl: `${SITE.baseUrl}/static/icon-512.png`,
+      caption: `${SITE.name} Logo`,
+      width: 512,
+      height: 512,
+    },
+    image: `${SITE.baseUrl}/static/icon-512.png`,
+    description: 'Data-driven laptop reviews, benchmarks, and comparison engine with PassMark & G3DMark scores.',
+    knowsAbout: [
+      'Laptops',
+      'Laptop Benchmarks',
+      'Computer Hardware',
+      'PassMark CPU Benchmarks',
+      'G3DMark GPU Benchmarks',
+    ],
+  }
 }
 
 export function websiteJsonLd(): object[] {
@@ -133,21 +214,20 @@ export function websiteJsonLd(): object[] {
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
+      '@id': `${SITE.baseUrl}/#website`,
+      url: `${SITE.baseUrl}/`,
       name: SITE.name,
-      alternateName: 'Laptop Index',
-      url: SITE.baseUrl,
+      alternateName: ['Laptop Index', 'laptopindex.info'],
+      description: 'Data-driven laptop reviews, benchmarks, and comparison engine.',
+      publisher: {
+        '@id': `${SITE.baseUrl}/#organization`,
+      },
       potentialAction: {
         '@type': 'SearchAction',
         target: { '@type': 'EntryPoint', urlTemplate: `${SITE.baseUrl}/laptops?q={search_term_string}` },
         'query-input': 'required name=search_term_string',
       },
     },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: SITE.name,
-      url: SITE.baseUrl,
-      logo: `${SITE.baseUrl}/static/icon.png`,
-    },
+    organizationJsonLd(),
   ]
 }
