@@ -232,15 +232,17 @@ export function websiteJsonLd(): object[] {
   ]
 }
 
-export function filteredBrowseMeta(f: Record<string, any>): { title: string; description: string; path: string; jsonLd: object[] } {
+export function filteredBrowseMeta(f: Record<string, any>): { title: string; description: string; h1: string; path: string; jsonLd: object[] } {
   // Canonical URL must ALWAYS be clean /laptops
   const path = '/laptops'
   const jsonLd = browseJsonLd()
 
   // 1. Search Query
   if (f.q) {
+    const title = `"${f.q}" Laptop Search Results | ${SITE.name}`.slice(0, 60)
     return {
-      title: `"${f.q}" Laptop Search Results | ${SITE.name}`.slice(0, 60),
+      title,
+      h1: title,
       description: `Browse benchmark scores, verified specs, and live prices for "${f.q}" in our database of laptops.`.slice(0, 155),
       path, jsonLd
     }
@@ -248,8 +250,10 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
 
   // 2. Segment & Price combo
   if (f.segment === 'Gaming' && f.maxPrice === 1500) {
+    const title = `Best Gaming Laptops Under $1500 | ${SITE.name}`
     return {
-      title: `Best Gaming Laptops Under $1500 | ${SITE.name}`,
+      title,
+      h1: title,
       description: 'Find top gaming laptops under $1500 with RTX graphics. Review 1080p/1440p fps benchmark scores, cooling specs, and low retail prices.',
       path, jsonLd
     }
@@ -257,22 +261,28 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
 
   // 3. Category / Segment
   if (f.segment === 'Gaming') {
+    const title = `Best Gaming Laptops 2026 | ${SITE.name}`
     return {
-      title: `Best Gaming Laptops 2026 | ${SITE.name}`,
+      title,
+      h1: title,
       description: 'Discover the best gaming laptops ranked by GPU benchmarks, fps scores, thermal specs, and live prices. Find top performance for your budget.',
       path, jsonLd
     }
   }
   if (f.segment === 'Professional') {
+    const title = `Best Professional Laptops 2026 | ${SITE.name}`
     return {
-      title: `Best Professional Laptops 2026 | ${SITE.name}`,
+      title,
+      h1: title,
       description: 'Explore top professional laptops benchmarked for coding, 3D, and workflow tasks. Compare verified specs, benchmark scores, and latest prices.',
       path, jsonLd
     }
   }
   if (f.segment === 'General') {
+    const title = `Best Everyday Laptops 2026 | ${SITE.name}`
     return {
-      title: `Best Everyday Laptops 2026 | ${SITE.name}`,
+      title,
+      h1: title,
       description: 'Find the best everyday laptops for browsing, school, and work. Compare battery specs, benchmark scores, overall value, and affordable prices.',
       path, jsonLd
     }
@@ -290,7 +300,8 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
     'integrated': ['Best Integrated GPU Laptops 2026 | LaptopIndex', 'Find efficient laptops with integrated graphics. Compare battery life specs, lightweight portability scores, benchmarks, and low prices.']
   }
   if (f.gpu && gpuMap[f.gpu]) {
-    return { title: gpuMap[f.gpu][0], description: gpuMap[f.gpu][1], path, jsonLd }
+    const [t, d] = gpuMap[f.gpu]
+    return { title: t, h1: t, description: d, path, jsonLd }
   }
 
   // 5. Brand
@@ -307,7 +318,8 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
     'Gigabyte': ['Best Gigabyte Laptops 2026 | LaptopIndex', 'Review top Gigabyte laptops for gaming and creators. Check RTX benchmark scores, high-refresh display specs, thermals, and current prices.']
   }
   if (f.brand && brandMap[f.brand]) {
-    return { title: brandMap[f.brand][0], description: brandMap[f.brand][1], path, jsonLd }
+    const [t, d] = brandMap[f.brand]
+    return { title: t, h1: t, description: d, path, jsonLd }
   }
 
   // 6. CPU
@@ -318,7 +330,8 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
     'Snapdragon': ['Best Snapdragon Laptops 2026 | LaptopIndex', 'Discover Snapdragon Copilot+ PC laptops with ultra-long battery life. Compare ARM benchmark scores, quiet fanless specs, and deal prices.']
   }
   if (f.cpu && cpuMap[f.cpu]) {
-    return { title: cpuMap[f.cpu][0], description: cpuMap[f.cpu][1], path, jsonLd }
+    const [t, d] = cpuMap[f.cpu]
+    return { title: t, h1: t, description: d, path, jsonLd }
   }
 
   // 7. RAM
@@ -329,7 +342,8 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
     64: ['Best 64GB RAM Laptops 2026 | LaptopIndex', 'Compare extreme 64GB RAM workstation laptops for heavy virtualization. Review high-load benchmark scores, hardware specs, and live prices.']
   }
   if (f.ram && ramMap[f.ram]) {
-    return { title: ramMap[f.ram][0], description: ramMap[f.ram][1], path, jsonLd }
+    const [t, d] = ramMap[f.ram]
+    return { title: t, h1: t, description: d, path, jsonLd }
   }
 
   // 8. Storage
@@ -340,101 +354,152 @@ export function filteredBrowseMeta(f: Record<string, any>): { title: string; des
     2048: ['Best 2TB SSD Laptops 2026 | LaptopIndex', 'Compare premium 2TB SSD laptops for content creators and gamers. Check ultra-fast storage specs, system benchmark scores, and latest prices.']
   }
   if (f.storage && storageMap[f.storage]) {
-    return { title: storageMap[f.storage][0], description: storageMap[f.storage][1], path, jsonLd }
+    const [t, d] = storageMap[f.storage]
+    return { title: t, h1: t, description: d, path, jsonLd }
   }
 
   // 9. Display Size
   if (f.size === 'small') {
-    return { title: 'Best 14-Inch Laptops 2026 | LaptopIndex', description: 'Discover the best 14-inch compact laptops for travel and commuting. Compare lightweight specs, battery life benchmarks, scores, and prices.', path, jsonLd }
+    const t = 'Best 14-Inch Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Discover the best 14-inch compact laptops for travel and commuting. Compare lightweight specs, battery life benchmarks, scores, and prices.', path, jsonLd }
   }
   if (f.size === 'medium') {
-    return { title: 'Best 15 & 16-Inch Laptops 2026 | LaptopIndex', description: 'Find balanced 15-inch and 16-inch laptops offering generous screen real estate. Review display specs, benchmark scores, and current prices.', path, jsonLd }
+    const t = 'Best 15 & 16-Inch Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find balanced 15-inch and 16-inch laptops offering generous screen real estate. Review display specs, benchmark scores, and current prices.', path, jsonLd }
   }
   if (f.size === 'large') {
-    return { title: 'Best 17 & 18-Inch Laptops 2026 | LaptopIndex', description: 'Compare massive 17-inch and 18-inch desktop replacement laptops. Review high-wattage specs, immersive gaming benchmark scores, and prices.', path, jsonLd }
+    const t = 'Best 17 & 18-Inch Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Compare massive 17-inch and 18-inch desktop replacement laptops. Review high-wattage specs, immersive gaming benchmark scores, and prices.', path, jsonLd }
   }
 
   // 10. Display Panel & Tech
   if (f.panel === 'OLED') {
-    return { title: 'Best OLED Laptops 2026 | LaptopIndex', description: 'Experience true blacks and infinite contrast with the best OLED laptops. Compare color gamut specs, visual benchmark scores, and live prices.', path, jsonLd }
+    const t = 'Best OLED Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Experience true blacks and infinite contrast with the best OLED laptops. Compare color gamut specs, visual benchmark scores, and live prices.', path, jsonLd }
   }
   if (f.panel === 'Mini LED') {
-    return { title: 'Best Mini LED Laptops 2026 | LaptopIndex', description: 'Find top Mini-LED laptops featuring peak HDR brightness and local dimming. Review display specs, creator benchmark scores, and market prices.', path, jsonLd }
+    const t = 'Best Mini LED Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find top Mini-LED laptops featuring peak HDR brightness and local dimming. Review display specs, creator benchmark scores, and market prices.', path, jsonLd }
   }
   if (f.panel === 'IPS') {
-    return { title: 'Best IPS Display Laptops 2026 | LaptopIndex', description: 'Browse reliable IPS display laptops with wide viewing angles and matte finishes. Compare color accuracy specs, benchmark scores, and low prices.', path, jsonLd }
+    const t = 'Best IPS Display Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Browse reliable IPS display laptops with wide viewing angles and matte finishes. Compare color accuracy specs, benchmark scores, and low prices.', path, jsonLd }
+  }
+  if (f.panel === 'Liquid Retina') {
+    const t = 'Best Liquid Retina Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Compare MacBook models equipped with brilliant Liquid Retina displays. Check color benchmark scores, P3 wide gamut specs, and current prices.', path, jsonLd }
   }
   if (f.touch === 'yes') {
-    return { title: 'Best Touchscreen Laptops 2026 | LaptopIndex', description: 'Explore versatile touchscreen laptops for note-taking and intuitive control. Compare responsive stylus specs, benchmark scores, and prices.', path, jsonLd }
+    const t = 'Best Touchscreen Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Explore versatile touchscreen laptops for note-taking and intuitive control. Compare responsive stylus specs, benchmark scores, and prices.', path, jsonLd }
   }
 
   // 11. Resolution
   if (f.res === 'FHD') {
-    return { title: 'Best Full HD Laptops 2026 | LaptopIndex', description: 'Find the best Full HD 1080p laptops for everyday productivity and esports. Compare power efficiency specs, benchmark scores, and low prices.', path, jsonLd }
+    const t = 'Best Full HD Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find the best Full HD 1080p laptops for everyday productivity and esports. Compare power efficiency specs, benchmark scores, and low prices.', path, jsonLd }
+  }
+  if (f.res === 'FHD+') {
+    const t = 'Best FHD+ Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Explore productive 16:10 FHD+ laptops for spreadsheets and web browsing. Check vertical screen specs, benchmark scores, and affordable prices.', path, jsonLd }
   }
   if (f.res === 'QHD+' || f.res === 'QHD') {
-    return { title: 'Best QHD+ Laptops 2026 | LaptopIndex', description: 'Find optimal QHD+ laptops combining crisp 1600p resolution with fast frame rates. Review panel specs, gaming benchmark scores, and prices.', path, jsonLd }
+    const t = 'Best QHD+ Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find optimal QHD+ laptops combining crisp 1600p resolution with fast frame rates. Review panel specs, gaming benchmark scores, and prices.', path, jsonLd }
+  }
+  if (f.res === '3K+') {
+    const t = 'Best 3K+ Display Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Discover stunning 3K+ resolution laptops for creative design and video editing. Compare panel specs, benchmark scores, and latest market prices.', path, jsonLd }
   }
   if (f.res === '4K') {
-    return { title: 'Best 4K Laptops 2026 | LaptopIndex', description: 'Compare ultra-sharp 4K display laptops for photo editing and media creation. Check pixel density specs, hardware benchmark scores, and prices.', path, jsonLd }
+    const t = 'Best 4K Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Compare ultra-sharp 4K display laptops for photo editing and media creation. Check pixel density specs, hardware benchmark scores, and prices.', path, jsonLd }
   }
 
   // 12. Refresh Rate
   if (f.refresh === 120) {
-    return { title: 'Best 120Hz Laptops 2026 | LaptopIndex', description: 'Find smooth 120Hz laptops ideal for productivity and casual gaming. Compare fluid motion specs, benchmark scores, battery life, and prices.', path, jsonLd }
+    const t = 'Best 120Hz Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find smooth 120Hz laptops ideal for productivity and casual gaming. Compare fluid motion specs, benchmark scores, battery life, and prices.', path, jsonLd }
   }
   if (f.refresh === 144) {
-    return { title: 'Best 144Hz+ Gaming Laptops 2026 | LaptopIndex', description: 'Explore smooth 144Hz+ gaming laptops for esports and fast-paced action. Review response time specs, benchmark scores, and competitive prices.', path, jsonLd }
+    const t = 'Best 144Hz+ Gaming Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Explore smooth 144Hz+ gaming laptops for esports and fast-paced action. Review response time specs, benchmark scores, and competitive prices.', path, jsonLd }
   }
   if (f.refresh === 165) {
-    return { title: 'Best 165Hz Laptops 2026 | LaptopIndex', description: 'Discover responsive 165Hz gaming laptops with minimal input lag. Compare high-FPS GPU benchmark scores, display specs, and deal prices.', path, jsonLd }
+    const t = 'Best 165Hz Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Discover responsive 165Hz gaming laptops with minimal input lag. Compare high-FPS GPU benchmark scores, display specs, and deal prices.', path, jsonLd }
   }
   if (f.refresh === 240) {
-    return { title: 'Best 240Hz Laptops 2026 | LaptopIndex', description: 'Compare tournament-grade 240Hz laptops with zero motion blur. Check GPU benchmark scores, latency specs, esports ratings, and deal prices.', path, jsonLd }
+    const t = 'Best 240Hz Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Compare tournament-grade 240Hz laptops with zero motion blur. Check GPU benchmark scores, latency specs, esports ratings, and deal prices.', path, jsonLd }
   }
 
   // 13. Weight
   if (f.maxWeight === 3) {
-    return { title: 'Best Laptops Under 3 lbs 2026 | LaptopIndex', description: 'Browse ultra-light laptops under 3 pounds designed for mobile professionals. Compare travel battery specs, benchmark scores, and live prices.', path, jsonLd }
+    const t = 'Best Laptops Under 3 lbs 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Browse ultra-light laptops under 3 pounds designed for mobile professionals. Compare travel battery specs, benchmark scores, and live prices.', path, jsonLd }
   }
   if (f.maxWeight === 4) {
-    return { title: 'Best Laptops Under 4 lbs 2026 | LaptopIndex', description: 'Find the best portable laptops under 4 lbs blending performance with mobility. Review weight specs, productivity benchmark scores, and prices.', path, jsonLd }
+    const t = 'Best Laptops Under 4 lbs 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find the best portable laptops under 4 lbs blending performance with mobility. Review weight specs, productivity benchmark scores, and prices.', path, jsonLd }
   }
   if (f.maxWeight === 5) {
-    return { title: 'Best Laptops Under 5 lbs 2026 | LaptopIndex', description: 'Discover versatile laptops under 5 lbs offering dedicated graphics and cooling specs. Compare gaming benchmark scores and competitive prices.', path, jsonLd }
+    const t = 'Best Laptops Under 5 lbs 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Discover versatile laptops under 5 lbs offering dedicated graphics and cooling specs. Compare gaming benchmark scores and competitive prices.', path, jsonLd }
+  }
+  if (f.maxWeight === 6) {
+    const t = 'Best Laptops Under 6 lbs 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Compare powerful high-performance laptops under 6 lbs with desktop-class cooling specs, multi-core benchmark scores, and verified prices.', path, jsonLd }
   }
 
   // 14. Price brackets
   if (f.maxPrice === 500) {
-    return { title: 'Best Laptops Under $500 2026 | LaptopIndex', description: 'Find the best budget laptops under $500 for school and work. Review verified performance benchmark scores, essential specs, and value prices.', path, jsonLd }
+    const t = 'Best Laptops Under $500 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Find the best budget laptops under $500 for school and work. Review verified performance benchmark scores, essential specs, and value prices.', path, jsonLd }
   }
   if (f.maxPrice === 1000) {
-    return { title: 'Best Laptops Under $1000 2026 | LaptopIndex', description: 'Discover top laptops under $1000 balancing speed, build quality, and battery life. Compare benchmark scores, hardware specs, and best prices.', path, jsonLd }
+    const t = 'Best Laptops Under $1000 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Discover top laptops under $1000 balancing speed, build quality, and battery life. Compare benchmark scores, hardware specs, and best prices.', path, jsonLd }
   }
   if (f.minPrice === 1000 && f.maxPrice === 1500) {
-    return { title: 'Best Laptops $1000-$1500 2026 | LaptopIndex', description: 'Compare the sweet-spot laptops between $1000 and $1500. Evaluate comprehensive benchmark scores, premium display specs, and current prices.', path, jsonLd }
+    const t = 'Best Laptops $1000-$1500 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Compare the sweet-spot laptops between $1000 and $1500. Evaluate comprehensive benchmark scores, premium display specs, and current prices.', path, jsonLd }
   }
   if (f.minPrice === 2000) {
-    return { title: 'Best Premium Laptops 2026 | LaptopIndex', description: 'Explore luxury and workstation laptops over $2000. Compare top-of-the-line benchmark scores, high-end display specs, and current market prices.', path, jsonLd }
+    const t = 'Best Premium Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Explore luxury and workstation laptops over $2000. Compare top-of-the-line benchmark scores, high-end display specs, and current market prices.', path, jsonLd }
   }
 
   // 15. Sorts & Rankings
   if (f.sort === 'value') {
-    return { title: 'Best Value Laptops 2026 | LaptopIndex', description: 'Discover the highest value-for-money laptops scored by price-to-performance algorithms. Compare benchmark scores, hardware specs, and deals.', path, jsonLd }
+    const t = 'Best Value Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Discover the highest value-for-money laptops scored by price-to-performance algorithms. Compare benchmark scores, hardware specs, and deals.', path, jsonLd }
   }
   if (f.sort === 'gaming') {
-    return { title: 'Highest Scoring Gaming Laptops 2026 | LaptopIndex', description: 'Browse the highest-rated gaming laptops ranked purely by 3D benchmark scores and GPU performance. Check thermal specs, frame rates, and prices.', path, jsonLd }
+    const t = 'Highest Scoring Gaming Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Browse the highest-rated gaming laptops ranked purely by 3D benchmark scores and GPU performance. Check thermal specs, frame rates, and prices.', path, jsonLd }
   }
   if (f.sort === 'score') {
-    return { title: 'Top Benchmark Scored Laptops 2026 | LaptopIndex', description: 'View laptops ranked by overall composite benchmark scores across CPU, GPU, RAM, and display tests. Compare verified specs and live prices.', path, jsonLd }
+    const t = 'Top Benchmark Scored Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'View laptops ranked by overall composite benchmark scores across CPU, GPU, RAM, and display tests. Compare verified specs and live prices.', path, jsonLd }
   }
   if (f.sort === 'weight') {
-    return { title: 'Lightest Laptops 2026 | LaptopIndex', description: 'Browse the lightest laptops ranked by measured carry weight. Compare ultralight chassis specs, battery benchmark scores, and live prices.', path, jsonLd }
+    const t = 'Lightest Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Browse the lightest laptops ranked by measured carry weight. Compare ultralight chassis specs, battery benchmark scores, and live prices.', path, jsonLd }
+  }
+  if (f.sort === 'rating') {
+    const t = 'Highest Rated Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Explore top customer-rated laptops backed by verified buyer satisfaction scores, hardware specs, stress test benchmarks, and prices.', path, jsonLd }
+  }
+  if (f.sort === 'popular') {
+    const t = 'Most Popular Laptops 2026 | LaptopIndex'
+    return { title: t, h1: t, description: 'Browse the most widely reviewed laptops on the market today. Compare community popularity scores, benchmark specs, and current deal prices.', path, jsonLd }
   }
 
   // Default clean /laptops
   return {
     title: `Browse All Laptops — Filter by Price, GPU, RAM & More | ${SITE.name}`,
+    h1: 'Browse All Laptops',
     description: 'Filter benchmark-scored laptops by brand, price, GPU, CPU, RAM, screen and weight. Data-driven specs, benchmarks, and deals.',
     path, jsonLd
   }

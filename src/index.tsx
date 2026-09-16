@@ -57,7 +57,7 @@ app.get('/laptops', (c) => {
     sort: q.sort || undefined,
   }
   const meta = filteredBrowseMeta(f)
-  return render(c, meta, <BrowsePage f={f} />)
+  return render(c, meta, <BrowsePage f={f} h1={meta.h1} />)
 })
 
 // ---------- API (JSON for client search + data consumers) ----------

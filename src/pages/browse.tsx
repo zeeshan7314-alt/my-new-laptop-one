@@ -64,10 +64,10 @@ const Sel = ({ name, label, opts, cur }: { name: string; label: string; opts: [s
   </label>
 )
 
-export const BrowsePage = ({ f }: { f: Filters }) => {
+export const BrowsePage = ({ f, h1 }: { f: Filters; h1?: string }) => {
   const results = applyFilters(f)
   const brands = [...new Set(LAPTOPS.map(l => l.brand))].sort()
-  const title = f.q ? `Search: "${f.q}"` : f.segment ? `${f.segment} Laptops` : 'Browse All Laptops'
+  const title = h1 || (f.q ? `Search: "${f.q}"` : f.segment ? `${f.segment} Laptops` : 'Browse All Laptops')
   return (
     <>
       <Header />
