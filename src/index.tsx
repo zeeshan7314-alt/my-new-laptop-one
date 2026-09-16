@@ -7,7 +7,7 @@ import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
 import { LAPTOPS, bySlug, META } from './lib/db'
 import { GUIDES, guideRanking, parseCompareSlug, popularPairs, compareSlug } from './lib/engine'
-import { SITE, Meta, productMeta, compareMeta, guideJsonLd, websiteJsonLd, browseJsonLd, compareHubJsonLd, guidesHubJsonLd } from './lib/seo'
+import { SITE, Meta, productMeta, compareMeta, guideJsonLd, websiteJsonLd, browseJsonLd, compareHubJsonLd, guidesHubJsonLd, filteredBrowseMeta } from './lib/seo'
 import { HomePage, WishlistPage } from './pages/home'
 import { BrowsePage, Filters, applyFilters } from './pages/browse'
 import { ProductPage } from './pages/product'
@@ -56,14 +56,8 @@ app.get('/laptops', (c) => {
     panel: q.panel || undefined, touch: q.touch || undefined, maxWeight: num('maxWeight'),
     sort: q.sort || undefined,
   }
-  const hasFilter = Object.values(f).some(v => v !== undefined)
-  const title = f.q ? `"${f.q}" — Laptop Search Results` : f.segment ? `Best ${f.segment} Laptops — Browse & Filter (2026)` : 'Browse All Laptops — Filter by Price, GPU, RAM & More'
-  return render(c, {
-    title: `${title} | ${SITE.name}`,
-    description: `Filter ${META.count} benchmark-scored laptops by brand, price, GPU, CPU, RAM, screen and weight. Data-driven specs, benchmarks, and deals.`,
-    path: hasFilter ? '/laptops' : '/laptops', // canonical always points to clean browse
-    jsonLd: browseJsonLd(),
-  }, <BrowsePage f={f} />)
+  const meta = filteredBrowseMeta(f)
+  return render(c, meta, <BrowsePage f={f} />)
 })
 
 // ---------- API (JSON for client search + data consumers) ----------
