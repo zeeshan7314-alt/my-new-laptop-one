@@ -57,12 +57,22 @@ pm2 start ecosystem.config.cjs   # sandbox dev server on :3000
 
 ## Deployment
 
-### Spaceship Hyperlift (Docker & GitHub)
-1. In Spaceship, navigate to **Hyperlift Manager** and connect your GitHub repository.
-2. Select your deployment branch (e.g. `main`).
-3. Set the Dockerfile path to `Dockerfile`.
-4. (Optional) Set `PORT` in Environment Variables (defaults to `8080` if not specified).
-5. Deploy! Hyperlift will automatically build the container and route traffic with SSL.
+### Spaceship Hyperlift Deployment (via GitHub)
+1. **Push your code to GitHub**:
+   - Ensure `package.json`, `package-lock.json`, and `Dockerfile` are pushed to your repository branch (e.g. `main`).
+2. **In Spaceship Dashboard**:
+   - Go to **Hyperlift Manager** -> **Create / Connect Application**.
+   - Select and authorize your **GitHub** repository.
+   - Choose your branch (e.g. `main`).
+3. **Build Configuration**:
+   - **Build Type**: Dockerfile
+   - **Dockerfile Path**: `Dockerfile`
+   - **Port**: `8080` (Hyperlift's default, automatically configured in our Dockerfile and server).
+4. **Health Check**:
+   - Health check endpoint is available at `/health` (returns HTTP 200 `{"status":"ok"}`) and `/healthz`.
+5. **Deploy**:
+   - Click **Deploy**. Hyperlift pulls the latest code from GitHub, builds the optimized container image, starts the server on port 8080, and provisions your free SSL certificate.
+   - Whenever you push updates to GitHub, Hyperlift will automatically trigger a new build and deploy seamlessly with zero downtime.
 
 ### Cloudflare Pages
 - Can also be deployed to Cloudflare Pages or Cloud Run as needed.

@@ -15,7 +15,7 @@ WORKDIR /app
 
 # Install all dependencies (including devDependencies needed for build)
 COPY package*.json ./
-RUN npm ci
+RUN npm ci || npm install
 
 # Copy full source and build production bundle
 COPY . .
@@ -32,7 +32,7 @@ ENV PORT=8080
 
 # Install production dependencies only
 COPY package*.json ./
-RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
+RUN (npm ci --omit=dev --ignore-scripts || npm install --omit=dev --ignore-scripts) && npm cache clean --force
 
 # Copy built server bundle and static files from builder stage
 COPY --from=builder /app/dist ./dist

@@ -24,6 +24,10 @@ app.use('/static/*', serveStatic({ root: './dist' }))
 app.use('/favicon.ico', serveStatic({ path: './public/favicon.ico' }))
 app.use('/favicon.ico', serveStatic({ path: './dist/favicon.ico' }))
 
+// Fast health check endpoints for container orchestrators, Spaceship Hyperlift & monitoring
+app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
+app.get('/healthz', (c) => c.text('OK'))
+
 app.use(renderer)
 
 // Normalize common sitemap request patterns (e.g. accidentally pasted full URL in GSC or missing extension)
