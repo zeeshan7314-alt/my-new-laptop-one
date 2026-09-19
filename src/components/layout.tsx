@@ -46,6 +46,7 @@ export const Header = () => (
       <div class="hidden md:flex items-center gap-1 text-sm font-medium">
         <a href="/laptops" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Browse</a>
         <a href="/guides" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Buying Guides</a>
+        <a href="/articles" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Articles</a>
         <a href="/compare" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Compare</a>
         <a href="/laptops?segment=Gaming" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Gaming</a>
       </div>
@@ -70,6 +71,7 @@ export const Header = () => (
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 px-4 py-3 bg-white dark:bg-slate-900 space-y-1">
       <a href="/laptops" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Browse Laptops</a>
       <a href="/guides" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Buying Guides</a>
+      <a href="/articles" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Articles & Reviews</a>
       <a href="/compare" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Compare</a>
       <a href="/wishlist" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-500">Wishlist</a>
       <div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
@@ -111,6 +113,7 @@ export const Footer = () => (
       <div>
         <h3 class="font-semibold text-slate-900 dark:text-white mb-2">Popular Guides</h3>
         <ul class="space-y-1.5 text-slate-500 dark:text-slate-400">
+          <li><a class="hover:text-brand-500" href="/articles">All 83 Reviews & Articles</a></li>
           <li><a class="hover:text-brand-500" href="/guides/best-gaming-laptops">Best Gaming Laptops</a></li>
           <li><a class="hover:text-brand-500" href="/guides/best-laptops-under-1000">Best Under $1000</a></li>
           <li><a class="hover:text-brand-500" href="/guides/best-student-laptops">Best Student Laptops</a></li>

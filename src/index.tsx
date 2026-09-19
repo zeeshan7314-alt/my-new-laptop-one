@@ -13,6 +13,8 @@ import { BrowsePage, Filters, applyFilters } from './pages/browse'
 import { ProductPage } from './pages/product'
 import { ComparePage, CompareHub } from './pages/compare'
 import { GuidesHub, GuidePage } from './pages/guides'
+import { ARTICLES, byArticleSlug, articleMeta } from './lib/articles'
+import { ArticlePage, ArticlesHub } from './pages/article'
 
 const app = new Hono()
 
@@ -150,6 +152,9 @@ app.get('/sitemap.xml', (c) => {
   const guidePages = GUIDES.map(g => ({
     loc: `/guides/${g.slug}`, priority: '0.8', changefreq: 'weekly',
   }))
+  const articlePages = ARTICLES.map(a => ({
+    loc: `/${a.slug}/`, priority: '0.8', changefreq: 'weekly',
+  }))
   const productPages = LAPTOPS.map(l => ({
     loc: `/${l.slug}-review`, priority: '0.8', changefreq: 'weekly',
   }))
@@ -157,7 +162,7 @@ app.get('/sitemap.xml', (c) => {
     loc: `/compare/${compareSlug(a, b)}`, priority: '0.7', changefreq: 'monthly',
   }))
 
-  const allEntries = [...corePages, ...guidePages, ...productPages, ...comparePages]
+  const allEntries = [...corePages, ...guidePages, ...articlePages, ...productPages, ...comparePages]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -185,12 +190,36 @@ Sitemap: ${SITE.baseUrl}/sitemap.xml
 `)
 })
 
-// ---------- Product review pages (catch-all, keep LAST) ----------
-app.get('/:page{[a-z0-9-]+-review}', (c) => {
-  const slug = c.req.param('page').replace(/-review$/, '')
-  const l = bySlug(slug)
-  if (!l) return c.notFound()
-  return render(c, productMeta(l), <ProductPage l={l} />)
+// ---------- Articles Hub ----------
+app.get('/articles', (c) => render(c, {
+  title: `Hardware Reviews, Guides & Tech Insights 2026 | ${SITE.name}`,
+  description: `Browse all ${ARTICLES.length} in-depth laptop evaluations, category roundups, gaming tablet guides, and hardware buyer checklists.`,
+  path: '/articles',
+}, <ArticlesHub />))
+
+app.get('/articles/', (c) => c.redirect('/articles', 301))
+
+// ---------- Articles & Reviews (Supports both /:slug/ and /:slug as requested) ----------
+app.get('/:slug{[a-z0-9-]+}/', (c, next) => {
+  const slug = c.req.param('slug')
+  const a = byArticleSlug(slug)
+  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+  return next()
+})
+
+app.get('/:slug{[a-z0-9-]+}', (c, next) => {
+  const slug = c.req.param('slug')
+  const a = byArticleSlug(slug)
+  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+
+  // Fallback to laptop product review if it matches [slug]-review
+  if (slug.endsWith('-review')) {
+    const laptopSlug = slug.replace(/-review$/, '')
+    const l = bySlug(laptopSlug)
+    if (l) return render(c, productMeta(l), <ProductPage l={l} />)
+  }
+
+  return next()
 })
 
 app.notFound((c) => {
