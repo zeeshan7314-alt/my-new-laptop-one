@@ -36,13 +36,14 @@ export function byArticleSlug(slug: string): Article | undefined {
 export function articleMeta(a: Article): Meta {
   const imgUrl = a.featuredImage
     ? (a.featuredImage.startsWith('http') ? a.featuredImage : `${SITE.baseUrl}${a.featuredImage}`)
-    : undefined
+    : `${SITE.baseUrl}/static/logo.png`
 
   return {
     title: a.title,
     description: a.metaDescription,
     path: `/${a.slug}/`,
     image: imgUrl,
+    ogImage: imgUrl,
     ogType: 'article',
     jsonLd: articleJsonLd(a),
   }

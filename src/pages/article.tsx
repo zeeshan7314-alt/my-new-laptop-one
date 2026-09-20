@@ -35,10 +35,26 @@ export const ArticlePage = ({ a }: { a: Article }) => {
   const readMins = estimateReadingTime(a.contentHtml)
   const { processedHtml, headings } = processContentHeadings(a.contentHtml)
 
-  // Find related articles (excluding current)
+  // Find contextually related articles based on category and title keywords
+  const titleTokens = (a.title + ' ' + a.slug)
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w.length > 3 && !['best', 'laptop', 'laptops', 'review', 'guide', '2026'].includes(w))
+
   const related = ARTICLES
     .filter(x => x.slug !== a.slug)
+    .map(x => {
+      const xTokens = (x.title + ' ' + x.slug).toLowerCase()
+      let score = (x.category === a.category ? 3 : 0)
+      for (const t of titleTokens) {
+        if (xTokens.includes(t)) score += 2
+      }
+      return { article: x, score }
+    })
+    .sort((x, y) => y.score - x.score)
     .slice(0, 4)
+    .map(x => x.article)
 
   return (
     <>
@@ -50,7 +66,7 @@ export const ArticlePage = ({ a }: { a: Article }) => {
           { name: a.h1 }
         ]} />
 
-        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 md:p-12 shadow-sm mt-4">
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-8 md:p-12 shadow-sm mt-4">
           <header class="border-b border-slate-100 dark:border-slate-800 pb-6 mb-8">
             <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">
               <span class="bg-brand-50 dark:bg-brand-950/60 px-2.5 py-1 rounded-md border border-brand-200 dark:border-brand-800">
@@ -111,7 +127,7 @@ export const ArticlePage = ({ a }: { a: Article }) => {
                 {headings.map((h) => (
                   <a
                     href={`#${h.id}`}
-                    class="text-xs px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-500 hover:text-brand-600 transition shadow-2xs font-medium max-w-xs truncate"
+                    class="text-xs px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-500 hover:text-brand-600 transition shadow-2xs font-medium max-w-full sm:max-w-xs truncate"
                     title={h.text}
                   >
                     {h.text}
@@ -123,7 +139,7 @@ export const ArticlePage = ({ a }: { a: Article }) => {
 
           <div
             id="article-content"
-            class="article-content prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 text-base leading-relaxed space-y-4"
+            class="article-content prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 text-base leading-relaxed space-y-4 overflow-x-hidden break-words"
             dangerouslySetInnerHTML={{ __html: processedHtml }}
           />
 

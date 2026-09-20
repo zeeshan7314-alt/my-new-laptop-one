@@ -30,12 +30,46 @@ app.get('/healthz', (c) => c.text('OK'))
 
 app.use(renderer)
 
-// Normalize common sitemap request patterns (e.g. accidentally pasted full URL in GSC or missing extension)
+// Legacy article redirects to preserve SEO and prevent 404s
+const LEGACY_ARTICLE_REDIRECTS: Record<string, string> = {
+  'best-graphics-card-for-under-500': '/best-graphic-card-for-under-100/',
+  'best-laptop-for-live-streaming': '/best-laptop-for-streaming-twitch/',
+  'best-laptops-for-travel-and-work': '/best-laptop-for-remote-work/',
+  'best-15-inch-laptops-under-500': '/best-thin-laptops-under-500/',
+  'best-graphics-card-for-under-300': '/best-graphic-card-for-under-100/',
+  'best-14-inch-laptops-under-500': '/best-thin-laptops-under-500/',
+  'best-lightweight-laptops-under-500': '/best-thin-laptops-under-500/',
+  'best-17-inch-laptops-under-1000': '/best-17-inch-laptops-under-500/',
+  'best-video-editing-laptops-under-500': '/best-laptop-for-web-developers/',
+  'best-graphics-card-for-under-150': '/best-graphic-card-for-under-100/',
+  'best-laptop-for-basic-use': '/best-laptops-for-word-processing/',
+  'best-laptop-with-big-screen': '/best-17-inch-laptops-under-500/',
+  'best-ssd-laptops-under-500': '/best-laptops-with-1tb-hard-drive/',
+  'best-13-inch-laptops-under-500': '/best-thin-laptops-under-500/',
+  'best-laptop-for-cricut-explore-air': '/best-laptop-for-fusion-360/',
+  'best-graphic-card-for-fortnite': '/best-graphic-card-for-under-100/',
+  'best-black-friday-laptops-deals-2026': '/best-black-friday-laptops-deals-2019/',
+  'best-laptop-for-seniors': '/best-laptops-for-word-processing/',
+  'best-non-touch-screen-laptops': '/why-you-shouldnt-buy-a-touch-screen-laptop/',
+  'best-laptop-for-writers-and-photographers': '/best-chromebook-for-writers-and-bloggers/',
+  'best-earphones-for-running': '/best-wireless-headphones-for-athletes/',
+  'best-laptop-with-a-cd-drive': '/best-laptop-for-engineering-students/',
+  'how-much-ram-do-i-need-on-my-laptop': '/best-laptop-with-32gb-ram/',
+  'best-laptop-under-500-for-gaming': '/best-cheap-laptop-for-gaming-under-500/',
+}
+
+// Normalize common sitemap request patterns & redirect legacy article URLs
 app.use('*', async (c, next) => {
   const path = c.req.path
   if (path !== '/sitemap.xml' && (path.endsWith('sitemap.xml') || path === '/sitemap' || path.endsWith('sitemap_index.xml'))) {
     return c.redirect('/sitemap.xml', 301)
   }
+
+  const cleanSlug = path.replace(/^\/|\/$/g, '')
+  if (LEGACY_ARTICLE_REDIRECTS[cleanSlug]) {
+    return c.redirect(LEGACY_ARTICLE_REDIRECTS[cleanSlug], 301)
+  }
+
   await next()
 })
 
