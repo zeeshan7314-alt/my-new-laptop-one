@@ -20,9 +20,10 @@
 | `/compare` | Comparison hub: any-2 picker + 24 popular pairs |
 | `/compare/:a-vs-:b` | Auto comparison: winner summary, weighted spec table, 10 use-case scores, 7 narrative sections, final verdict (canonical slug order, 301 redirect) |
 | `/guides` + `/guides/:slug` | 16 buying guides, auto-ranked by score engine (gaming, students, budget, OLED, AI, under-$500/1000/1500, MacBooks…) |
+| `/articles` + `/:slug/` | 83 in-depth editorial hardware evaluations, buying guides & category roundups |
 | `/wishlist` | localStorage wishlist |
 | `/api/laptops`, `/api/laptops/:slug` | JSON API (powers client search suggest) |
-| `/sitemap.xml`, `/robots.txt` | SEO (151 URLs) |
+| `/sitemap.xml`, `/robots.txt` | Dynamic & static SEO sitemap (235 URLs) with per-article dateModified timestamps |
 
 ## Architecture
 - **Stack**: Hono + TypeScript + JSX (edge SSR) on Cloudflare Pages, TailwindCSS (CDN), FontAwesome

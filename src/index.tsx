@@ -15,6 +15,7 @@ import { ComparePage, CompareHub } from './pages/compare'
 import { GuidesHub, GuidePage } from './pages/guides'
 import { ARTICLES, byArticleSlug, articleMeta } from './lib/articles'
 import { ArticlePage, ArticlesHub } from './pages/article'
+import { generateSitemapXml } from './lib/sitemap'
 
 const app = new Hono()
 
@@ -180,37 +181,7 @@ app.get('/wishlist', (c) => render(c, {
 app.get('/sitemap.xml', (c) => {
   const reqHost = c.req.header('host')?.toLowerCase() || ''
   const base = reqHost.includes('laptopindex.info') ? `https://${reqHost}` : SITE.baseUrl
-
-  const corePages: { loc: string; priority: string; changefreq: string }[] = [
-    { loc: '/', priority: '1.0', changefreq: 'daily' },
-    { loc: '/laptops', priority: '0.9', changefreq: 'daily' },
-    { loc: '/compare', priority: '0.9', changefreq: 'weekly' },
-    { loc: '/guides', priority: '0.9', changefreq: 'weekly' },
-  ]
-  const guidePages = GUIDES.map(g => ({
-    loc: `/guides/${g.slug}`, priority: '0.8', changefreq: 'weekly',
-  }))
-  const articlePages = ARTICLES.map(a => ({
-    loc: `/${a.slug}/`, priority: '0.8', changefreq: 'weekly',
-  }))
-  const productPages = LAPTOPS.map(l => ({
-    loc: `/${l.slug}-review`, priority: '0.8', changefreq: 'weekly',
-  }))
-  const comparePages = popularPairs(30).map(([a, b]) => ({
-    loc: `/compare/${compareSlug(a, b)}`, priority: '0.7', changefreq: 'monthly',
-  }))
-
-  const allEntries = [...corePages, ...guidePages, ...articlePages, ...productPages, ...comparePages]
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allEntries.map(e => `  <url>
-    <loc>${base}${e.loc}</loc>
-    <lastmod>${META.updated}</lastmod>
-    <changefreq>${e.changefreq}</changefreq>
-    <priority>${e.priority}</priority>
-  </url>`).join('\n')}
-</urlset>`
+  const xml = generateSitemapXml(base)
   c.header('Content-Type', 'application/xml; charset=utf-8')
   c.header('Cache-Control', 'public, max-age=3600, s-maxage=86400')
   return c.body(xml)
