@@ -119,7 +119,7 @@ export function compareMeta(a: Laptop, b: Laptop, slug: string): Meta {
 }
 
 export function guideJsonLd(title: string, slug: string, items: Laptop[]): object[] {
-  return [{
+  const schemas: object[] = [{
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: title,
@@ -136,6 +136,49 @@ export function guideJsonLd(title: string, slug: string, items: Laptop[]): objec
       { '@type': 'ListItem', position: 3, name: title, item: `${SITE.baseUrl}/guides/${slug}` },
     ],
   }, organizationJsonLd()]
+
+  if (slug === 'best-gaming-laptops') {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'How much RAM is needed for a gaming laptop in 2026?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'In 2026, 32GB of DDR5 RAM is the recommended sweet spot for AAA gaming and streaming. While 16GB is the entry-level baseline, modern graphics titles with high-res textures and ray tracing can exceed 16GB total system memory usage. Enthusiast rigs pairing RTX 5080 and 5090 GPUs perform best with 32GB to 64GB.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Which GPU tier is best for gaming laptops in 2026?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'For 1080p competitive esports under $1,000, RTX 4050/4060 machines provide dependable framerates. For 1440p and 1600p high-refresh gaming, the RTX 5070 and RTX 5070 Ti deliver the best performance-per-dollar. For uncompromised 4K resolution, ultra ray tracing, and 240Hz competitive play, the RTX 5080 and RTX 5090 represent the definitive flagship tier.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Why does TGP (Total Graphics Power) matter more than GPU model name?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Laptop GPUs can be configured by manufacturers at different wattages (TGP). A maximum-wattage 140W RTX 5070 with robust vapor-chamber cooling can match or outpace a thermally constrained 85W RTX 5080 in thin chassis. LaptopIndex scores account for real G3DMark benchmark outputs rather than nominal naming.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'What display refresh rate should I target on a gaming laptop?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Target at least 144Hz to 165Hz with a response time of 3ms or faster. For competitive esports (Valorant, CS2, Apex Legends), 240Hz or 300Hz IPS or OLED panels offer lower input latency and sharper motion clarity.'
+          }
+        }
+      ]
+    })
+  }
+
+  return schemas
 }
 
 export function browseJsonLd(): object[] {

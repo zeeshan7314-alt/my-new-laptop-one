@@ -147,7 +147,24 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
 
             <Section id="performance" icon="fa-microchip" title="Performance Summary"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.performance }} /></Section>
             <Section id="display" icon="fa-display" title="Display"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.display }} /></Section>
-            <Section id="gaming" icon="fa-gamepad" title="Gaming Performance"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.gaming }} /></Section>
+            <Section id="gaming" icon="fa-gamepad" title="Gaming Performance">
+              <p class="prose-p" dangerouslySetInnerHTML={{ __html: st.gaming }} />
+              {l.gpu.dedicated && (
+                <div class="mt-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl p-4 border border-slate-200 dark:border-slate-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold shrink-0">
+                      <i class="fas fa-trophy" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-xs text-slate-600 dark:text-slate-300">
+                      Ranked in our benchmark guide: <a href="/guides/best-gaming-laptops" class="font-bold text-rose-600 dark:text-rose-400 hover:underline">Best Gaming Laptops of 2026</a>
+                    </div>
+                  </div>
+                  <a href="/guides/best-gaming-laptops" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white shrink-0 text-center transition">
+                    View Gaming Rankings →
+                  </a>
+                </div>
+              )}
+            </Section>
             <Section id="productivity" icon="fa-briefcase" title="Productivity"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.productivity }} /></Section>
             <Section id="programming" icon="fa-code" title="Programming"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.programming }} /></Section>
             <Section id="video-editing" icon="fa-film" title="Video Editing"><p class="prose-p" dangerouslySetInnerHTML={{ __html: st.videoEditing }} /></Section>

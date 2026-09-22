@@ -32,7 +32,7 @@ export const HomePage = () => {
               <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">Search</button>
             </form>
             <div class="mt-5 flex flex-wrap justify-center gap-2 text-xs">
-              {[['Best under $1000', '/guides/best-laptops-under-1000'], ['Gaming laptops', '/guides/best-gaming-laptops'], ['OLED picks', '/guides/best-oled-laptops'], ['Ultraportables', '/guides/best-lightweight-laptops'], ['Compare tool', '/compare']].map(([t, h]) => (
+              {[['Best under $1000', '/guides/best-laptops-under-1000'], ['Best Gaming Laptops 2026', '/guides/best-gaming-laptops'], ['OLED picks', '/guides/best-oled-laptops'], ['Ultraportables', '/guides/best-lightweight-laptops'], ['Compare tool', '/compare']].map(([t, h]) => (
                 <a href={h} class="px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 font-medium text-slate-700 dark:text-slate-300 shadow-sm transition">{t}</a>
               ))}
             </div>
@@ -68,6 +68,13 @@ export const HomePage = () => {
               <div>
                 <h2 class="text-lg font-extrabold text-slate-900 dark:text-white mb-3"><i class={`fas ${ic} ${col} mr-2`} aria-hidden="true"></i>{t}</h2>
                 <div class="space-y-4">{list.map((l: any) => <LaptopCard l={l} />)}</div>
+                {t === 'Top Gaming' && (
+                  <div class="mt-3 text-right">
+                    <a href="/guides/best-gaming-laptops" class="text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline">
+                      See full rankings: Best gaming laptops (2026) →
+                    </a>
+                  </div>
+                )}
               </div>
             ))}
           </section>
