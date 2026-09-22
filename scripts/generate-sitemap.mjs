@@ -17,7 +17,7 @@ const laptops = laptopsData.laptops || []
 const meta = laptopsData.meta || { updated: '2026-09-10' }
 const articles = articlesData || []
 
-// 2. Guide Slugs
+// 2. Guide Slugs (All 20 data-driven buying guides & gaming clusters)
 const guideSlugs = [
   'best-gaming-laptops',
   'best-student-laptops',
@@ -34,7 +34,11 @@ const guideSlugs = [
   'best-laptops-under-500',
   'best-laptops-under-1000',
   'best-laptops-under-1500',
-  'best-macbooks'
+  'best-macbooks',
+  'best-rtx-5070-gaming-laptops',
+  'best-gaming-laptops-under-1500',
+  'best-thin-and-light-gaming-laptops',
+  'best-1440p-gaming-laptops'
 ]
 
 // 3. Compute top 30 comparison pairs
@@ -81,34 +85,34 @@ const entries = []
 // Core pages
 entries.push(
   { loc: `${BASE_URL}/`, lastmod: latestArticleDate, changefreq: 'daily', priority: '1.0' },
-  { loc: `${BASE_URL}/laptops`, lastmod: meta.updated, changefreq: 'daily', priority: '0.9' },
-  { loc: `${BASE_URL}/compare`, lastmod: meta.updated, changefreq: 'weekly', priority: '0.9' },
-  { loc: `${BASE_URL}/guides`, lastmod: meta.updated, changefreq: 'weekly', priority: '0.9' },
-  { loc: `${BASE_URL}/articles`, lastmod: latestArticleDate, changefreq: 'weekly', priority: '0.9' }
+  { loc: `${BASE_URL}/guides`, lastmod: meta.updated, changefreq: 'daily', priority: '0.9' },
+  { loc: `${BASE_URL}/laptops`, lastmod: meta.updated, changefreq: 'daily', priority: '0.8' },
+  { loc: `${BASE_URL}/articles`, lastmod: latestArticleDate, changefreq: 'weekly', priority: '0.7' },
+  { loc: `${BASE_URL}/compare`, lastmod: meta.updated, changefreq: 'weekly', priority: '0.6' }
 )
 
-// Guides
+// Guides (Primary commercial pillars)
 for (const slug of guideSlugs) {
   entries.push({
     loc: `${BASE_URL}/guides/${slug}`,
     lastmod: meta.updated,
     changefreq: 'weekly',
-    priority: '0.8'
+    priority: '0.9'
   })
 }
 
-// Articles
+// Articles (Legacy in-depth content)
 for (const a of articles) {
   const cleanSlug = a.slug.replace(/^\/+|\/+$/g, '')
   entries.push({
     loc: `${BASE_URL}/${cleanSlug}/`,
     lastmod: a.dateModified || a.datePublished || latestArticleDate,
     changefreq: 'weekly',
-    priority: '0.8'
+    priority: '0.7'
   })
 }
 
-// Laptop product reviews
+// Laptop product reviews (Evaluation nodes)
 for (const l of laptops) {
   entries.push({
     loc: `${BASE_URL}/${l.slug}-review`,
@@ -124,7 +128,7 @@ for (const pair of compareSlugs) {
     loc: `${BASE_URL}/compare/${pair}`,
     lastmod: meta.updated,
     changefreq: 'monthly',
-    priority: '0.7'
+    priority: '0.6'
   })
 }
 

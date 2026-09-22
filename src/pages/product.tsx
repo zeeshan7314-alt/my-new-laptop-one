@@ -34,6 +34,7 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
   const st = sectionText(l)
   const faqs = faq(l)
   const sims = similar(l, 4)
+  const productGuides = guidesFor(l)
   const better = betterAlternative(l), cheaper = cheaperAlternative(l), premium = premiumAlternative(l)
   const brand3 = sameBrand(l), cpu3 = sameCpu(l), gpu3 = sameGpu(l), budget3 = sameBudget(l)
   const toc = [
@@ -73,6 +74,20 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
               <div class="flex flex-wrap gap-1.5 mb-2">{l.badges.map(b => <BadgePill text={b} />)}</div>
               <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight">{l.name} Review <span class="text-slate-400 font-bold">(2026)</span></h1>
               <p class="mt-2 text-slate-600 dark:text-slate-400">{cpuLabel(l)} · {gpuLabel(l)} · {l.ram.gb} GB RAM · {storageLabel(l)} · {l.display.sizeInches}″ {l.display.refreshHz} Hz{l.display.panel ? ` ${l.display.panel}` : ''}</p>
+              {productGuides.length > 0 && (
+                <div class="flex flex-wrap items-center gap-2 mt-2.5">
+                  {productGuides.slice(0, 2).map(({ guide, rank }) => (
+                    <a
+                      href={`/guides/${guide.slug}`}
+                      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs font-bold hover:bg-amber-500/20 transition shadow-2xs"
+                    >
+                      <i class="fas fa-trophy text-amber-500" aria-hidden="true"></i>
+                      Ranked #{rank} in {guide.h1}
+                      <i class="fas fa-arrow-right text-[10px] ml-0.5 opacity-70" aria-hidden="true"></i>
+                    </a>
+                  ))}
+                </div>
+              )}
               {l.amazon.rating ? <p class="mt-1 text-sm text-slate-500"><i class="fas fa-star text-amber-400" aria-hidden="true"></i> {l.amazon.rating} average · {(l.amazon.reviewCount || 0).toLocaleString()} Amazon reviews</p> : null}
               <div class="mt-5 flex flex-wrap items-center gap-3">
                 <AmazonBtn l={l} size="lg" />
@@ -100,6 +115,16 @@ export const ProductPage = ({ l }: { l: Laptop }) => {
             <Section id="verdict" icon="fa-gavel" title="Verdict">
               <div class="space-y-3 mb-5">
                 <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-base">{verdictLine(l)} in our {META.count}-laptop database.</p>
+                {productGuides.length > 0 && (
+                  <div class="p-3.5 rounded-xl bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 text-xs sm:text-sm text-slate-700 dark:text-slate-300 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-amber-400 text-amber-950 flex items-center justify-center font-extrabold text-sm shrink-0">
+                      #{productGuides[0].rank}
+                    </div>
+                    <p class="leading-relaxed">
+                      Ranked <strong>#{productGuides[0].rank}</strong> in our curated guide to the <a href={`/guides/${productGuides[0].guide.slug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{productGuides[0].guide.h1}</a> based on verified benchmark performance and value.
+                    </p>
+                  </div>
+                )}
                 <p class="prose-p review-prose text-slate-600 dark:text-slate-400 leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: st.summaryRanking }} />
               </div>
               <div class="grid md:grid-cols-2 gap-4">

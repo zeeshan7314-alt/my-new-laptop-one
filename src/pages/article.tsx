@@ -2,6 +2,7 @@
 // Article Page & Articles Hub — 83 in-depth guides & reviews
 // =====================================================
 import { Article, ARTICLES } from '../lib/articles'
+import { getArticleRecommendations } from '../lib/articleRecommendations'
 import { Header, Footer, CompareBar, Breadcrumbs } from '../components/layout'
 
 function estimateReadingTime(html: string): number {
@@ -34,6 +35,7 @@ function processContentHeadings(html: string): { processedHtml: string; headings
 export const ArticlePage = ({ a }: { a: Article }) => {
   const readMins = estimateReadingTime(a.contentHtml)
   const { processedHtml, headings } = processContentHeadings(a.contentHtml)
+  const rec = getArticleRecommendations(a.slug, a.title)
 
   // Find contextually related articles based on category and title keywords
   const titleTokens = (a.title + ' ' + a.slug)
@@ -137,6 +139,32 @@ export const ArticlePage = ({ a }: { a: Article }) => {
             </nav>
           )}
 
+          {/* Edward Sturm Topical Authority Callout: Funnel PageRank into 2026 Buying Guides & Modern Reviews */}
+          <div class="my-8 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-brand-50/40 dark:from-slate-800/80 dark:to-slate-800/40 border border-brand-200/80 dark:border-brand-700/50 shadow-xs not-prose">
+            <div class="flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                <i class="fas fa-microchip text-base" aria-hidden="true"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                  <span class="font-bold text-sm text-slate-900 dark:text-white">2026 Hardware Update & Verified Benchmarks</span>
+                  <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300">
+                    {rec.categoryBadge}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {rec.editorialNote} For current generation recommendations, see <a href={`/guides/${rec.pillarSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.pillarAnchor}</a>
+                  {rec.clusterSlug ? (
+                    <> or check our <a href={`/guides/${rec.clusterSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.clusterAnchor}</a></>
+                  ) : null}
+                  {rec.modernReviewSlug ? (
+                    <> (e.g. read our <a href={`/${rec.modernReviewSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.modernReviewAnchor}</a>)</>
+                  ) : null}. You can also analyze specs across the <a href="/" class="text-brand-600 dark:text-brand-400 font-bold hover:underline">LaptopIndex homepage database</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div
             id="article-content"
             class="article-content prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 text-base leading-relaxed space-y-4 overflow-x-hidden break-words"
@@ -199,6 +227,65 @@ export const ArticlePage = ({ a }: { a: Article }) => {
                 </div>
               </a>
             ))}
+          </div>
+        </section>
+
+        {/* Topical Authority 2026 Buying Guides Pillar Grid */}
+        <section class="mt-10 mb-10 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fas fa-compass text-brand-500" aria-hidden="true"></i> 2026 Laptop Buying Guides & Benchmarks
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">Explore our data-driven category rankings scored by PassMark CPU and G3DMark GPU benchmarks.</p>
+            </div>
+            <a href="/guides" class="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline shrink-0">
+              View all 20 guides <i class="fas fa-arrow-right text-[10px] ml-1" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <a href="/guides/best-gaming-laptops" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group">
+              <div class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 flex items-center justify-between">
+                <span>Best Gaming Laptops</span>
+                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">RTX 50-series and high-wattage gaming machines ranked by 1440p frame rates.</p>
+            </a>
+            <a href="/guides/best-laptops-under-1000" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group">
+              <div class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 flex items-center justify-between">
+                <span>Best Laptops Under $1000</span>
+                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">The sweet-spot value bracket balancing OLED screens, 16GB RAM, and speed.</p>
+            </a>
+            <a href="/guides/best-student-laptops" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group">
+              <div class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 flex items-center justify-between">
+                <span>Best Student Laptops</span>
+                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Lightweight college laptops with 10+ hours battery life and quiet cooling.</p>
+            </a>
+            <a href="/guides/best-engineering-laptops" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group">
+              <div class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 flex items-center justify-between">
+                <span>Best Engineering Laptops</span>
+                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">CAD, 3D simulation, and SolidWorks mobile workstations with dedicated GPUs.</p>
+            </a>
+            <a href="/guides/best-budget-laptops" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group">
+              <div class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 flex items-center justify-between">
+                <span>Best Budget Laptops</span>
+                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Reliable, fast laptops under $500 that never cut corners on NVMe storage.</p>
+            </a>
+            <a href="/guides/best-oled-laptops" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group">
+              <div class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-brand-500 flex items-center justify-between">
+                <span>Best OLED Laptops</span>
+                <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Stunning 100% DCI-P3 color accuracy and infinite contrast for creators and film.</p>
+            </a>
           </div>
         </section>
       </main>

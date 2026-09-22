@@ -26,18 +26,18 @@ export function getSitemapEntries(baseUrl = SITE.baseUrl): SitemapEntry[] {
   // Core navigation pages
   const corePages: SitemapEntry[] = [
     { loc: `${base}/`, lastmod: latestArticleDate, changefreq: 'daily', priority: '1.0' },
-    { loc: `${base}/laptops`, lastmod: META.updated || '2026-09-10', changefreq: 'daily', priority: '0.9' },
-    { loc: `${base}/compare`, lastmod: META.updated || '2026-09-10', changefreq: 'weekly', priority: '0.9' },
-    { loc: `${base}/guides`, lastmod: META.updated || '2026-09-10', changefreq: 'weekly', priority: '0.9' },
-    { loc: `${base}/articles`, lastmod: latestArticleDate, changefreq: 'weekly', priority: '0.9' },
+    { loc: `${base}/guides`, lastmod: META.updated || '2026-09-10', changefreq: 'daily', priority: '0.9' },
+    { loc: `${base}/laptops`, lastmod: META.updated || '2026-09-10', changefreq: 'daily', priority: '0.8' },
+    { loc: `${base}/articles`, lastmod: latestArticleDate, changefreq: 'weekly', priority: '0.7' },
+    { loc: `${base}/compare`, lastmod: META.updated || '2026-09-10', changefreq: 'weekly', priority: '0.6' },
   ]
 
-  // Data-ranked guides hub pages
+  // Data-ranked guides hub pages (primary commercial pillars)
   const guidePages: SitemapEntry[] = GUIDES.map(g => ({
     loc: `${base}/guides/${g.slug}`,
     lastmod: META.updated || '2026-09-10',
     changefreq: 'weekly',
-    priority: '0.8',
+    priority: '0.9',
   }))
 
   // Editorial articles & in-depth product evaluations
@@ -45,7 +45,7 @@ export function getSitemapEntries(baseUrl = SITE.baseUrl): SitemapEntry[] {
     loc: `${base}/${a.slug.replace(/^\/+|\/+$/g, '')}/`,
     lastmod: a.dateModified || a.datePublished || latestArticleDate,
     changefreq: 'weekly',
-    priority: '0.8',
+    priority: '0.7',
   }))
 
   // Laptop product reviews
@@ -61,7 +61,7 @@ export function getSitemapEntries(baseUrl = SITE.baseUrl): SitemapEntry[] {
     loc: `${base}/compare/${compareSlug(a, b)}`,
     lastmod: META.updated || '2026-09-10',
     changefreq: 'monthly',
-    priority: '0.7',
+    priority: '0.6',
   }))
 
   return [...corePages, ...guidePages, ...articlePages, ...productPages, ...comparePages]

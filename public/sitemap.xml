@@ -7,622 +7,646 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://laptopindex.info/laptops</loc>
+    <loc>https://laptopindex.info/guides</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://laptopindex.info/compare</loc>
+    <loc>https://laptopindex.info/laptops</loc>
     <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://laptopindex.info/guides</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/articles</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://laptopindex.info/compare</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-gaming-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-student-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-engineering-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-rtx-5060-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-oled-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-lightweight-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-budget-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-programming-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-video-editing-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-ai-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-business-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-2-in-1-laptops</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-laptops-under-500</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-laptops-under-1000</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-laptops-under-1500</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/guides/best-macbooks</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://laptopindex.info/guides/best-rtx-5070-gaming-laptops</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://laptopindex.info/guides/best-gaming-laptops-under-1500</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://laptopindex.info/guides/best-thin-and-light-gaming-laptops</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://laptopindex.info/guides/best-1440p-gaming-laptops</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/asus-zenbook-13-ultra-slim-ux331ua-as51-laptop-review/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/asus-rog-strix-scar-ii-gaming-laptop-review/</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/sager-np8957-thin-light-gaming-laptop-review/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/gigabyte-aero-15-classic-xa-f74adp-review/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/gigabyte-aero-15-classic-wa-u74adp-15-inch-review/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/rog-zephyrus-m-thin-gaming-laptop-review/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-2-in-1-laptops-under-600/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-2-in-1-laptops-under-400/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-17-inch-laptops-under-500/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-thin-laptops-under-500/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-touch-screen-laptops-under-1000/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-with-thunderbolt-3-ports/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-with-1tb-hard-drive/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-with-backlit-keyboard/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-with-32gb-ram/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-with-ubuntu/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/cheap-gaming-laptop-under-600/</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-cheap-laptop-for-gaming-under-500/</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-gaming-laptops-with-good-battery-life/</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-accounting-students/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-engineering-students/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-medical-school/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-online-teaching/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-remote-work/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-researchers/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-web-developers/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-software-engineers/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-virtualization/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-financial-modeling/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-arcgis/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-homeschool/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-realtors/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptops-for-word-processing/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-streaming-netflix/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-streaming-twitch/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-egpu/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-fusion-360/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-cities-skylines/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-for-civilization-6/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-chromebooks-under-250/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-chromebooks-under-400/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-chromebooks-under-500/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-chromebook-for-writers-and-bloggers/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-amazon-fire-tablet-under-200/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-gaming-tablet-under-100/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-tablets-for-gaming-under-200/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-tablets-for-gaming-and-movies/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-tablet-for-college-students-on-a-budget/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-tablet-for-medical-students/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-gaming-mouses-under-20/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-gaming-mouses-under-30/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-mouses-under-50/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-cheap-wireless-gaming-mouse/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-bluetooth-mouse-for-chromebook/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-wireless-mouse-for-large-hands/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-mouses-for-fortnite/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-mouses-for-wow/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-backpack-for-back-pain/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-backpack-to-carry-laptop/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-bag-for-air-travel/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-stylish-laptop-backpacks-for-ladies/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-designer-bags-for-laptops/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-tote-bags-for-laptops/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-stylus-for-touch-screen-laptops/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-graphic-card-for-under-100/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-gaming-headsets-under-200/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-headphones-for-teenagers/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-wireless-headphones-for-athletes/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-bluetooth-for-noisy-environment/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-black-friday-laptops-deals-2019/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-hp-laptops-black-friday-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-lenovo-laptops-black-friday-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-dell-inspiron-black-friday-laptop-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-acer-aspire-black-friday-laptop-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-acer-predator-laptops-black-friday-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-asus-vivobook-black-friday-laptops-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-apple-macbook-black-friday-laptop-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-razer-blade-stealth-laptops-black-friday-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-laptop-accessories-black-friday-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/best-gaming-headset-black-friday-deals/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/how-to-tell-if-a-laptop-is-good-for-gaming/</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/what-is-the-best-processor-for-my-laptop/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/why-you-shouldnt-buy-a-touch-screen-laptop/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/asus-vivobook-go-14-flip-j1400ka-ds02t-review</loc>
@@ -1234,180 +1258,180 @@
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-hp-255-g10-ryzen-3</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-asus-vivobook-e1504fa-as54</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-asus-vivobook-go-e1504fa-as33</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-asus-vivobook-go-e1504fa-ab34</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-lenovo-v15-1i-512gb</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-dell-dc1525</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-premium-slim-ryzen-3-vs-dell-dc15250-i5</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-asus-vivobook-5z8n</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-asus-vivobook-e1504fa-as54</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-asus-vivobook-go-e1504fa-as33</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-asus-vivobook-go-e1504fa-ab34</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-hp-14-ep0299nr</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-go-15-ag15-31p-3947-vs-acer-premium-slim-ryzen-3</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-slim-8gb-vs-acer-premium-slim-ryzen-3</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-acer-aspire-go-15-ag15-31p-3947</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-acer-aspire-slim-8gb</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-3-a315-24p-r7vh-vs-acer-aspire-go-ag15-32p-39r2</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/apple-macbook-air-15-m5-15-4-2026-vs-hp-tpn-i139</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/apple-macbook-air-m5-13-3-2026-vs-hp-tpn-i139</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-nitro-v-anv15-51-51h9-vs-hp-victus-15-fb1013dx</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-go-15-ag15-31p-3947-vs-asus-vivobook-5z8n</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/hp-255-g10-ryzen-3-vs-lenovo-v15-1i-512gb</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-go-15-ag15-31p-3947-vs-asus-vivobook-e1504fa-as54</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/hp-tpn-i139-vs-lenovo-v15-g4-abp-ryzen-7-40gb-2tb</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/hp-255-g10-ryzen-3-vs-lenovo-v15-ryzen-7-16gb</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-go-15-ag15-31p-3947-vs-asus-vivobook-go-e1504fa-as33</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-go-15-ag15-31p-3947-vs-asus-vivobook-go-e1504fa-ab34</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-slim-8gb-vs-asus-vivobook-5z8n</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-go-15-ag15-31p-3947-vs-lenovo-v15-1i-512gb</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://laptopindex.info/compare/acer-aspire-slim-8gb-vs-asus-vivobook-e1504fa-as54</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>
