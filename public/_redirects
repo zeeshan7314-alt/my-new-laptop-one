@@ -1,0 +1,4 @@
+# Canonical Domain Redirections: Force https://laptopindex.info/
+https://www.laptopindex.info/* https://laptopindex.info/:splat 301
+http://www.laptopindex.info/* https://laptopindex.info/:splat 301
+http://laptopindex.info/* https://laptopindex.info/:splat 301

@@ -19,6 +19,32 @@ import { generateSitemapXml } from './lib/sitemap'
 
 const app = new Hono()
 
+// Canonical Apex Domain Enforcer: Only run on https://laptopindex.info/
+// 301 redirects www.laptopindex.info (and any other subdomains) or unencrypted http to https://laptopindex.info
+app.use('*', async (c, next) => {
+  // Allow container health probes to pass without redirection
+  if (c.req.path === '/health' || c.req.path === '/healthz') {
+    return next()
+  }
+
+  const rawHost = (c.req.header('x-forwarded-host') || c.req.header('host') || '').toLowerCase().trim()
+  const hostname = rawHost.split(',')[0].trim().split(':')[0].trim()
+  const proto = (c.req.header('x-forwarded-proto') || '').toLowerCase().trim()
+
+  // Detect requests to www.laptopindex.info or any subdomain of laptopindex.info
+  const isWwwOrSubdomain = hostname === 'www.laptopindex.info' || (hostname.endsWith('.laptopindex.info') && hostname !== 'laptopindex.info')
+  // Detect plain http requests on laptopindex.info
+  const isHttpOnApex = hostname === 'laptopindex.info' && proto === 'http'
+
+  if (isWwwOrSubdomain || isHttpOnApex) {
+    const url = new URL(c.req.url)
+    const canonicalTarget = `https://laptopindex.info${url.pathname}${url.search}`
+    return c.redirect(canonicalTarget, 301)
+  }
+
+  await next()
+})
+
 // Serve static assets (images, css, js, icons) in production runtime (Node / Docker / Hyperlift)
 app.use('/static/*', serveStatic({ root: './public' }))
 app.use('/static/*', serveStatic({ root: './dist' }))
@@ -179,9 +205,7 @@ app.get('/wishlist', (c) => render(c, {
 
 // ---------- Sitemap + robots ----------
 app.get('/sitemap.xml', (c) => {
-  const reqHost = c.req.header('host')?.toLowerCase() || ''
-  const base = reqHost.includes('laptopindex.info') ? `https://${reqHost}` : SITE.baseUrl
-  const xml = generateSitemapXml(base)
+  const xml = generateSitemapXml(SITE.baseUrl)
   c.header('Content-Type', 'application/xml; charset=utf-8')
   c.header('Cache-Control', 'public, max-age=3600, s-maxage=86400')
   return c.body(xml)
