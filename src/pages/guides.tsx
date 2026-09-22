@@ -9,20 +9,50 @@ export const GuidesHub = () => (
     <Header />
     <main class="max-w-6xl mx-auto px-4 py-6">
       <Breadcrumbs items={[{ name: 'Buying Guides' }]} />
-      <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">Laptop Buying Guides</h1>
-      <p class="text-slate-500 mb-6">Every guide is ranked automatically from live benchmark + pricing data across {LAPTOPS.length} laptops — no pay-to-play placements.</p>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-2">Laptop Buying Guides (2026)</h1>
+      <p class="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed max-w-3xl">
+        Every buying guide on LaptopIndex is generated automatically from our normalized database of {LAPTOPS.length} verified laptops. We cross-reference multi-thread PassMark CPU ratings, G3DMark GPU compute, thermal headroom, and real-time Amazon pricing to eliminate biased sponsorships.
+      </p>
+
+      {/* Contextual navigation quick links on hub */}
+      <div class="flex flex-wrap gap-2 mb-8 text-xs">
+        <span class="text-slate-400 font-medium py-1.5">Quick Links:</span>
+        <a href="/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition">
+          <i class="fas fa-home mr-1 text-slate-400"></i> LaptopIndex Homepage
+        </a>
+        <a href="/compare" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition">
+          <i class="fas fa-scale-balanced mr-1 text-slate-400"></i> Head-to-Head Compare Tool
+        </a>
+        <a href="/laptops" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition">
+          <i class="fas fa-laptop mr-1 text-slate-400"></i> Complete Laptop Database
+        </a>
+        <a href="/articles" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition">
+          <i class="fas fa-newspaper mr-1 text-slate-400"></i> In-Depth Hardware Articles
+        </a>
+      </div>
+
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {GUIDES.map(g => {
           const top = guideRanking(g)[0]
           return (
-            <a href={`/guides/${g.slug}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-lg transition p-5">
-              <h2 class="font-bold text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{g.h1}</h2>
-              <p class="text-xs text-slate-500 mt-1.5 line-clamp-2">{g.description}</p>
-              {top && <p class="text-xs mt-3 font-semibold text-emerald-600 dark:text-emerald-400"><i class="fas fa-trophy mr-1" aria-hidden="true"></i>#1: {top.name}</p>}
+            <a href={`/guides/${g.slug}`} class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-lg transition p-5 flex flex-col justify-between">
+              <div>
+                <h2 class="font-bold text-slate-900 dark:text-white group-hover:text-brand-500 leading-snug">{g.h1}</h2>
+                <p class="text-xs text-slate-500 mt-1.5 line-clamp-2">{g.description}</p>
+              </div>
+              {top && <p class="text-xs mt-3 pt-2 border-t border-slate-100 dark:border-slate-800/80 font-semibold text-emerald-600 dark:text-emerald-400"><i class="fas fa-trophy mr-1" aria-hidden="true"></i>#1 Pick: {top.name}</p>}
             </a>
           )
         })}
       </div>
+
+      {/* Hub bottom contextual links */}
+      <section class="mt-12 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+        <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-2">How to Use These Laptop Buying Guides</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          Whether you are searching for high-refresh esports power in our <a href="/guides/best-gaming-laptops" class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">best gaming laptops guide</a>, lightweight student notebooks, or creator workstations, every category is scored with task-specific formulas. You can explore all ranked laptops on the <a href="/" class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">LaptopIndex homepage</a>, compare any two models side-by-side with our <a href="/compare" class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">laptop comparison tool</a>, or browse the complete roster in our <a href="/laptops" class="font-semibold text-brand-600 dark:text-brand-400 hover:underline">laptop specs directory</a>.
+        </p>
+      </section>
     </main>
     <CompareBar />
     <Footer />
@@ -245,6 +275,59 @@ export const GuidePage = ({ g }: { g: Guide }) => {
                 <p class="text-xs text-slate-500 mt-1.5 line-clamp-2">{rg.description}</p>
               </a>
             ))}
+          </div>
+        </section>
+
+        {/* SEO contextual internal links: overall site & tools */}
+        <section id="site-tools" class="mt-10 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fas fa-compass text-brand-500" aria-hidden="true"></i> Explore More on LaptopIndex
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">Need to compare specific models or explore beyond this category? Use our suite of data-driven hardware tools.</p>
+            </div>
+            <a href="/" class="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 shrink-0">
+              Browse all {LAPTOPS.length} laptops <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+            <a href="/" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group flex flex-col justify-between">
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white group-hover:text-brand-500 mb-1 flex items-center justify-between">
+                  <span>LaptopIndex Home</span>
+                  <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">Return to the <span class="font-medium text-slate-700 dark:text-slate-300">LaptopIndex homepage</span> for overall benchmark rankings across 100+ models.</p>
+              </div>
+            </a>
+            <a href="/compare" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group flex flex-col justify-between">
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white group-hover:text-brand-500 mb-1 flex items-center justify-between">
+                  <span>Compare Tool</span>
+                  <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">Pit any two machines side-by-side with our <span class="font-medium text-slate-700 dark:text-slate-300">interactive laptop comparison tool</span>.</p>
+              </div>
+            </a>
+            <a href="/laptops" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group flex flex-col justify-between">
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white group-hover:text-brand-500 mb-1 flex items-center justify-between">
+                  <span>Full Catalog</span>
+                  <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">Filter specs, weights, and price-to-performance in the <span class="font-medium text-slate-700 dark:text-slate-300">complete laptop database</span>.</p>
+              </div>
+            </a>
+            <a href="/articles" class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-300 dark:hover:border-brand-700 bg-slate-50/50 dark:bg-slate-800/40 transition group flex flex-col justify-between">
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white group-hover:text-brand-500 mb-1 flex items-center justify-between">
+                  <span>Hardware Articles</span>
+                  <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition text-brand-500" aria-hidden="true"></i>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">Read in-depth analyses, buyer checklists, and guides in our <span class="font-medium text-slate-700 dark:text-slate-300">laptop articles library</span>.</p>
+              </div>
+            </a>
           </div>
         </section>
 

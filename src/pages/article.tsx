@@ -144,14 +144,24 @@ export const ArticlePage = ({ a }: { a: Article }) => {
           />
 
           <footer class="mt-14 pt-6 border-t border-slate-200 dark:border-slate-800">
-            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-5 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <p class="font-semibold text-slate-700 dark:text-slate-300">Published by LaptopIndex Tech Editorial</p>
-                <p class="text-slate-400 mt-0.5">Original hardware reviews, price tracking & synthetic benchmarks</p>
+            <div class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-5 text-xs text-slate-500 dark:text-slate-400">
+              <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <p class="font-semibold text-slate-700 dark:text-slate-300">Published by LaptopIndex Tech Editorial</p>
+                  <p class="text-slate-400 mt-0.5">Original hardware reviews, price tracking & synthetic benchmarks</p>
+                </div>
+                <a href="/articles" class="text-brand-500 hover:text-brand-600 font-bold underline shrink-0">
+                  Browse All 83 Articles & Guides →
+                </a>
               </div>
-              <a href="/articles" class="text-brand-500 hover:text-brand-600 font-bold underline shrink-0">
-                Browse All 83 Articles & Guides →
-              </a>
+              <div class="mt-4 pt-3 border-t border-slate-200/70 dark:border-slate-700/60 flex flex-wrap gap-x-4 gap-y-2 text-xs">
+                <span class="text-slate-400">Contextual Hardware Tools:</span>
+                <a href="/" class="text-brand-600 dark:text-brand-400 font-medium hover:underline">LaptopIndex Benchmark Homepage</a>
+                <span class="text-slate-300 dark:text-slate-700">•</span>
+                <a href="/guides" class="text-brand-600 dark:text-brand-400 font-medium hover:underline">Data-Driven Buying Guides</a>
+                <span class="text-slate-300 dark:text-slate-700">•</span>
+                <a href="/compare" class="text-brand-600 dark:text-brand-400 font-medium hover:underline">Side-by-Side Laptop Comparison</a>
+              </div>
             </div>
           </footer>
         </article>
