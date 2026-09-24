@@ -238,22 +238,22 @@ app.get('/articles/best-entry-level-gaming-laptop/', (c) => c.redirect('/best-en
 app.get('/best-entry-level-gaming-laptop', (c) => c.redirect('/best-entry-level-gaming-laptops/', 301))
 app.get('/best-entry-level-gaming-laptop/', (c) => c.redirect('/best-entry-level-gaming-laptops/', 301))
 
-// Direct /articles/:slug support (render article directly or redirect to canonical)
+// Redirect /articles/:slug to canonical /:slug/ URL
 app.get('/articles/:slug{[a-z0-9-]+}/', (c, next) => {
   const slug = c.req.param('slug')
   const a = byArticleSlug(slug)
-  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+  if (a) return c.redirect(`/${a.slug}/`, 301)
   return next()
 })
 
 app.get('/articles/:slug{[a-z0-9-]+}', (c, next) => {
   const slug = c.req.param('slug')
   const a = byArticleSlug(slug)
-  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+  if (a) return c.redirect(`/${a.slug}/`, 301)
   return next()
 })
 
-// ---------- Articles & Reviews (Supports both /:slug/ and /:slug as requested) ----------
+// ---------- Articles & Reviews (Canonical /:slug/ and 301 redirect for non-slash) ----------
 app.get('/:slug{[a-z0-9-]+}/', (c, next) => {
   const slug = c.req.param('slug')
   const a = byArticleSlug(slug)
@@ -264,7 +264,7 @@ app.get('/:slug{[a-z0-9-]+}/', (c, next) => {
 app.get('/:slug{[a-z0-9-]+}', (c, next) => {
   const slug = c.req.param('slug')
   const a = byArticleSlug(slug)
-  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+  if (a) return c.redirect(`/${a.slug}/`, 301)
 
   // Fallback to laptop product review if it matches [slug]-review
   if (slug.endsWith('-review')) {
