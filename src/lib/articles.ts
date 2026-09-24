@@ -15,6 +15,7 @@ export interface Article {
   datePublished: string
   dateModified: string
   contentHtml: string
+  hideLegacyCallout?: boolean
 }
 
 export const ARTICLES: Article[] = rawArticles as Article[]

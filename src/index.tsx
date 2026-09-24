@@ -232,6 +232,21 @@ app.get('/articles', (c) => render(c, {
 
 app.get('/articles/', (c) => c.redirect('/articles', 301))
 
+// Direct /articles/:slug support (render article directly or redirect to canonical)
+app.get('/articles/:slug{[a-z0-9-]+}/', (c, next) => {
+  const slug = c.req.param('slug')
+  const a = byArticleSlug(slug)
+  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+  return next()
+})
+
+app.get('/articles/:slug{[a-z0-9-]+}', (c, next) => {
+  const slug = c.req.param('slug')
+  const a = byArticleSlug(slug)
+  if (a) return render(c, articleMeta(a), <ArticlePage a={a} />)
+  return next()
+})
+
 // ---------- Articles & Reviews (Supports both /:slug/ and /:slug as requested) ----------
 app.get('/:slug{[a-z0-9-]+}/', (c, next) => {
   const slug = c.req.param('slug')

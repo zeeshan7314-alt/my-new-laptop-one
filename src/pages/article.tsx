@@ -139,31 +139,33 @@ export const ArticlePage = ({ a }: { a: Article }) => {
             </nav>
           )}
 
-          {/* Edward Sturm Topical Authority Callout: Funnel PageRank into 2026 Buying Guides & Modern Reviews */}
-          <div class="my-8 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-brand-50/40 dark:from-slate-800/80 dark:to-slate-800/40 border border-brand-200/80 dark:border-brand-700/50 shadow-xs not-prose">
-            <div class="flex items-start gap-3.5">
-              <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                <i class="fas fa-microchip text-base" aria-hidden="true"></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="flex flex-wrap items-center gap-2 mb-1.5">
-                  <span class="font-bold text-sm text-slate-900 dark:text-white">2026 Hardware Update & Verified Benchmarks</span>
-                  <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300">
-                    {rec.categoryBadge}
-                  </span>
+          {/* Edward Sturm Topical Authority Callout: Funnel PageRank into 2026 Buying Guides & Modern Reviews (skipped for modern articles) */}
+          {!a.hideLegacyCallout && a.slug !== 'best-entry-level-gaming-laptop' && rec && (
+            <div class="my-8 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-brand-50/40 dark:from-slate-800/80 dark:to-slate-800/40 border border-brand-200/80 dark:border-brand-700/50 shadow-xs not-prose">
+              <div class="flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <i class="fas fa-microchip text-base" aria-hidden="true"></i>
                 </div>
-                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {rec.editorialNote} For current generation recommendations, see <a href={`/guides/${rec.pillarSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.pillarAnchor}</a>
-                  {rec.clusterSlug ? (
-                    <> or check our <a href={`/guides/${rec.clusterSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.clusterAnchor}</a></>
-                  ) : null}
-                  {rec.modernReviewSlug ? (
-                    <> (e.g. read our <a href={`/${rec.modernReviewSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.modernReviewAnchor}</a>)</>
-                  ) : null}. You can also analyze specs across the <a href="/" class="text-brand-600 dark:text-brand-400 font-bold hover:underline">LaptopIndex homepage database</a>.
-                </p>
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span class="font-bold text-sm text-slate-900 dark:text-white">2026 Hardware Update & Verified Benchmarks</span>
+                    <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-brand-100 dark:bg-brand-900/60 text-brand-700 dark:text-brand-300">
+                      {rec.categoryBadge}
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {rec.editorialNote} For current generation recommendations, see <a href={`/guides/${rec.pillarSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.pillarAnchor}</a>
+                    {rec.clusterSlug ? (
+                      <> or check our <a href={`/guides/${rec.clusterSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.clusterAnchor}</a></>
+                    ) : null}
+                    {rec.modernReviewSlug ? (
+                      <> (e.g. read our <a href={`/${rec.modernReviewSlug}`} class="font-bold text-brand-600 dark:text-brand-400 hover:underline">{rec.modernReviewAnchor}</a>)</>
+                    ) : null}. You can also analyze specs across the <a href="/" class="text-brand-600 dark:text-brand-400 font-bold hover:underline">LaptopIndex homepage database</a>.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div
             id="article-content"
