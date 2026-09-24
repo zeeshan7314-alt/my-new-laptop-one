@@ -140,7 +140,7 @@ export const ArticlePage = ({ a }: { a: Article }) => {
           )}
 
           {/* Edward Sturm Topical Authority Callout: Funnel PageRank into 2026 Buying Guides & Modern Reviews (skipped for modern articles) */}
-          {!a.hideLegacyCallout && a.slug !== 'best-entry-level-gaming-laptop' && rec && (
+          {!a.hideLegacyCallout && !a.slug.startsWith('best-entry-level-gaming') && rec && (
             <div class="my-8 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-brand-50/40 dark:from-slate-800/80 dark:to-slate-800/40 border border-brand-200/80 dark:border-brand-700/50 shadow-xs not-prose">
               <div class="flex items-start gap-3.5">
                 <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">

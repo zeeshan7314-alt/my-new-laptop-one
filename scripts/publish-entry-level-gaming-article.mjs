@@ -13,7 +13,7 @@ const rawArticles = JSON.parse(fs.readFileSync(articlesPath, 'utf-8'));
 console.log(`Initial articles count: ${rawArticles.length}`);
 
 // Check if slug already exists
-const targetSlug = 'best-entry-level-gaming-laptop';
+const targetSlug = 'best-entry-level-gaming-laptops';
 const existingIdx = rawArticles.findIndex(a => a.slug === targetSlug);
 
 const articleContentHtml = `

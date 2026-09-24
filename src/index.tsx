@@ -232,6 +232,12 @@ app.get('/articles', (c) => render(c, {
 
 app.get('/articles/', (c) => c.redirect('/articles', 301))
 
+// Redirect singular variant to canonical plural article
+app.get('/articles/best-entry-level-gaming-laptop', (c) => c.redirect('/best-entry-level-gaming-laptops/', 301))
+app.get('/articles/best-entry-level-gaming-laptop/', (c) => c.redirect('/best-entry-level-gaming-laptops/', 301))
+app.get('/best-entry-level-gaming-laptop', (c) => c.redirect('/best-entry-level-gaming-laptops/', 301))
+app.get('/best-entry-level-gaming-laptop/', (c) => c.redirect('/best-entry-level-gaming-laptops/', 301))
+
 // Direct /articles/:slug support (render article directly or redirect to canonical)
 app.get('/articles/:slug{[a-z0-9-]+}/', (c, next) => {
   const slug = c.req.param('slug')

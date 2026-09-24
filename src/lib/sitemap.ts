@@ -64,7 +64,17 @@ export function getSitemapEntries(baseUrl = SITE.baseUrl): SitemapEntry[] {
     priority: '0.6',
   }))
 
-  return [...corePages, ...guidePages, ...articlePages, ...productPages, ...comparePages]
+  const rawEntries = [...corePages, ...guidePages, ...articlePages, ...productPages, ...comparePages]
+  const seenLocs = new Set<string>()
+  const deduplicated: SitemapEntry[] = []
+  for (const entry of rawEntries) {
+    if (!seenLocs.has(entry.loc)) {
+      seenLocs.add(entry.loc)
+      deduplicated.push(entry)
+    }
+  }
+
+  return deduplicated
 }
 
 export function generateSitemapXml(baseUrl = SITE.baseUrl): string {

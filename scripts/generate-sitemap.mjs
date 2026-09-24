@@ -132,9 +132,19 @@ for (const pair of compareSlugs) {
   })
 }
 
+// Deduplicate entries by loc
+const seenLocs = new Set()
+const uniqueEntries = []
+for (const entry of entries) {
+  if (!seenLocs.has(entry.loc)) {
+    seenLocs.add(entry.loc)
+    uniqueEntries.push(entry)
+  }
+}
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries.map(e => `  <url>
+${uniqueEntries.map(e => `  <url>
     <loc>${e.loc}</loc>
     <lastmod>${e.lastmod}</lastmod>
     <changefreq>${e.changefreq}</changefreq>
@@ -145,12 +155,12 @@ ${entries.map(e => `  <url>
 
 const publicPath = path.join(rootDir, 'public/sitemap.xml')
 fs.writeFileSync(publicPath, xml, 'utf-8')
-console.log(`[sitemap] Wrote ${entries.length} URLs to ${publicPath}`)
+console.log(`[sitemap] Wrote ${uniqueEntries.length} URLs to ${publicPath}`)
 
 const distPath = path.join(rootDir, 'dist/sitemap.xml')
 if (fs.existsSync(path.join(rootDir, 'dist'))) {
   fs.writeFileSync(distPath, xml, 'utf-8')
-  console.log(`[sitemap] Wrote ${entries.length} URLs to ${distPath}`)
+  console.log(`[sitemap] Wrote ${uniqueEntries.length} URLs to ${distPath}`)
 }
 
 console.log(`[sitemap] Breakdown:
